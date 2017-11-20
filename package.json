@@ -19,9 +19,10 @@
     "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
-    "http-server": "^0.10.0",
     "mockjs": "^1.0.1-beta3",
     "run-sequence": "^2.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
 }
