@@ -1,0 +1,72 @@
+<ion-view hide-tabs="true" view-title="参会人才" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">参会人才</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content class="bg-white" lazy-container> <!--  overflow-scroll="true"-->
+
+    <div class="jobs_list">
+      <div class="scroller">
+        <ul>
+          <li ng-repeat="item in ResumeList track by $index" on-finish-render-filters> <!--  style="height:400px;" -->
+            <div ng-if="$index==0||$index%10!=0">
+              <!--<i class="hot" ng-show="item.IsHot"><b>热</b></i>-->
+              <a href="#/company/resume/{{item.Id}}">
+                <div class="ll companyLogo circleLogo">
+                  <img lazy-src="{{::item.HeadImage}}" err-src="/Content/Phone/images/head/none.jpg" class="my-galleryImg"/>
+                </div>
+                <div class="rr companyJob">
+                  <div class="companyJobSection">
+                    <div class="top over">
+                      <div class="ll">
+                        {{::item.Realname}}
+                        <i class="ion ion-theme-boy" ng-show="item.Gender==A01"></i>
+                        <i class="ion ion-theme-girl" ng-show="item.Gender==A02"></i>
+                        <span class="f12 fgray">
+                        {{::item.EducationCode | KeyToName:'Education':ConstantXML}}
+                        |
+                        {{::item.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML}}
+                        |
+                        {{::item.Birthday | CallbackAge}}岁
+                        </span>
+                      </div>
+                      <div class="rr">
+                        <span>{{::item.IntentionPayCode | KeyToName:'IntentionPay':ConstantXML}}</span>
+                      </div>
+                    </div>
+                    <div class="mid over">
+                      <div class="ll">
+                        <span class="fblack">{{::item.IntentionJobTypeNames}}</span>
+                      </div>
+                    </div>
+                    <div class="bottom over f12" ng-if="ConstantXML && item.Labels">
+                      <div class="ll">
+                        <div class="signGroup">
+                          <span ng-repeat="itemLabel in ::item.Labels.split(',')">{{::itemLabel | KeyToName:'ResumeLabel':ConstantXML}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- <infinite-scroll-end ng-model="ResumeList" one-page="10"></infinite-scroll-end> -->
+
+      <list-status ng-model="ResumeList" null-msg="暂无报名"></list-status>
+      
+    </div>
+
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

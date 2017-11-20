@@ -1,0 +1,73 @@
+<ion-view hide-tabs="true" view-title="简历库" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <a ng-click="backTo()" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title">简历库</h1>
+  </ion-header-bar>
+  
+  <!-- Content  overflow-scroll='true'-->
+  <ion-content class="bg-white" overflow-scroll='true' lazy-container>
+
+    <div class="ResumeList">
+
+      <div class="section-style mt10">
+
+        <div class="section-item hasHead" ng-repeat="item in CollectResumeList | limitTo:RJ_onepage:RJ_current*RJ_onepage">
+          <div class="left-head">
+            <a href="javascript:;" class="circleLogo">
+              <img lazy-src="/Content/Phone/images/head/none.jpg" err-src="/Content/Phone/images/head/none.jpg" class="my-galleryImg"/>
+            </a>
+          </div>
+          <div class="left">
+            <a href="{{app_config.links}}/#/company/collectResume/{{item.Resume.Id}}" class="title">
+              {{item.Resume.Realname}}
+              <i class="ion ion-theme-boy" ng-show="item.Resume.Gender==A01"></i>
+              <i class="ion ion-theme-girl" ng-show="item.Resume.Gender==A02"></i>
+            </a>
+            <p style="margin-bottom:3px;" class="fblack">
+              <span>{{item.Resume.EducationCode | KeyToName:'Education':ConstantXML}}</span>
+              <i>|</i>
+              <span>{{item.Resume.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML}}</span>
+              <i>|</i>
+              <span>{{item.Resume.Birthday | CallbackAge}}岁</span>
+              <i>|</i>
+              <span>{{item.Resume.IntentionJobTypeNames}}</span>
+            </p>
+            <div class="signGroup">
+              <span>可加班</span><span>可出差</span>
+            </div>
+            <!--<p>已收到<b>{{item.ApplyCount}}</b>份简历</p>-->
+          </div>
+          <div class="right">
+            <span>{{item.Resume.IntentionPayCode | KeyToName:'IntentionPay':ConstantXML}}</span>
+          </div>
+          <div class="clr"></div>
+          <div class="bottom">
+            <ul>
+              <li class="w75"><a href="javascript:;" class="fgray">收藏时间：{{item.AddTime | FuckDater | date:"yyyy-MM-dd hh:mm"}}</a></li>
+              <li>
+                <a href="javascript:;" ng-click="DeleteCollectResume()">
+                  <!-- <i class="ion ion-theme-del-1"></i> -->
+                  取消收藏
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <paper name="CollectResumeList" current="RJ_current" onepage="RJ_onepage"></paper>
+
+        <list-status ng-model="CollectResumeList"></list-status>
+        
+      </div>
+
+    </div>
+      
+  </ion-content>
+  <!-- end Content -->
+  
+  
+</ion-view>

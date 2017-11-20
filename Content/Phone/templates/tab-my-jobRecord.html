@@ -1,0 +1,35 @@
+<ion-view hide-tabs="true" view-title="申请记录" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <a ng-click="backTo()" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title">申请记录</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content class="bg-white">
+    <div id="my">
+      
+      <div id="JobRecord" class="item-list">
+
+        <div ng-if="JobRecords.length>0" class="item" ng-repeat="item in JobRecords | limitTo:RJ_onepage:RJ_current*RJ_onepage">
+          <h2><a href="{{app_config.links}}/#/tab/my/jobrecord/detail/record/{{item.Job.Id}}">{{item.Job.Name}}</a></h2>
+          <p>{{item.Job.EnterpriseName}}</p>
+          <p>申请时间：{{item.ApplyTime|limitTo:10}}　企业查阅状态：<span ng-class="{true:'fgreen'}[item.IsDispose]">{{item.IsDispose ? '已阅':'未查阅'}}</span></p>
+        </div>
+
+        <paper name="JobRecords" current="RJ_current" onepage="RJ_onepage"></paper>
+        <list-status ng-model="JobRecords" null-msg="暂无记录"></list-status>
+
+      </div>
+      
+    </div>
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

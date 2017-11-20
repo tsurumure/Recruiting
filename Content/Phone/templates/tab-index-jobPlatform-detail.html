@@ -1,0 +1,48 @@
+<ion-view hide-tabs="true" view-title="{{item.Name}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <!--<a href="#/tab/index/jobPlatform" class="button icon ion-ios-arrow-left"></a>-->
+    <h1 class="title">店家直招详情</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true" id="contentList" class="empty" lazy-container>
+    
+    <get-datas-detail url="{{app_config.imgUrl}}/api/Common/NearbyRecruit/GetRecruit/{{paramsId}}" list="item"></get-datas-detail>
+
+    <div class="jobPlatform">
+      <div class="list" ng-hide="nullList">
+        <ul>
+          <li class="item">
+            <h2>
+              <strong>{{item.Name}}</strong>
+              <span ng-show="userImfor.Id==item.UserId">
+                <a href="javascript:;" ng-click="JobPlatformEvent('edit','修改')" alt="修改" class="ion-ios-compose-outline" style="font-size:17px;"></a>
+                &nbsp;
+                <a href="javascript:;" ng-click="delJobPlatform()" alt="删除" class="ion-ios-trash-outline"></a>
+              </span>
+            </h2>
+            <div class="content">
+              <p><em>联系电话：</em><a href="tel:{{item.Phone}}">{{item.Phone}}</a></p>
+              <p ng-if="item.Address!=null"><span><em>所在位置：</em>{{item.Address}}</span></p>
+              <p><em>工作内容：</em>{{item.Content}}</p>
+              <p class="photoContent" ng-if="item.Images">
+                <ion-gallery ion-gallery-items="item.Images" ion-gallery-row="3"></ion-gallery>
+              </p>
+              <p>{{item.ReleaseTime|limitTo:16}} &nbsp;&nbsp; <!-- <em>浏览次数：</em>{{item.SelectCount}} &nbsp;&nbsp;--> <a href="javascript:;" ng-click="inform()">举报</a></p>
+              <p><div id="OwnMapDetail" style="height:120px;"></div></p>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+
+  </ion-content>
+
+  <!-- end Content -->
+  
+</ion-view>

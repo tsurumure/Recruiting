@@ -1,0 +1,36 @@
+<ion-view hide-tabs="true" view-title="社交信息" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">社交信息</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content>
+    
+    <div id="my">
+      <form ng-submit="processForm()">
+
+        <div class="item item-input">
+          <span class="input-label">当前昵称</span>
+          <input class="input-text" type="text" ng-model="datas.nickName" value="黄晓明" placeholder="输入您的昵称"/>
+        </div>
+        <div class="item item-error" ng-show="isUse">
+          <span ng-show="isUse">{{isUseMsg}}</span>
+        </div>
+        <div class="wp">
+          <input type="submit" value="提交" class="button button-block button-small button-positive">
+        </div>
+      </form>
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

@@ -1,0 +1,24 @@
+<ion-tabs class="tabs-light tabs-icon-top tabs-color-active-positive" ng-class="{'tabs-item-hide': hideTabs}">
+
+  <ion-tab title="找人才" icon="ion ion-theme-nav-1" ng-click="linkChangePage('/#/company/index')">
+    <ion-nav-view name="company-index"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="热点" icon="ion ion-theme-news" ng-click="linkChangePage('/#/company/enterpriseHot')">
+    <ion-nav-view name="company-enterpriseHot"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="发布" icon="ion ion-theme-nav-center" ng-click="CenterButton_Open()">
+    <ion-nav-view>123</ion-nav-view>
+  </ion-tab>
+  
+  <ion-tab title="广场" icon="ion ion-theme-nav-3" ng-click="linkChangePage('/#/company/square')">
+    <ion-nav-view name="company-square"></ion-nav-view>
+  </ion-tab>
+  
+  <ion-tab title="我的" icon="ion ion-theme-menu-5" badge="IsHasMessageApply" badge-style="badgeDot" ng-click="linkChangePage('/#/' + entry + '/my', true, entry)">
+    <ion-nav-view name="company-my"></ion-nav-view>
+  </ion-tab>
+  
+</ion-tabs>
+

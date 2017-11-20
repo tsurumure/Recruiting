@@ -1,0 +1,71 @@
+<ion-view hide-tabs="true" view-title="发布名片" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo('/#/tab/square/card/{{SquareJob_Type}}')" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">发布名片</h1>
+    <!-- {{(SquareJob_Type=='full') ? '创建全职名片' : '创建兼职名片'}}-->
+    <!-- <button class="button icon ion-ios-compose-outline"></button> -->
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll='false' lazy-container>
+    
+    <div class="SquareJob">
+
+        <form role="form" name="myForm" ng-submit="submitForm_full(myForm.$valid)" novalidate>
+          <!--
+          <div class="list list-inset mt10">
+            <div class="item item-input">
+              <span class="input-label">默认简历</span>
+              <div class="select-label active" ng-click="selectResume()">
+                <label ng-bind="SelectedResume.Title"></label>
+                <i class="ion-ios-list-outline"></i>
+              </div>
+            </div> -->
+            <!--  ng-class="{true:'active'}[isSelectResume]"-->
+
+            <!-- <div class="item">
+              <input type="text" ng-model="CardDatas.ResumeId" required placeholder="test" style="font-size:12px;">
+            </div> -->
+
+            <!-- <div class="item">
+              <div>自荐话语<b>*</b></div>
+              <div class="content">
+                <textarea placeholder="一段自荐的话，描述工作技能、意向岗位、薪资等等" class="textarea" name="content" ng-model="CardDatas.Content" required></textarea>
+                <div class="item item-error" ng-show="myForm.content.$dirty && myForm.content.$invalid">
+                  <span ng-show="myForm.content.$error.required">简历标题不能为空</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+          <div class="modalAdd">
+            <div class="item">
+              <textarea placeholder="一段自荐的话，描述工作技能、意向岗位、薪资等等" ng-model="CardDatas.Content" required></textarea>
+              <div class="emot_add" style="display:none;">
+                <a href="javascript:;" class="ion-happy-outline"></a>
+                <a href="javascript:;" class="ion-images"><input type="file" class="fileUpload-input" multiple=""></a>
+                <div class="fileUpload-list"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="myResume-tip tip-positive tip-full" ng-show="isErrorForSubmit">
+            <p><i class="ion-android-alert"></i>内容不能为空！</p>
+          </div>
+
+          <div class="list-inset">
+            <button type="submit" class="button button-small button-full button-positive">发布</button>
+          </div>
+
+        </form>
+
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

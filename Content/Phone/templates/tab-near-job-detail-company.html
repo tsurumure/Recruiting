@@ -1,0 +1,101 @@
+<ion-view hide-tabs="true" view-title="{{jobDetailData.EnterpriseName}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">公司信息</h1>
+    <a href="{{app_config.links}}/#/tab/near" class="button icon ion-ios-home"></a>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true" lazy-container>
+    
+    <div id="job">
+      
+      <div class="item item-text-wrap" id="job-top">
+        <h2>{{companyData.Name}}</h2>
+        <div class="row row-umargin">
+          <div class="col col-50"><span>行业</span>{{companyData.Industry}}</div>
+          <div class="col col-50"><span>性质</span>{{companyData.Nature}}</div>
+        </div>
+        <div class="row row-umargin">
+          <div class="col col-50"><span>规模</span>{{companyData.PeopleNum}}</div>
+          <div class="col col-50"><span>资金</span>{{companyData.RegisteredCapital}}</div>
+        </div>
+        <div class="row row-umargin">
+          <div class="col"><span>网站</span>{{companyData.WebsiteUrl}}</div>
+        </div>
+      </div>
+      
+      <div class="item item-group item-text-wrap">
+        <div class="title">公司介绍</div>
+        <div class="content" ng-bind-html="companyData.Intro"></div>
+      </div>
+
+      <div class="item item-group item-text-wrap">
+        <div class="title">详细地址</div>
+        <div class="content" ng-bind-html="companyData.Address"></div>
+      </div>
+      <div class="item item-group item-text-wrap">
+        <div class="title">联系方式</div>
+        <div class="content">
+          <p ng-show="companyData.ContactManPhone && companyData.ContactManName">
+            <span ng-repeat="item in companyData.ContactManPhone"><a href="tel:{{item.Num}}">{{item.Num}}</a> {{item.Name}}, </span>
+            {{companyData.ContactManName}}
+          </p>
+          <p ng-hide="companyData.ContactManPhone&&companyData.ContactManName">暂无</p>
+        </div>
+      </div>
+
+      <div class="item item-group item-text-wrap">
+        <div class="title">公交线路</div>
+        <div class="content" ng-bind-html="companyData.BusRoutes"></div>
+      </div>
+
+      <div class="item item-group item-text-wrap" ng-if="companyData.Images.length>0">
+        <div class="content">
+          <ul>
+            <li ng-repeat="item in companyData.Images">
+              <img lazy-src="{{app_config.imgUrl}}{{item}}" class="img100 mb10"/>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="item item-group">
+        <div class="title">该企业发布的职位</div>
+        
+        <div class="jobs_list jobs_list_mini">
+          <ul>
+            <li ng-repeat="jobItem in companyData.Jobs">
+              <a href="{{app_config.links}}/#/tab/near/job/detail/near/{{jobItem.Id}}">
+                <div class="ll companyLogo">
+                  <img lazy-src="{{app_config.imgUrl}}{{jobItem.EnterpriseLogoSmall}}" class="my-galleryImg"/>
+                </div>
+                <div class="rr companyJob">
+                  <div class="companyJobSection">
+                    <div class="top over">
+                      <div class="ll">{{jobItem.Name}}</div>
+                      <div class="rr"><span>{{jobItem.Pay}} <em ng-if="item.Pay!='面议'">{{jobItem.JobPayUnit}}</em></span></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="item item-group">
+        <nearmap id="nearmap2" style="height:300px" hidecenter="true"></nearmap>
+      </div>
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+</ion-view>

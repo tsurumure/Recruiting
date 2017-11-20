@@ -1,0 +1,49 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <button class="button button-clear button-primary" ng-click="closeModal()">取消</button>
+    <h1 class="title">发布新动态</h1>
+    <button class="button button-clear button-primary" ng-click="AddSquare()">发布</button>
+  </ion-header-bar>
+  <ion-content>
+    
+    <div class="modalAdd">
+      
+        <div class="item">
+          <textarea placeholder="内容不超过200个字" ng-model="datas.Content" required></textarea>
+          <div class="emot_add" style="display:none;">
+            <a href="javascript:;" class="ion-happy-outline"></a>
+            <a href="javascript:;" class="ion-images"><upload-file></upload-file></a>
+            <div class="fileUpload-list"></div>
+          </div>
+          
+        </div>
+<!-- 
+        <div class="item item-error" ng-if="isEmpty||datas.Content.length>200||errMsg">
+          <span ng-if="isEmpty" ng-hide="datas.Content.length>0">内容不能为空!</span>
+          <span ng-if="datas.Content.length>200">内容不能超过200个字符</span>
+          <span ng-if="errMsg">{{errMsg}}</span>
+        </div> -->
+
+        <div class="myResume-tip tip-positive tip-full" ng-if="isEmpty||datas.Content.length>200||errMsg">
+          <p ng-if="isEmpty" ng-hide="datas.Content.length>0"><i class="ion-android-alert"></i>内容不能为空!</p>
+          <p ng-if="datas.Content.length>200"><i class="ion-android-alert"></i>内容不能超过200个字符</p>
+          <p ng-if="errMsg"><i class="ion-android-alert"></i>{{errMsg}}</p>
+        </div>
+        
+        <div class="item">
+          <div class="fileUpload">
+            <upload-file></upload-file>
+            上传图片
+          </div>
+          <div class="fileUpload-list"></div>
+        </div>
+
+        <div class="item item-text-wrap">
+          <span class="tip">提示：不能发表超过200个字符的内容；图片上传数量不得超过6张；</span>
+        </div>
+      <!--</form>-->
+      
+    </div>
+    
+  </ion-content>
+</ion-modal-view>

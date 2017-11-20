@@ -1,0 +1,18 @@
+ <ion-modal-view>
+  <ion-header-bar ng-hide="isApp" class="bar bar-header bar-positive">
+    <h1 class="title">{{itemIntroduce.Name}}</h1>
+    <button class="button button-clear button-primary" ng-click="modal.remove()">返回</button>
+  </ion-header-bar>
+  <ion-content overflow-scroll="true">
+    
+    <div class="modalAdd">
+      
+      <div class="articleDetail">
+        <div class="articleContent f14" style="padding:20px 0;" ng-bind-html="itemIntroduce.Content">
+        </div>
+      </div>
+        
+    </div>
+    
+  </ion-content>
+</ion-modal-view>

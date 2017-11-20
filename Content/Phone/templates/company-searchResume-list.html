@@ -1,0 +1,73 @@
+<ion-view hide-tabs="true" view-title="搜索简历" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <a ng-click="backTo()" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title">搜索简历</h1>
+  </ion-header-bar>
+
+  <!-- Content  overflow-scroll="true"  class="bg-white"-->
+  <ion-content class="bg-white has-footer" lazy-container>
+
+    <div class="ResumeList">
+
+      <div class="section-style mt10">
+        <!-- | limitTo:RJ_onepage:RJ_current*RJ_onepage -->
+        <div class="section-item hasHead" ng-repeat="item in SearchResumeList track by $index" on-finish-render-filters>
+          <div class="left-head">
+            <a href="javascript:;" class="circleLogo">
+              <img lazy-src="/Content/Phone/images/head/none.jpg" err-src="/Content/Phone/images/head/none.jpg" class="my-galleryImg"/>
+            </a>
+          </div>
+          <div class="left">
+            <a href="{{app_config.links}}/#/company/searchResume/detail/{{item.Id}}" class="title">
+              {{item.Realname}} <!--【{{item.IsRead}}】-->
+              <i class="ion ion-theme-boy" ng-show="item.Gender==A01"></i>
+              <i class="ion ion-theme-girl" ng-show="item.Gender==A02"></i>
+            </a>
+            <p class="fblack" ng-class="{true:'mb10'}[!item.Labels]">
+              <span>{{item.EducationCode | KeyToName:'Education':ConstantXML}}</span>
+              <i>|</i>
+              <span>{{item.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML}}</span>
+              <i>|</i>
+              <span>{{item.Birthday | CallbackAge}}岁</span>
+              <i>|</i>
+              <span>{{item.IntentionJobTypeNames}}</span>
+            </p>
+            <div class="signGroup mb10" ng-if="ConstantXML && item.Labels">
+              <span ng-repeat="itemLabel in item.Labels.split(',')">{{itemLabel | KeyToName:'ResumeLabel':ConstantXML}}</span>
+            </div>
+          </div>
+          <div class="right">
+            <span>{{item.IntentionPayCode | KeyToName:'IntentionPay':ConstantXML}}</span>
+          </div>
+          <div class="clr"></div>
+          <!--<div class="bottom"></div>-->
+        </div>
+
+        <!-- <paper name="SearchResumeList" hasborder current="RJ_current" onepage="RJ_onepage"></paper> -->
+        <infinite-scroll-end is-auth ng-model="SearchResumeList" one-page="10" args="SearchResumeDatas"></infinite-scroll-end>
+
+        <list-status ng-model="SearchResumeList"></list-status>
+        
+      </div>
+
+    </div>
+
+  </ion-content>
+
+  <div class="bar bar-footer list-record searchResume-footer">
+    <div class="ll">搜索关键字：<b>{{SearchResumeDatas.Key}}</b></div>
+    <div class="rr"><a href="javascript:;" ng-click="backTo()">返回</a></div>
+  </div>
+
+
+
+  <!--<div class="bar bar-footer ResumeDetailFooter"></div>-->
+  <!--<ion-content class="has-footer">-->
+    
+
+
+</ion-view>

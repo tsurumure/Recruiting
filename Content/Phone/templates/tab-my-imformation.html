@@ -1,0 +1,142 @@
+<ion-view hide-tabs="true" view-title="基本信息" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">基本信息</h1>
+    <button class="button" ng-click="postSubmit()">保存</button>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true">
+    
+    <div id="my">
+
+      <form role="form" name="myForm" ng-submit="submitForm(myForm.$valid)" novalidate>
+        
+        <div class="list list-inset mt10">
+
+          <!-- <div class="item">{{UserBaseInfor}}</div> -->
+          
+          <div class="item item-input">
+            <span class="input-label">真实姓名<b>*</b></span>
+            <input type="text" placeholder="请输入真实姓名" name="Name" ng-model="UserBaseInfor.Name" ng-pattern="/^[\u4e00-\u9fa5]{2,4}$/" required>
+          </div>
+          <div class="item item-error" ng-show="myForm.Name.$dirty && myForm.Name.$invalid">
+            <span ng-show="myForm.Name.$error.required">姓名不能为空</span>
+            <span ng-show="!myForm.Name.$error.required && myForm.Name.$dirty && myForm.Name.$invalid">请输入真实名字</span>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">性　　别<b>*</b></span>
+            <radioer bind-value="UserBaseInfor.GenderCode" params='[{"key":"A01","value":"男"},{"key":"A02","value":"女"}]' required></radioer>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">身　　高</span>
+            <input type="text" placeholder="请输入身高" ng-model="UserBaseInfor.Stature" required>cm
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">出生日期</span>
+            <date-directive bind-value="UserBaseInfor.Birthday"></date-directive>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">婚姻状态<b>*</b></span>
+            <radioer bind-value="UserBaseInfor.MaritalStatusCode" params='[{"key":"A01","value":"已婚"},{"key":"A02","value":"未婚"}]' required></radioer>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">民　　族<b>*</b></span>
+            <selection placeholder="选择民族" xml-name="Nation" bind-value="UserBaseInfor.NationCode" required></selection>
+          </div>
+          
+          <div class="item item-input">
+            <span class="input-label">现居住地<b>*</b></span>
+            <selection-areas placeholder="选择现居住地" bind-title="UserBaseInfor.LiveAreaCascadeName" ng-model="UserBaseInfor.LiveAreaId"></selection-areas>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">籍　　贯<b>*</b></span>
+            <selection-areas placeholder="选择籍贯" level="2" bind-title="UserBaseInfor.NativePlaceAreaCascadeName" ng-model="UserBaseInfor.NativePlaceAreaId"></selection-areas>
+          </div>
+
+        </div>
+
+        <div class="list list-inset mt10">
+          <div class="item item-input">
+            <span class="input-label">工　　龄<b>*</b></span>
+            <selection placeholder="选择工龄" xml-name="WorkAge" bind-value="UserBaseInfor.WorkingAgeCode" required></selection>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">毕业学校<b>*</b></span>
+            <input type="text" placeholder="请输入毕业学校" ng-model="UserBaseInfor.GraduateSchool" required>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">主修专业<b>*</b></span>
+            <input type="text" placeholder="请输入主修专业" ng-model="UserBaseInfor.MajorIn" required>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">学　　历<b>*</b></span>
+            <selection placeholder="选择学历" xml-name="Education" bind-value="UserBaseInfor.EducationCode" required></selection>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">计算机等级<b>*</b></span>
+            <selection placeholder="选择计算机等级" xml-name="ComputerLevel" bind-value="UserBaseInfor.ComputerLevelCode" required></selection>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">英语等级<b>*</b></span>
+            <selection placeholder="选择英语等级" xml-name="EnglishLevel" bind-value="UserBaseInfor.EnglishLevelCode" required></selection>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">个人标签<b>*</b></span>
+            <selection multiline="3" placeholder="选择个人标签" xml-name="ResumeLabel" bind-value="UserBaseInfor.Labels" required></selection>
+          </div>
+        </div>
+
+        <div class="list list-inset mt10">
+          <div class="item item-input">
+            <span class="input-label">手机号码<b>*</b></span>
+            <input type="text" placeholder="请输入手机号码" name="Phone" ng-model="UserBaseInfor.Phone" required>
+          </div>
+          <div class="item item-error" ng-show="myForm.Phone.$dirty && myForm.Phone.$invalid">
+            <span ng-show="myForm.Phone.$error.required">手机号码不能为空</span>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">QQ</span>
+            <input type="text" placeholder="请输入QQ" ng-model="UserBaseInfor.QQ">
+          </div>
+          <div class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="text" placeholder="请输入Email" ng-model="UserBaseInfor.Email">
+          </div>
+          <div class="item item-input">
+            <span class="input-label">通讯地址<b>*</b></span>
+            <input type="text" placeholder="请输入通讯地址" ng-model="UserBaseInfor.Address" required>
+          </div>
+        </div>
+
+        <div class="myResume-tip tip-positive" ng-show="isErrorForSubmit">
+          <p><i class="ion-android-alert"></i>请检查<b>*</b>必填项是否有误</p>
+        </div>
+        
+        <div class="list-inset">
+          <button type="submit" id="submitBtn" class="button button-small button-full button-positive">保存资料</button>
+        </div>
+
+
+      </form>
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

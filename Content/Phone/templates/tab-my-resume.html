@@ -1,0 +1,114 @@
+<ion-view hide-tabs="true" view-title="我的简历" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <!--<button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>-->
+    <a href="{{app_config.links}}/#/tab/my" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title">我的简历</h1>
+    <!--<input type="submit" class="button" ng-click="submitForm()" value="保存">-->
+  </ion-header-bar> 
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true" class="bg-white">
+    
+    <div id="my" class="myResume">
+      
+      <!--<div class="word-tip">
+        <p>提示：请认真填写简历，以便让用人单位更快地了解您的情况，填写后即可投递简历（<b>*</b>号为必填项）</p>
+      </div>-->
+      
+      <!-- 简历列表(基本资料) -->
+      <div class="resume-baseInform mb20">
+        <div class="content" ng-class="{true:'show'}[isShowAll]">
+          <div class="row"><div class="col">
+            <a href="javascript:;" class="title" ng-click="goInform()">基本信息<i class="ion-compose"></i></a>
+          </div></div>
+          <div class="row">
+            <div class="col"><em>真实姓名：</em>{{UserBaseInfor.Name}}</div>
+            <div class="col"><em>性　　别：</em>{{UserBaseInfor.GenderCode | KeyToName:'Gender':ConstantXML}}</div>
+          </div>
+          <div class="row">
+            <div class="col"><em>身　　高：</em>{{UserBaseInfor.Stature}}</div>
+            <div class="col"><em>出生日期：</em>{{UserBaseInfor.Birthday.substring(0,10)}}</div>
+          </div>
+          <div class="row">
+            <div class="col"><em>婚姻状态：</em>{{UserBaseInfor.MaritalStatusCode | KeyToName:'MaritalStatus':ConstantXML}}</div>
+            <div class="col"><em>工　　龄：</em>{{UserBaseInfor.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML}}</div>
+          </div>
+          <div class="row">
+              <div class="col"><em>民　　族：</em>{{UserBaseInfor.NationCode | KeyToName:'Nation':ConstantXML}}</div>
+            </div>
+          <div class="row">
+            <div class="col"><em>现居住地：</em>{{UserBaseInfor.LiveAreaCascadeName}}</div>
+          </div>
+          <div class="row">
+            <div class="col"><em>籍　　贯：</em>{{UserBaseInfor.NativePlaceAreaCascadeName}}</div>
+          </div>
+          <div class="row"><div class="col"><em>毕业学校：</em>{{UserBaseInfor.GraduateSchool}}</div></div>
+          <div class="row">
+            <div class="col"><em>主修专业：</em>{{UserBaseInfor.MajorIn}}</div>
+            <div class="col"><em>学　　历：</em>{{UserBaseInfor.EducationCode | KeyToName:'Education':ConstantXML}}</div>
+          </div>
+          <div class="row">
+            <div class="col"><em>计算机等级：</em>{{UserBaseInfor.ComputerLevelCode | KeyToName:'ComputerLevel':ConstantXML}}</div>
+            <div class="col"><em>英语等级：</em>{{UserBaseInfor.EnglishLevelCode | KeyToName:'EnglishLevel':ConstantXML}}</div>
+          </div>
+          <div class="row"><div class="col"><em>手机号码：</em>{{UserBaseInfor.Phone}}</div></div>
+          <div class="row"><div class="col"><em>QQ：</em>{{UserBaseInfor.QQ}}</div></div>
+          <div class="row"><div class="col"><em>Email：</em>{{UserBaseInfor.Email}}</div></div>
+          <div class="row"><div class="col"><em>通讯地址：</em>{{UserBaseInfor.Address}}</div></div>
+        </div>
+
+        <div class="btnGroup">
+          <a href="javascript:;" class="more" ng-class="{true:'show'}[isShowAll]" ng-click="showAll()">
+            <i class="ion-ios-arrow-down"></i>  
+          </a><!-- {{showAllText}}-->
+        </div>
+
+      </div>
+
+      
+
+      <div class="resume-list">
+        <div class="title">简历列表<span>最多创建4份简历，当前 <b ng-bind="ResumeList.length"></b> 份</span></div>
+        
+        <ul class="list" ng-show="ResumeList.length>0">
+          <li ng-repeat="item in ResumeList" ng-class="{true:'default'}[item.IsDefault]">
+            <div class="circlePercent">
+              <label>{{ item.Proportion*100 | number:0 }}%</label>
+              <div>
+                <span ng-if="item.Proportion>0.5"><i style="transform: rotate({{ (item.Proportion-0.5)*3.6*100 + 45 | number:0 }}deg);"></i></span>
+                <span ng-if="item.Proportion>0.5"><i style="transform: rotate(225deg);"></i></span>
+                <span ng-if="item.Proportion<=0.5"><i style="transform: rotate(45deg);"></i></span>
+                <span ng-if="item.Proportion<=0.5"><i style="transform: rotate({{ (item.Proportion)*3.6*100 + 45 | number:0 }}deg);"></i></span>
+              </div>
+            </div>
+
+            <div class="content">
+              <div class="content-base">
+                <a href="#/tab/my/resumeDetail/{{item.Id}}">{{item.Title}}</a>
+                <p>{{item.IntentionJobTypeNames}}</p>
+              </div>
+              <div class="content-radio">
+                  <a href="javascript:;" ng-click="ChangeDefault()"><i class="ion ion-theme-radio-1"></i></a>
+                  <a href="javascript:;" ng-if="!item.IsDefault" ng-click="DeleteResume()"><i class="ion ion-theme-del-1"></i></a>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+
+        <a href="javascript:;" ng-if="!userImfor.IsHasResumeBaseInfo" ng-disabled="true" class="button button-small button-full button-positive button-newStyle">需要先完善基本资料</a>
+        <a href="#/tab/my/resumeDetail/add" ng-if="userImfor.IsHasResumeBaseInfo && ResumeList.length<4" class="button button-small button-full button-positive button-newStyle">创建新的简历</a>
+
+      </div>
+
+
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

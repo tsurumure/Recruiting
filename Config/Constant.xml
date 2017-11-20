@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Constant version="20170715">
+  <!--企业性质-->
+  <Item name="EnterpriseNature">
+    <Node key="A05" value="民营企业"></Node>
+    <Node key="A01" value="国有企业"></Node>
+    <Node key="A02" value="外资企业"></Node>
+    <Node key="A03" value="合资企业"></Node>
+    <Node key="A04" value="私营企业"></Node>    
+    <Node key="A06" value="股份制企业"></Node>
+    <Node key="A07" value="集体企业"></Node>
+    <Node key="A08" value="集体事业"></Node>
+    <Node key="A09" value="乡镇企业"></Node>
+    <Node key="A10" value="行政机关"></Node>
+    <Node key="A11" value="社会团体"></Node>
+    <Node key="A12" value="事业单位"></Node>
+    <Node key="A13" value="跨国公司(集团)"></Node>
+  </Item>
+  <!--企业人数-->
+  <Item name="EnterprisePeopleNum">
+    <Node key="A01" value="50人以下"></Node>
+    <Node key="A02" value="50-100人"></Node>
+    <Node key="A03" value="100-200人"></Node>
+    <Node key="A04" value="200-500人"></Node>
+    <Node key="A05" value="500-1000人"></Node>
+    <Node key="A06" value="1000人以上"></Node>
+  </Item>
+  <!--注册资金-->
+  <Item name="EnterpriseRegisteredCapital">
+    <Node key="A01" value="100万以下"></Node>
+    <Node key="A02" value="100万-500万"></Node>
+    <Node key="A03" value="500万-1000万"></Node>
+    <Node key="A04" value="1000万-5000万"></Node>
+    <Node key="A05" value="5000万以上"></Node>
+  </Item>
+  <!--工资支付方式-->
+  <Item name="JobPayWay">
+    <Node key="A01" value="月薪" display="元/月"></Node>
+    <Node key="A02" value="日薪" display="元/日"></Node>
+    <Node key="A03" value="时薪" display="元/时"></Node>
+    <Node key="A04" value="计件" display="元/件"></Node>
+    <Node key="A05" value="计件+保底" display="元/件"></Node>
+  </Item>
+  <!--工资支付单位-->
+  <Item name="JobPayUnit">
+    <Node key="A01" value="元/月"></Node>
+    <Node key="A02" value="元/日"></Node>
+    <Node key="A03" value="元/小时"></Node>
+    <Node key="A04" value="元/件"></Node>
+    <Node key="A05" value="元/件"></Node>
+  </Item>
+  <!--岗位工资-->
+  <Item name="JobPay">
+    <Node key="A01" value="面议"></Node>
+    <Node key="A02" value="2000以下"></Node>
+    <Node key="A03" value="2000-3000"></Node>
+    <Node key="A04" value="3000-4000"></Node>
+    <Node key="A05" value="4000-5000"></Node>
+    <Node key="A06" value="5000-7000"></Node>
+    <Node key="A07" value="7000-10000"></Node>
+    <Node key="A08" value="10000-15000"></Node>
+    <Node key="A09" value="15000以上"></Node>
+  </Item>
+  <!--学历-->
+  <Item name="Education">
+    <Node key="A01" value="小学"></Node>
+    <Node key="A02" value="初中"></Node>
+    <Node key="A03" value="高中"></Node>
+    <Node key="A04" value="中专"></Node>
+    <Node key="A05" value="大专"></Node>
+    <Node key="A06" value="本科"></Node>
+    <Node key="A07" value="硕士"></Node>
+    <Node key="A08" value="博士"></Node>
+  </Item>
+  <!--学历要求(停止使用)-->
+  <Item name="DemandEducation">
+    <Node key="A00" value="不限"></Node>
+    <Node key="A01" value="小学"></Node>
+    <Node key="A02" value="初中"></Node>
+    <Node key="A03" value="高中"></Node>
+    <Node key="A04" value="中专"></Node>
+    <Node key="A05" value="大专"></Node>
+    <Node key="A06" value="本科"></Node>
+    <Node key="A07" value="硕士"></Node>
+    <Node key="A08" value="博士"></Node>
+  </Item>
+  <!--性别要求(停止使用)-->
+  <Item name="DemandGender">
+    <Node key="A00" value="不限"></Node>
+    <Node key="A01" value="男"></Node>
+    <Node key="A02" value="女"></Node>
+  </Item>
+  <!--工龄-->
+  <Item name="WorkAge">
+    <Node key="A01" value="无经验"></Node>
+    <Node key="A02" value="1年"></Node>
+    <Node key="A03" value="2年"></Node>
+    <Node key="A04" value="3年"></Node>
+    <Node key="A05" value="4年"></Node>
+    <Node key="A06" value="5年"></Node>
+    <Node key="A07" value="6-10年"></Node>
+    <Node key="A08" value="11-15年"></Node>
+    <Node key="A09" value="15年以上"></Node>
+  </Item>
+  <!--性别-->
+  <Item name="Gender">
+    <Node key="A01" value="男"></Node>
+    <Node key="A02" value="女"></Node>
+  </Item>  
+  <!--福利-->
+  <Item name="Welfare">
+    <Node key="A01" value="住宿" abbr="住"></Node>
+    <Node key="A02" value="班车" abbr="车"></Node>
+    <Node key="A03" value="工作餐" abbr="餐"></Node>
+    <Node key="A04" value="返现" abbr="返"></Node>
+    <Node key="A05" value="实习" abbr="习"></Node>
+    <Node key="A06" value="保险" abbr="险"></Node>
+    <Node key="A07" value="公积金" abbr="金"></Node>
+    <Node key="A08" value="年终奖" abbr="奖"></Node>
+    <Node key="A09" value="周末双休" abbr="双"></Node>
+  </Item>
+  <!--工作性质-->
+  <Item name="JobNature">
+    <Node key="A01" value="全职"></Node>
+    <Node key="A02" value="兼职"></Node>
+    <Node key="A03" value="临时工"></Node>
+    <Node key="A04" value="小时工"></Node>
+  </Item>
+  <!--期待工资-->
+  <Item name="IntentionPay">
+    <Node key="A01" value="面议"></Node>
+    <Node key="A02" value="2000以下"></Node>
+    <Node key="A03" value="2000-3000"></Node>
+    <Node key="A04" value="3000-4000"></Node>
+    <Node key="A05" value="4000-5000"></Node>
+    <Node key="A06" value="5000-7000"></Node>
+    <Node key="A07" value="7000-10000"></Node>
+    <Node key="A08" value="10000-15000"></Node>
+    <Node key="A09" value="15000以上"></Node>
+  </Item>
+  <!--求职状态-->
+  <Item name="WorkStatus">    
+    <Node key="A02" value="目前正在找工作"></Node>
+    <Node key="A03" value="近期打算要跳槽"></Node>
+    <Node key="A04" value="应届毕业生"></Node>
+    <Node key="A01" value="暂时不想找工作"></Node>
+  </Item>
+  <!--婚姻状态-->
+  <Item name="MaritalStatus">
+    <Node key="A01" value="已婚"></Node>
+    <Node key="A02" value="未婚"></Node>
+  </Item>
+  <!--计算机等级-->
+  <Item name="ComputerLevel">
+    <Node key="A01" value="不懂"></Node>
+    <Node key="A02" value="一般"></Node>
+    <Node key="A03" value="良好"></Node>
+    <Node key="A04" value="熟练"></Node>
+    <Node key="A05" value="精通"></Node>
+  </Item>
+  <!--英语等级-->
+  <Item name="EnglishLevel">
+    <Node key="A01" value="不懂"></Node>
+    <Node key="A02" value="一般"></Node>
+    <Node key="A03" value="良好"></Node>
+    <Node key="A04" value="熟练"></Node>
+    <Node key="A05" value="精通"></Node>
+  </Item>
+  <!--行业-->
+  <Item name="Industry">
+    <Node key="21073b2eab6b4b8886a6de04ae8e6888" value="机械五金模具"></Node>
+    <Node key="c9fd1c92fcec467caacca5a58e5e71f1" value="包装印刷文具"></Node>
+    <Node key="53f2cbe3ef254976baee5be0db9b504f" value="塑胶玩具工艺"></Node>
+    <Node key="26007b11279047fe8fda0ec7b06426c0" value="服装纺织鞋帽"></Node>
+    <Node key="faca8b87bdf2488296cc63ba2633d960" value="IT网络电子商务"></Node>
+    <Node key="e02a5fe6e8494842977c8d05278ba5fc" value="电子电器音像"></Node>
+    <Node key="e0d93ca6b550475ab07626ccaba25bf1" value="食品医药医疗"></Node>
+    <Node key="7e9e84399a9547d3be18d0ffa215c7d9" value="化工能源化妆品"></Node>
+    <Node key="3f6fa9736bfb4425bf5233f879ba01c1" value="房产建材装饰"></Node>
+    <Node key="69a3a0edb49d4e19b8b30b4391fc8906" value="商贸广告教育"></Node>
+    <Node key="1c9d4b699d4948758cd8f5253fab0ded" value="餐娱商铺服务业"></Node>
+    <Node key="ef0e81923be44dfd89ea56788182521d" value="金融保险证券"></Node>
+    <Node key="ddd01fbdca904eccaec80681dda217b4" value="汽车物流快递"></Node>
+    <Node key="9b3aafbb51cf4caba1657cfa931ac71e" value="民生供应公共管理"></Node>   
+    <Node key="b9969b4b32464a3086f55e8e79e524ec" value="其它行业"></Node>
+  </Item>  
+  <Item name="City">
+    <Node key="00000000000000000000000000440500" value="汕头市"></Node>
+    <Node key="00000000000000000000000000445100" value="潮州市"></Node>
+    <Node key="00000000000000000000000000445200" value="揭阳市"></Node>
+  </Item>
+  <!--开放城市-->
+  <Item name="OpenCity">
+    <Node key="00000000000000000000000000440500" value="汕头市"></Node>
+    <Node key="00000000000000000000000000445100" value="潮州市"></Node>
+    <Node key="00000000000000000000000000445200" value="揭阳市"></Node>
+  </Item>
+  <!--民族-->
+  <Item name="Nation">
+    <Node key="A01" value="汉族"></Node>
+    <Node key="A02" value="蒙古族"></Node>
+    <Node key="A03" value="彝族"></Node>
+    <Node key="A04" value="侗族"></Node>
+    <Node key="A05" value="哈萨克族"></Node>
+    <Node key="A06" value="畲族"></Node>
+    <Node key="A07" value="纳西族"></Node>
+    <Node key="A08" value="仫佬族"></Node>
+    <Node key="A09" value="仡佬族"></Node>
+    <Node key="A10" value="怒族"></Node>
+    <Node key="A11" value="保安族"></Node>
+    <Node key="A12" value="鄂伦春族"></Node>
+    <Node key="A13" value="回族"></Node>
+    <Node key="A14" value="壮族"></Node>
+    <Node key="A15" value="瑶族"></Node>
+    <Node key="A16" value="傣族"></Node>
+    <Node key="A17" value="高山族"></Node>
+    <Node key="A18" value="景颇族"></Node>
+    <Node key="A19" value="羌族"></Node>
+    <Node key="A20" value="锡伯族"></Node>
+    <Node key="A21" value="乌孜别克族"></Node>
+    <Node key="A22" value="裕固族"></Node>
+    <Node key="A23" value="赫哲族"></Node>
+    <Node key="A24" value="藏族"></Node>
+    <Node key="A25" value="布依族"></Node>
+    <Node key="A26" value="白族"></Node>
+    <Node key="A27" value="黎族"></Node>
+    <Node key="A28" value="拉祜族"></Node>
+    <Node key="A29" value="柯尔克孜族"></Node>
+    <Node key="A30" value="布朗族"></Node>
+    <Node key="A31" value="阿昌族"></Node>
+    <Node key="A32" value="俄罗斯族"></Node>
+    <Node key="A33" value="京族"></Node>
+    <Node key="A34" value="门巴族"></Node>
+    <Node key="A35" value="维吾尔族"></Node>
+    <Node key="A36" value="朝鲜族"></Node>
+    <Node key="A37" value="土家族"></Node>
+    <Node key="A38" value="傈僳族"></Node>
+    <Node key="A39" value="水族"></Node>
+    <Node key="A40" value="土族"></Node>
+    <Node key="A41" value="撒拉族"></Node>
+    <Node key="A42" value="普米族"></Node>
+    <Node key="A43" value="鄂温克族"></Node>
+    <Node key="A44" value="塔塔尔族"></Node>
+    <Node key="A45" value="珞巴族"></Node>
+    <Node key="A46" value="苗族"></Node>
+    <Node key="A47" value="满族"></Node>
+    <Node key="A48" value="哈尼族"></Node>
+    <Node key="A49" value="佤族"></Node>
+    <Node key="A50" value="东乡族"></Node>
+    <Node key="A51" value="达斡尔族"></Node>
+    <Node key="A52" value="毛南族"></Node>
+    <Node key="A53" value="塔吉克族"></Node>
+    <Node key="A54" value="德昂族"></Node>
+    <Node key="A55" value="独龙族"></Node>
+    <Node key="A56" value="基诺族"></Node>
+  </Item>
+  <Item name="CreditType">
+    <Node key="A01" value="虚假简历"></Node>
+    <Node key="A02" value="自离不交接"></Node>
+    <Node key="A03" value="接单做私活"></Node>
+    <Node key="A04" value="偷到财产"></Node>
+    <Node key="A05" value="泄露机密"></Node>
+    <Node key="A06" value="其它"></Node>
+  </Item>
+  <Item name="ResumeLabel">
+    <Node key="A01" value="热情开朗"></Node>
+    <Node key="A02" value="亲和力"></Node>
+    <Node key="A03" value="善于沟通"></Node>
+    <Node key="A04" value="能加班"></Node>
+    <Node key="A05" value="会英语"></Node>
+    <Node key="A06" value="能出差"></Node>
+    <Node key="A07" value="抗压力"></Node>
+    <Node key="A08" value="善于创新"></Node>
+  </Item>
+  <Item name="LastLoginDate">
+    <Node key="A01" value="1"></Node>
+    <Node key="A02" value="3"></Node>
+    <Node key="A03" value="7"></Node>
+    <Node key="A04" value="15"></Node>
+    <Node key="A05" value="30"></Node>
+  </Item>
+</Constant>

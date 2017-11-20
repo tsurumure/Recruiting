@@ -1,0 +1,67 @@
+<ion-view hide-tabs="true" view-title="招聘" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <a ng-click="backTo()" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title">职位管理</h1>
+    <!-- <a href="{{app_config.links}}/#/company/releaseJob/add" class="button">发布</a> -->
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll='true' ng-class="{true:'bg-white'}[ReleaseJobList.length<=0]">
+
+    <div class="releaseJob">
+
+      <div class="releaseJob-list">
+
+        <div class="section-style mt10" ng-show="ReleaseJobList.length>0">
+          
+          <div class="section-item" ng-repeat="item in ReleaseJobList | limitTo:RJ_onepage:RJ_current*RJ_onepage">
+            <div class="left">
+              <a href="{{app_config.links}}/#/company/releaseJob/{{item.Id}}" class="title"><em ng-if="item.IsPutaway==false">下架中</em>{{item.Name}}</a>
+              <p>
+                <span>{{item.Department}}</span>
+                <i>|</i>
+                <span>{{item.RecruitingCount}}人</span>
+                <i>|</i>
+                <span>￥{{item.Pay}}</span>
+              </p>
+              <p>已收到<b>{{item.ApplyCount}}</b>份简历</p>
+            </div>
+            <div class="right">
+              <a href="javascript:;" ng-if="item.IsPutaway==true" ng-click="RefreshJob()" class="button button-small button-positive"><i class="ion ion-theme-releaseJob-0"></i>刷新</a>
+              <p>{{item.ReleaseTime | FuckDater | date:"MM-dd"}} 更新</p>
+            </div>
+            <div class="clr"></div>
+            <div class="bottom">
+              <ul>
+                <li ng-click="ChangeIsPutaway()">
+                  <a href="javascript:;" ng-if="item.IsPutaway==true"><i class="ion ion-theme-releaseJob-3"></i>下架</a>
+                  <a href="javascript:;" ng-if="item.IsPutaway==false" class="off"><i class="ion ion-theme-releaseJob-2"></i>上架</a>
+                </li>
+                <li><a href="{{app_config.links}}/#/company/releaseJob/{{item.Id}}"><i class="ion ion-theme-my-2"></i>编辑</a></li>
+                <li><a href="{{app_config.links}}/#/company/releaseJobDetail/{{item.Id}}"><i class="ion ion-theme-releaseJob-1"></i>预览</a></li>
+                <li><a href="javascript:;" ng-click="DeleteJob()"><i class="ion ion-theme-del-1"></i>删除</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <paper name="ReleaseJobList" hasborder current="RJ_current" onepage="RJ_onepage"></paper>
+        <list-status ng-model="ReleaseJobList" null-msg="暂无记录"></list-status>
+
+      </div>
+    </div>
+      
+  </ion-content>
+  <!-- end Content -->
+  
+  <div class="bottomCircle">
+    <a href="{{app_config.links}}/#/company/releaseJob/add"><i class="ion ion-theme-nav-center"></i></a>
+  </div>
+  
+  
+</ion-view>

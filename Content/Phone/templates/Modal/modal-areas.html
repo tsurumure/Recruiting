@@ -1,0 +1,35 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <button class="button button-clear button-primary" ng-click="SaveModal()">保存</button>
+    <h1 class="title" ng-bind="bindTitle"></h1>
+    <button class="button button-clear button-primary" ng-click="CloseModal()">取消</button>
+  </ion-header-bar>
+
+  <!--  overflow-scroll="true" -->
+  <ion-tabs delegate-handle="modelTabs" class="tabs-striped tabs-top tabs-light tabs-color-active-positive">
+    <ion-tab title="省" on-select="on_select_tab(1)">
+      <ion-content class="has-header has-tabs-top tabs-list">
+        <ion-list>
+          <ion-radio name="firstRadio" ng-repeat="item in AllDatas_First" ng-model="Id_First" ng-value="FillZero(item.Id)+item.Id" ng-click="SelectArea_First()">{{item.Name}}</ion-radio>
+        </ion-list>
+      </ion-content>
+    </ion-tab>
+    <ion-tab title="市" on-select="on_select_tab(2)">
+      <ion-content class="has-header has-tabs-top tabs-list">
+        <ion-list>
+          <ion-radio name="secondRadio" ng-repeat="item in AllDatas_Second" ng-model="Id_Second" ng-value="FillZero(item.Id)+item.Id" ng-click="SelectArea_Second()">{{item.Name}}</ion-radio>
+        </ion-list>
+      </ion-content>
+    </ion-tab>
+
+    <ion-tab title="区/县{{level}}" on-select="on_select_tab(3)" ng-if="IsThird">
+      <ion-content class="has-header has-tabs-top tabs-list">
+        <ion-list>
+          <ion-radio name="ThirdRadio" ng-repeat="item in AllDatas_Third" ng-model="Id_Third" ng-value="FillZero(item.Id)+item.Id" ng-click="SelectArea_Third()">{{item.Name}}</ion-radio>
+        </ion-list>
+      </ion-content>
+    </ion-tab>
+
+  </ion-tabs>
+
+</ion-modal-view>

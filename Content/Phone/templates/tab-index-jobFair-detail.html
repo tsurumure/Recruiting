@@ -1,0 +1,113 @@
+<ion-view hide-tabs="true" view-title="招聘会详情" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <!--<a href="{{app_config.links}}/#/tab/index/jobfair" class="button icon ion-ios-arrow-left"></a>-->
+    <h1 class="title">招聘会详情</h1>
+    <button ng-click="backTo('/#/'+entry+'/index')" class="button icon ion-ios-home"></button>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content class="empty has-footer"> <!--  overflow-scroll="true"-->
+
+    <div id="jobFair">
+      <div class="jobFairDetail">
+
+        <div class="item-bar" ng-class="{true:'status-stop'}[jobFairDetail.IsEnd]">
+          <div class="item-theme-content">
+            <div class="title" ng-bind="jobFairDetail.Name"></div>
+            <div class="content">
+              <!--<p ng-bind-html="jobFairDetail.Content" class="mb10"></p>-->
+              <p><i class="ion ion-theme-nav-2"></i>{{jobFairDetail.Address}}</p>
+              <p><i class="ion ion-theme-clock-1"></i>{{jobFairDetail.ConductTime}}</p>
+              <div class="tip-message">本场招聘会是预约式招聘会，请企业朋友提前报名，先到先得。</div>
+            </div>
+          </div>
+          <div class="clr"></div>
+        </div>
+
+        <div class="statistics">
+          <div class="row">
+            <div class="col col-50">
+              <a ng-href="#/{{entry}}/index/jobfair/detail/{{CareerFairId}}/seekerList">
+                <em ng-bind="jobFairPersonal.length"></em><span>参会人才</span>
+                <!--<em ng-bind="jobFairDetail.CareerFairDetails.length"></em><span>参会企业</span>-->
+              </a>
+            </div>
+            <div class="col col-50">
+              <a href="javascript:;">
+                <em ng-bind="jobFairDetail.StallCount"></em><span>可选摊位</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-group">
+          <!-- <a href="javascript:;" class="item item-icon-right">
+            <i class="ion ion-left ion-theme-my-4"></i>
+            人才一览表
+            <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+          </a>
+          <a href="javascript:;" class="item item-icon-right">
+            <i class="ion ion-left ion-theme-jf-2"></i>
+            摊位图
+            <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+          </a> -->
+          <a ng-click="showImfor(1)" href="javascript:;" class="item item-icon-right">
+            <i class="ion ion-left ion-theme-jf-3"></i>
+            参会流程
+            <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+          </a>
+          <a ng-click="showImfor(2)" href="javascript:;" class="item item-icon-right">
+            <i class="ion ion-left ion-theme-jf-4"></i>
+            公交指引/驾车导航
+            <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+          </a>
+          <a ng-click="showImfor(3)" href="javascript:;" class="item item-icon-right">
+            <i class="ion ion-left ion-theme-jf-5"></i>
+            联系方式
+            <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+          </a>
+          <a ng-click="showImfor(4)" href="javascript:;" class="item item-icon-right">
+            <i class="ion ion-left ion-theme-jf-6"></i>
+            参会须知
+            <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+          </a>
+          <a ng-click="showImfor(5)" href="javascript:;" class="item item-icon-right">
+            <i class="ion ion-left ion-theme-jf-7"></i>
+            媒体支持
+            <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </ion-content>
+
+
+  <div class="bar bar-footer">
+    <div class="theme-button-group" ng-class="{true:'count-2'}[jobFairDetail.IsEnd==false]">
+      <div class="theme-button">
+        <a href="javascript:;" ng-click="showImfor(0)" class="button button-outline button-small button-full">
+          <i class="ion ion-eye"></i>了解详情
+        </a>
+      </div>
+      <div class="theme-button" ng-hide="jobFairDetail.IsEnd">
+        <a href="javascript:;" ng-click="OpenCareerFairForm(entry)" ng-disabled="IsApply" class="button button-positive button-small button-full">
+          <i class="ion ion-theme-apply-1"></i>我要报名
+        </a>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

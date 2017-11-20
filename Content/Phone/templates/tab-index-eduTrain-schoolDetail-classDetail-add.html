@@ -1,0 +1,80 @@
+<ion-view hide-tabs="true" view-title="我要报名" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar ng-hide="isApp" align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">我要报名</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="false">
+
+    <div class="articleDetail">
+      
+      <form role="form" name="myForm" ng-submit="submitForm(myForm.$valid)" novalidate>
+        
+          <div class="item item-input-group">
+            <span class="input-title">姓　　名<b>*</b></span>
+            <div class="input-text-group">
+              <input class="input-text" type="text" name="Name" ng-model="applyDatas.Name" ng-pattern="/^[\u4e00-\u9fa5]{2,4}$/" placeholder="输入您的姓名" required/>
+            </div>
+          </div>
+          <div class="item item-error" ng-show="myForm.Name.$dirty && myForm.Name.$invalid">
+            <span ng-show="myForm.Name.$error.required">姓名不能为空</span>
+            <span ng-show="!myForm.Name.$error.required && myForm.Name.$dirty && myForm.Name.$invalid">请输入真实名字</span>
+          </div>
+  
+          <div class="item item-input-group">
+            <span class="input-title">性　　别</span>
+            <div class="input-text-group">
+              <div class="input-radio">
+                <a href="javascript:;" ng-click="selectGender('男')" ng-class="{true:'button-positive'}[sex.male]" class="button button-small">男</a>
+                <a href="javascript:;" ng-click="selectGender('女')" ng-class="{true:'button-positive'}[sex.female]" class="button button-small">女</a>
+              </div>
+              <input type="hidden" name="sex" ng-value="applyDatas.Gender"/>
+            </div>
+          </div>
+          <div class="item item-input item-input-group">
+            <span class="input-label" style="width:94px;">出生日期</span>
+            <div ng-click="bornDatePicker()" class="dateClick" ng-hide="bornSelectedDate||defaultDate" style="cursor:pointer;">选择出生日期<i class="ion-ios-arrow-down"></i></div>
+            <div ng-click="bornDatePicker()" class="dateClick-label" ng-if="defaultDate" ng-hide="bornSelectedDate">{{defaultDate|limitTo:10}} <i class="ion-ios-arrow-down"></i></div>
+            <div ng-click="bornDatePicker()" class="dateClick-label" ng-if="bornSelectedDate">{{ bornSelectedDate_format }} <i class="ion-ios-arrow-down"></i></div>
+            <input type="hidden" ng-value="bornSelectedDate|date:'yyyy-MM-dd'"/>
+          </div>
+          <div class="item item-input-group">
+            <span class="input-title">手机号码<b>*</b></span>
+            <div class="input-text-group">
+              <input class="input-text" type="number" ng-model="applyDatas.Phone" placeholder="输入您的手机号码"/>
+            </div>
+          </div>
+          <div class="item item-input-group">
+            <span class="input-title">最高学历</span>
+            <div class="input-text-group">
+              <input class="input-text" type="text" ng-model="applyDatas.Education" placeholder="输入您的最高学历"/>
+            </div>
+          </div>
+          <div class="item">
+            <textarea placeholder="其它内容" ng-model="applyDatas.Content" class="f14" style="width:100%;"></textarea>
+          </div>
+  
+          <div class="myResume-tip tip-positive mb10" ng-show="isErrorForSubmit">
+            <p><i class="ion-android-alert"></i>请检查<b>*</b>必填项是否有填写</p>
+          </div>
+          <div class="wp">
+            <input type="submit" value="提交" class="button button-block button-small button-positive">
+            <!-- <a href="javascript:;" class="button button-block button-small button-positive">提交</a> -->
+          </div>
+  
+        </form>
+
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

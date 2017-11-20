@@ -1,0 +1,124 @@
+<ion-view hide-tabs="true" view-title="广场详情" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo(CurrentURL,'/#/tab/{{url}}')" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title" ng-click="backTo()">广场详情</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content>
+    
+    <div class="square square-detail" lazy-container>
+      <ul ng-show="item">
+        
+        <li class="item" itemid="{{item.Id}}">
+          <div class="s-top">
+            <div class="s-top-left">
+              <a href="{{app_config.links}}/#/tab/{{url}}/imformation/{{item.UserId}}">
+                <img ng-src="{{item.UserHeadPic||'/Content/Phone/images/default/head/head_none.jpg'}}" err-src="/Content/Phone/images/default/head/head_none.jpg"/>
+              </a>
+              <a href="{{app_config.links}}/#/tab/{{url}}/imformation/{{item.UserId}}">{{item.UserNickName}}</a>
+            </div>
+            <div class="s-top-right" ng-if="item.UserId===userImfor.Id">
+              <a href="javascript:;" ng-click="mySquareDel()" class="ion-ios-trash-outline"></a>
+            </div>
+          </div>
+          <div class="s-mid">
+            <div class="s-mid-content">{{item.Content}}</div>
+
+            <a ng-if="item.ContentData && item.ContentData!=''" href="#/tab/{{url}}/cardDetail/{{(item.ContentData|StringToJSON).Id}}" class="SquareCards_Wrap">
+              <div class="SquareCards">
+                <div class="card-left">
+                  <div class="title">
+                    <strong ng-bind="(item.ContentData|StringToJSON).Resume.Realname"></strong>
+                    <span>正在寻找XXX工作</span>
+                  </div>
+                  <div class="content">
+                    <ul>
+                        <li><em>性别：</em><span ng-bind="(item.ContentData|StringToJSON).Resume.Gender | KeyToName:'Gender':ConstantXML"></span></li>
+                      <li><em>年龄：</em><span ng-bind="((item.ContentData|StringToJSON).Resume.Birthday | CallbackAge)+'岁'"></span></li>
+                      <li><em>学历：</em><span ng-bind="(item.ContentData|StringToJSON).Resume.EducationCode | KeyToName:'Education':ConstantXML">本科</span></li>
+                      <li><em>身高：</em><span ng-bind="(item.ContentData|StringToJSON).Resume.Stature+'cm'"></span></li>
+                      <li class="long"><em>意向：</em><span ng-bind="(item.ContentData|StringToJSON).Resume.IntentionJobTypeNames"></span></li> 
+                    </ul>
+                  </div>
+                </div>
+                <div class="card-right">
+                  <div class="headpic">
+                    <img ng-src="{{(item.ContentData|StringToJSON).Resume.HeadImage}}">
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <div class="s-min-photo" ng-show="item.Images">
+              <ion-gallery ion-gallery-items="item.Images" ion-gallery-row="3"></ion-gallery>
+            </div>
+          </div>
+          <div class="s-bottom">
+            <div class="s-bottom-left">{{item.ReleaseTime | limitTo:16}} &nbsp;&nbsp;<a href="javascript:;" ng-click="inform()">举报</a></div>
+            <div class="s-bottom-right">
+              <span ng-class="{true:'unusable'}[loadingPraise]">
+                <a ng-click="eventPostPraise()" href="javascript:;" class="ion-zan-outline" ng-class="{true: 'active'}[item.PraiseUserIds.indexOf(userImfor.Id)>=0]">
+                  <span>{{this.item.PraiseCount}}</span>
+                </a>
+              </span>
+              <span>
+                <a href="javascript:;" ng-click="getMyMessageFocus()" class="ion-ios-chatboxes-outline">
+                  <span>{{item.ReplyCount}}</span>
+                </a>
+              </span>
+            </div>
+          </div>
+          <div class="s-bottom-praise" ng-if="item.PraiseCount>0">
+            <i class="ion-zan-outline"></i>
+            <span ng-if="item.PraiseCount>0" ng-repeat="itemPraise in item.PraiseUserNickNames">{{itemPraise}}, </span>
+            <span ng-if="item.PraiseCount>0||item.CurrentUserIsPraise">已点赞</span>
+          </div>
+          <div class="s-bottom-list">
+            <ul>
+              <li ng-repeat="itemChild in item.MessageReplyList | orderBy:itemChild.ReleaseTime:true" itemid="{{itemChild.Id}}">
+                <div class="s-bottom-list-hd"><a href="javascript:;"><img ng-src="{{itemChild.UserHeadPic||'/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg"></a></div>
+                <div class="s-bottom-list-bd">
+                  <span class="s-bottom-list-bd-name" ng-hide="itemChild.ParentUserNickName"><a href="#/tab/{{url}}/imformation/{{itemChild.UserId}}">{{itemChild.UserNickName}}</a>:</span>
+                  <span class="s-bottom-list-bd-name" ng-show="itemChild.ParentUserNickName"><a href="#/tab/{{url}}/imformation/{{itemChild.UserId}}">{{itemChild.UserNickName}}</a> 回复 <a href="#/tab/{{url}}/imformation/{{itemChild.ParentUserId}}">{{itemChild.ParentUserNickName}}</a>:</span>
+                  {{itemChild.Content}}
+                </div>
+                <div class="s-bottom-list-ft">
+                  <div class="s-bottom-list-ft-date">
+                    {{item.ReleaseTime | limitTo:16}}
+                    <a href="javascript:;" ng-click="mySquareMessageDel()" ng-if="itemChild.UserId===userImfor.Id">删除</a>
+                  </div>
+                  <div class="s-bottom-list-ft-action">
+                    <a href="javascript:;" ng-click="replyComment()">回复</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  </ion-content>
+  <!-- end Content -->
+  
+  <div class="detailComment">
+    <div class="row">
+      <div class="col col-80">
+        <input type="text" class="text" placeholder="{{commentPlaceholder}}" ng-model="commentContent" focus-me="isFocus"/>
+      </div>
+      <div class="col col-20">
+        <input type="button" ng-click="submitComment(item.Id)" class="button button-small button-positive" value="提交">
+      </div>
+    </div>
+  </div>
+      
+  
+  
+  
+  
+</ion-view>

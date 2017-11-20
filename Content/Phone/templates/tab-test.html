@@ -1,0 +1,47 @@
+<ion-view hide-tabs="true" view-title="测试" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <a ng-show="isBackToIndex" href="{{app_config.links}}/#/tab/index" class="button icon ion-ios-arrow-left"></a>
+    <button ng-hide="isBackToIndex" ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">测试</h1>
+  </ion-header-bar>
+  
+  <ion-content overflow-scroll="true">
+    <br/>
+
+    <p>DeviceRecord：{{DeviceRecordBoolean}}</p>
+    <p>D1:{{D1}}, D2:{{D2}}, D3:{{D3}}</p>
+
+    <p>getDevToken: </p>
+    <p><input type="text" ng-model="getDevToken"></p>
+
+    <p class="fcenter"><input type="button" ng-click="getDeviceToken()" value="ua"></p>
+
+    <p><button id="b1" ng-click="shareClick()">分享</button></p>
+
+    <p><a href="/test1.html">Go /test1!</a></p>
+    <br/>
+    <p><a href="/m/test1.html#/tab/index">Go /m/test1.html#/tab/index</a></p>
+
+    <br>
+
+    <p>
+      <a href="/www/index.html">www1</a> &nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/www2/index.html">www2</a>
+    </p>
+
+    <p><a href="/Content/Phone/js/cordova/index.html">示例代码</a></p>
+
+    
+
+    <p><a href="javascript:;" ng-click="share1()">2.0 插件测试 - 分享1</a></p>
+    <p><a href="javascript:;" ng-click="share2()">2.0 插件测试 - 分享2</a></p>
+  </ion-content>
+  
+
+  
+  
+</ion-view>

@@ -1,0 +1,164 @@
+<ion-view hide-tabs="true" view-title="简历详情" animation="slide-left-right">
+  
+  <!-- Content  overflow-scroll="true"  class="bg-white"-->
+  <ion-content ng-class="{'has-footer':ResumeDetailPreview, 'bg-white':!ResumeDetailPreview}">
+    
+    <div class="temp-header">
+      <div class="content">
+        <div class="ll"><a href="javascript:;" ng-click="backTo()" class="icon ion-ios-arrow-left"></a></div>
+        <h1><img class="logo" ng-src="/Content/Phone/images/theme/logo.png"></h1>
+        <div class="rr"><a href="javascript:;" ng-click="backTo('/#/company/index')" class="icon ion-ios-home"></a></div>
+        <div class="clr"></div>
+      </div>
+      <div class="bg" style="background:url('/Content/Phone/images/theme/bg-resume.png') 50% 0;"></div>
+    </div>
+
+    <div class="ResumeDetailPreview CommonDetail" ng-if="ResumeDetailPreview">
+
+      <div class="centerHead">
+        <div class="head"><div class="head-a">
+          <img ng-src="{{ResumeDetailPreview.HeadImage || '/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg"></div>
+        </div>
+        <h2>
+          {{ResumeDetailPreview.Realname}}
+          <i class="ion ion-theme-boy colorful-font-5" ng-show="ResumeDetailPreview.Gender=='A01'"></i>
+          <i class="ion ion-theme-girl colorful-font-7" ng-show="ResumeDetailPreview.Gender=='A02'"></i>
+        </h2>
+        <div class="inform">
+          <div>
+            <span ng-bind="ResumeDetailPreview.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML"></span>
+            <i>|</i>
+            <span ng-bind="ResumeDetailPreview.EducationCode | KeyToName:'Education':ConstantXML"></span>
+            <i>|</i>
+            <span ng-bind="ResumeDetailPreview.Skill"></span>
+          </div>
+          <div class="signGroup" ng-if="ConstantXML && ResumeDetailPreview.Labels">
+            <span ng-repeat="itemLabel in ResumeDetailPreview.Labels.split(',')">{{itemLabel | KeyToName:'ResumeLabel':ConstantXML}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item item-group">
+        <div class="title">基本资料</div>
+        <div class="content">
+          <div class="content-ul">
+            <p><em>民　　族</em>{{ResumeDetailPreview.NationCode | KeyToName:'Nation':ConstantXML}}</p>
+            <p><em>身　　高</em>{{ResumeDetailPreview.Stature}}cm</p>
+            <p><em>出生年月</em>{{ResumeDetailPreview.Birthday | CallbackShortDate}}</p>
+            <p><em>现居住地</em>{{ResumeDetailPreview.LiveAreaCascadeName}}</p>
+            <p><em>籍　　贯</em>{{ResumeDetailPreview.NativePlaceAreaCascadeName}}</p>
+            <p><em>毕业学校</em>{{ResumeDetailPreview.GraduateSchool}}</p>
+            <p><em>主　　修</em>{{ResumeDetailPreview.MajorIn}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item item-group">
+        <div class="title">专业技能</div>
+        <div class="content">
+          <div class="content-ul">
+            <p><em>计算机熟练度</em>{{ResumeDetailPreview.ComputerLevelCode | KeyToName:'ComputerLevel':ConstantXML}}</p>
+            <p><em>英语熟练度</em>{{ResumeDetailPreview.EnglishLevelCode | KeyToName:'EnglishLevel':ConstantXML}}</p>
+            <p><em>职业资格证书</em>{{ResumeDetailPreview.Certificate}}</p>
+            <p><em>专业技能</em>{{ResumeDetailPreview.Skill}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item item-group">
+        <div class="title">求职意向</div>
+        <div class="content">
+          <div class="content-ul">
+            <p><em>意向职位</em>{{ResumeDetailPreview.IntentionJobTypeNames}}</p>
+            <p><em>意向城市</em>{{ResumeDetailPreview.IntentionAreaNames}}</p>
+            <p><em>期望薪资</em>{{ResumeDetailPreview.IntentionPayCode | KeyToName:'IntentionPay':ConstantXML}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item item-group">
+        <div class="title">教育经历</div>
+        <div class="content">
+          <div class="content-section" ng-repeat="item in ResumeDetailPreview.EduExperience">
+            <div class="hd">{{item.EduinTime}} - {{item.EduoutTime}}</div>
+            <div class="bd">
+              {{item.EduProfessional}}　{{item.EduLevelValue | KeyToName:'Education':ConstantXML }}　{{item.EduSchool}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item item-group">
+        <div class="title">工作经历</div>
+        <div class="content">
+          <div class="content-section" ng-repeat="item in ResumeDetailPreview.WorkExperience">
+            <div class="hd">{{item.JobinTime}} - {{item.JoboutTime}}</div>
+            <div class="bd">
+              {{item.JobCompany }}　{{item.JobName}}
+            </div>
+            <div class="bm" ng-bind-html="item.JobDetail"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item item-group">
+        <div class="title">个人介绍</div>
+        <div class="content" ng-bind-html="ResumeDetailPreview.PersonalProfile"></div>
+      </div>
+
+      <div class="item item-group">
+        <div class="title">联系方式</div>
+        <div class="content">
+
+          <div class="content-ul" ng-if="ResumeDetailPreview.Phone!=''||ResumeDetailPreview.Email!=''">
+            <p><em>手机号码</em><a href="tel:{{ResumeDetailPreview.Phone}}">{{ResumeDetailPreview.Phone}}</a></p>
+            <p><em>邮箱地址</em>{{ResumeDetailPreview.Email}}</p>
+            <p><em>QQ</em>{{ResumeDetailPreview.QQ}}</p>
+          </div>
+
+          <div class="noAllow mt20 mb20 f12" ng-if="ResumeDetailPreview.Phone==''&&ResumeDetailPreview.Email==''">
+            <p class="fcenter">请点击<strong>查看按钮</strong>查看该求职者联系方式</p>
+            <p class="fcenter"><a href="javascript:;" ng-click="SetAllow()" class="button button-positive button-small">查看</a></p>
+            <p class="fcenter">（剩余<strong>{{userImfor.AllowReadResumeCount||'-'}}</strong>次查看机会）</p>
+          </div>
+
+        </div>
+      </div>
+      <div class="item fgray f12" style="padding-top:5px;padding-bottom:5px;">
+        联系我时，请说明是在职得招聘上看到的
+      </div>
+
+
+      <!-- 满意度只显示在[收到的简历]，不显示在[简历详情]？ -->
+      <!-- 简历详情缺少是否评价了满意度判断 -->
+      <!--<div class="item item-group" ng-if="ResumeDetailPreview.IsDispose&&!ResumeDetailPreview.IsPass">
+        <div class="title">简历印象</div>
+        <div class="content"></div>
+      </div>-->
+      
+    </div>
+    <list-status ng-if="!ResumeDetailPreview" ng-model="ResumeDetailPreview" null-msg="{{errMsg}}"></list-status>
+
+  </ion-content>
+  <!-- end Content -->
+  
+
+  <!-- <div class="bar bar-footer ResumeDetailFooter" ng-if="ResumeDetailPreview">
+    <div class="row">
+      <a href="javascript:;" ng-click="ButtonClick_Collect()" class="col col-33 links" ng-class="{false:'off'}[ResumeDetailPreview.IsEnterpriseCollect==true]">
+        <i class="ion ion-theme-zan-1"></i>{{ResumeDetailPreview.IsEnterpriseCollect==true ? '已收藏' : '未收藏'}}
+      </a>
+      <a href="javascript:;" ng-click="BottomClick_Message()" class="col col-33 links"><i class="ion ion-theme-message-2"></i>留言</a>
+      <a href="#/{{entry}}/appdownloadZl" class="col col-33 links"><i class="ion ion-theme-message-1"></i>职聊</a>
+    </div>
+  </div> -->
+
+  <div class="bar bar-footer" id="job-application" ng-hide="isPreview">
+      <!-- ng-click="SelectResume()" ng-disabled="IsJobApply || jobDetailData.IsPutaway==false" -->
+    <a href="javascript:;" ng-click="BottomClick_Invite()" class="large button button-positive icon-left ion ion-theme-resume-invite">邀请面试</a>
+    <a href='javascript:;' ng-click="BottomClick_Message()" class='button ion ion-theme-message-1'>私信</a>
+    <a href='#/{{entry}}/appdownloadZl' class='button ion ion-theme-message-2'>职聊</a>
+    <a href='javascript:;' ng-click='ButtonClick_Collect()' class='button ion ion-theme-zan-1' ng-class="{true:'button-active'}[ResumeDetailPreview.IsEnterpriseCollect==true]">{{ResumeDetailPreview.IsEnterpriseCollect ? '已收藏' : '收藏'}}</a>
+  </div>
+
+</ion-view>

@@ -1,0 +1,35 @@
+<ion-view hide-tabs="true" view-title="{{item.Name}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo('/#/{{entry}}/{{imgTextsDetail_back}}')" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">{{imgTextsDetail.Name}}</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content lazy-container class="empty">
+    
+    <div id="my">
+      
+      <div class="weiLife weiLife_detail">
+        
+        <div class="weiLife_title">
+          <h1>{{imgTextsDetail.Name}}</h1>
+          <p>{{imgTextsDetail.ReleaseTime}}</p>
+        </div> 
+        <div class="weiLife_content" ng-bind-html="imgTextsDetail.Content"></div>
+      
+      </div>
+      
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

@@ -1,0 +1,220 @@
+<ion-view hide-tabs="true" view-title="搜索" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">搜索</h1>
+  </ion-header-bar>
+  
+  <!-- Content  overflow-scroll='true' -->
+  <ion-content lazy-container>
+    
+    <div class="common-tab">
+			<ul>
+				<li class="col-33"><a href="javascript:;" ng-class="{true:'on'}[isActive.job]" ng-click="changeJobTyep(1)">搜职位</a></li>
+				<li class="col-33"><a href="javascript:;" ng-class="{true:'on'}[isActive.company]" ng-click="changeJobTyep(2)">搜公司</a></li>
+				<li class="col-33"><a href="javascript:;" ng-class="{true:'on'}[isActive.other]" ng-click="changeJobTyep(3)">高级搜索</a></li>
+			</ul>
+		</div>
+    
+    <div class="search-input">
+      <div class="form">
+        <input type="text" placeholder="{{inputPlaceholder}}" ng-model="searchDatas.inputKeyword" ng-keydown="searchKeydown($event, searchDatas.inputKeyword)" class="inputSearch">
+        <input type="hidden" class="search_area" value="00000000000000000000000000445200">
+        <input type="hidden" class="search_type" value="jobs">
+        <a href="javascript:;" ng-click="searchKeyword(searchDatas.inputKeyword)" class="ion-sousuo"></a>
+      </div>
+    </div>
+    
+    <div class="search-hotword" ng-hide="isActive.other">
+      <div ng-hide="isActive.company||JobResponse">
+        <div class="title">热词搜索：</div>
+        <div class="search-hotword-list" ng-if="isActive.job">
+          <ul><li ng-repeat="Word in JobHotWords" ng-click="searchHotword('{{Word}}', 1)">{{Word}}</li></ul>
+        </div>
+      </div>
+      <div ng-hide="isActive.job||CompanyResponse">
+        <div class="title">热词搜索：</div>
+        <div class="search-hotword-list" ng-if="isActive.company">
+          <ul><li ng-repeat="Word in CompanyHotWords track by $index" ng-click="searchHotword('{{Word}}', 2)">{{Word}}</li></ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 职位列表 -->
+    <div class="jobs_list" ng-hide="!isActive.job"> <!--  ng-show="isActive.job && JobResponse"-->
+      <ion-list>
+
+        <div ng-if="JobResponse.length <= 0">
+          <div class="noneContent" style="padding:160px 20px;background:transparent;">
+            <i class="ion-social-freebsd-devil"></i>
+            搜索不到该职位
+          </div>
+        </div>
+
+        <ul ng-hide="JobResponse.length <= 0">
+          <li ng-repeat="item in JobResponse">
+            <a href="{{app_config.links}}/#/tab/job/detail/searchJob/{{item.Id}}">
+              <div class="ll companyLogo">
+                <img lazy-src="{{item.EnterpriseLogoSmall || '/Content/Phone/images/default/companyLogo.jpg'}}" err-src="/Content/Phone/images/default/companyLogo.jpg" class="my-galleryImg"/>
+              </div>
+              <div class="rr companyJob">
+                <div class="companyJobSection">
+                  <div class="top over">
+                    <div class="ll">{{item.Name}}</div>
+                    <div class="rr"><span>{{item.Pay}}</span> <em ng-if="item.Pay!='面议'">{{item.JobPayUnit}}</em></div>
+                  </div>
+                  <div class="mid over">
+                    <div class="ll">{{item.EnterpriseName}}</div>
+                    <div class="rr">{{item.ReleaseTime|limitTo:10}}</div>
+                  </div>
+                  <div class="bottom over" ng-if="item.WelfareValue!=''">
+                    <div class="ll">
+                      <div class="signGroup">
+                        <span ng-repeat="i in item.WelfareValue.split(',') | limitTo:4">{{i}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </ion-list>
+      
+      <ion-infinite-scroll class="scroll-bottom" spinner="dots" ng-if="jobs_Loaded" immediate-check="false" on-infinite="refreshDown('job', 1)" distance="1%" alt="上滑加载更多"></ion-infinite-scroll>
+      <p class="scroll-end" ng-if="jobs_end && JobResponse.length!=0">没有更多了</p>
+      
+    </div>
+    <!-- end 职位列表 -->
+    
+    <!-- 公司列表 -->
+    <div class="companys_list" ng-hide="!isActive.company"> <!--  ng-show="isActive.company && CompanyResponse"-->
+      <ion-list>
+
+        <div ng-if="CompanyResponse.length <= 0">
+          <div class="noneContent" style="padding:160px 20px;background:transparent;">
+            <i class="ion-social-freebsd-devil"></i>
+            搜索不到该企业
+          </div>
+        </div>
+
+        <ul>
+          <li ng-repeat="item in CompanyResponse">
+            <a href="{{app_config.links}}/#/tab/job/detail/searchCompany/{{item.Id}}">
+              <div class="ll companyLogo">
+                  <img lazy-src="{{item.EnterpriseLogoSmall || '/Content/Phone/images/default/companyLogo.jpg'}}" err-src="/Content/Phone/images/default/companyLogo.jpg" class="my-galleryImg"/>
+              </div>
+              <div class="rr companyJob">
+                <div class="companyJobSection">
+                  <div class="top over">
+                    <div class="ll">{{item.Name}}</div>
+                    <div class="rr"><span>{{item.Pay}}</span> <em ng-if="item.Pay!='面议'">{{item.JobPayUnit}}</em></div>
+                  </div>
+                  <div class="mid over">
+                    <div class="ll">{{item.EnterpriseName}}</div>
+                    <div class="rr">{{item.ReleaseTime|limitTo:10}}</div>
+                  </div>
+                  <div class="bottom over" ng-if="item.WelfareValue!=''">
+                    <div class="ll">
+                      <div class="signGroup">
+                        <span ng-repeat="i in item.WelfareValue.split(',') | limitTo:4">{{i}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </ion-list>
+      <ion-infinite-scroll class="scroll-bottom" ng-if="companys_Loaded" immediate-check="false" on-infinite="refreshDown('company', 2)" distance="1%" alt="上滑加载更多"></ion-infinite-scroll>
+      <p class="scroll-end" ng-if="companys_end && CompanyResponse.length!=0">没有更多了</p>
+      <!-- <ion-spinner id="icon-loading" icon="dots" class="spinner spinner-dark" ng-hide="isHideLoading" alt="加载中"></ion-spinner> -->
+    </div>
+    <!-- end 公司列表 -->
+    
+    <!-- 高级搜索列表 -->
+    <div class="companys_list" ng-hide="(!isActive.other) || resetOther"> <!-- ng-show="isActive.other && OtherResponse"-->
+      <div class="item f12 over" ng-show="isActive.other && OtherResponse"><p class="word">搜索关键字：<b>{{showKeyword}}</b></p><a href="javascript:;" class="btn rr" ng-click="otherReset()">点击重新搜索</a></div>
+      <ion-list>
+        <div ng-if="OtherResponse.length <= 0">
+          <div class="noneContent" style="padding:160px 20px;background:transparent;">
+            <i class="ion-social-freebsd-devil"></i>
+            搜索不到该职位
+          </div>
+        </div>
+        <ul>
+          <li ng-repeat="item in OtherResponse track by $index">
+            <a href="{{app_config.links}}/#/tab/job/detail/searchOther/{{item.Id}}">
+              <div class="ll companyLogo">
+                  <img lazy-src="{{item.EnterpriseLogoSmall || '/Content/Phone/images/default/companyLogo.jpg'}}" err-src="/Content/Phone/images/default/companyLogo.jpg" class="my-galleryImg"/>
+              </div>
+              <div class="rr companyJob">
+                <div class="companyJobSection">
+                  <div class="top over">
+                    <div class="ll">{{item.Name}}</div>
+                    <div class="rr"><span>{{item.Pay}}</span> <em ng-if="item.Pay!='面议'">{{item.JobPayUnit}}</em></div>
+                  </div>
+                  <div class="mid over">
+                    <div class="ll">{{item.EnterpriseName}}</div>
+                    <div class="rr">{{item.ReleaseTime|limitTo:10}}</div>
+                  </div>
+                  <div class="bottom over" ng-if="item.WelfareValue!=''">
+                    <div class="ll">
+                      <div class="signGroup">
+                        <span ng-repeat="i in item.WelfareValue.split(',') | limitTo:4">{{i}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </ion-list>
+      <ion-infinite-scroll class="scroll-bottom" spinner="dots" ng-if="others_Loaded" immediate-check="false" on-infinite="refreshDown('other', 0)" distance="1%" alt="上滑加载更多"></ion-infinite-scroll>
+      <p class="scroll-end" ng-if="others_end && OtherResponse.length!=0">没有更多了</p>
+      <!-- <ion-spinner id="icon-loading" icon="dots" class="spinner spinner-dark" ng-hide="isHideLoading" alt="加载中"></ion-spinner> -->
+    </div>
+    <!-- end 高级搜索列表 -->
+
+    <!-- 高级搜索器 -->
+    <div class="other_list">
+      <div class="list" ng-hide="isActive.job||isActive.company||OtherResponse" ng-show="resetOther">
+        <div class="item item-input">
+          <span class="input-label">选择区域</span><!-- -->
+          <selection-city placeholder="选择城市" url="/Config/Area.xml" ng-model="datas.IntentionAreaId"></selection-city>
+          <!--<input type="hidden" ng-model="datas.IntentionAreaId">-->
+        </div>
+        <!--<div class="item item-input item-block">
+          <span class="input-label input-block" ng-click="toggleList(1)">选择企业性质<i class="ion-ios-arrow-down"></i></span>
+          <selection-multiple xml="/Config/Constant.xml" name="EnterpriseNature" ng-if="showList_1"></selection-multiple>
+        </div>-->
+        <div class="item item-input item-block">
+          <span class="input-label input-block" ng-click="toggleList(2)">选择福利<i class="ion-ios-arrow-down"></i></span>
+          <selection-multiple xml="/Config/Constant.xml" name="Welfare" ng-if="showList_2"></selection-multiple>
+          <!--<input type="hidden" ng-model="datas.Welfare"/>-->
+        </div>
+        <div class="item item-input item-block">
+          <span class="input-label input-block" ng-click="toggleList(3)">选择计薪方式<i class="ion-ios-arrow-down"></i></span>
+          <selection-multiple xml="/Config/Constant.xml" name="JobPayWay" ng-if="showList_3"></selection-multiple>
+          <!--<input type="hidden" ng-model="datas.JobPayWay"/>-->
+        </div>
+        <div class="item item-input item-block">
+          <span class="input-label input-block" ng-click="toggleList(4)">选择工作性质<i class="ion-ios-arrow-down"></i></span>
+          <selection-multiple xml="/Config/Constant.xml" name="JobNature" ng-if="showList_4"></selection-multiple>
+          <!--<input type="hidden" ng-model="datas.JobNature"/>-->
+        </div>
+        <div class="item item-input">
+          <button ng-click="searchKeyword(searchDatas.inputKeyword)" class="button button-small button-full button-positive">搜索</button>
+        </div>
+      </div>
+      
+    </div>
+    <!-- end 高级搜索 -->
+  </ion-content>
+  <!-- end Content -->
+</ion-view>

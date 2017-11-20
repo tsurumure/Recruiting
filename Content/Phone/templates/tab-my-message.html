@@ -1,0 +1,44 @@
+<ion-view hide-tabs="true" view-title="站内信" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">站内信</h1>
+  </ion-header-bar>
+  
+  <ion-content class="bg-white">
+    
+    <div class="MessageItemGroup">
+
+      <div class="list item-list" ng-hide="Message_InformList.length<=0 && Message_MailGroupUsersList.length<=0">
+        <a ng-show="Message_InformList.length>0" ng-href="#/{{entry}}/my/messageSystem" class="item item-avatar">
+          <img ng-src="/Content/Phone/images/head/site.png">
+          <h3 ng-bind="Message_InformList[0].Content"></h3>
+          <span ng-bind="Message_InformList[0].AddTime + '&nbsp;&nbsp;系统通知'"></span>
+        </a>
+
+        <a ng-show="Message_MailGroupUsersList.length>0" ng-repeat="item in Message_MailGroupUsersList | limitTo:RJ_onepage:RJ_current*RJ_onepage" ng-href="#/{{TabType}}/my/message/{{userImfor.Id==item.ReceiveUser.Id ? item.SendUser.Id : item.ReceiveUser.Id}}" ng-if="Message_MailGroupUsersList.length>0" class="item item-avatar" ng-class="{true:'unread'}[(!item.IsRead)&&(userImfor.Id!=item.SendUser.Id)]" >
+          <img ng-if="userImfor.Id==item.ReceiveUser.Id" ng-src="{{item.SendUser.HeadPic || '/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg">
+          <img ng-if="userImfor.Id==item.SendUser.Id && item.SendUser.Id!=item.ReceiveUser.Id" ng-src="{{item.ReceiveUser.HeadPic || '/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg">
+          <h3 ng-bind="item.Content"></h3>
+          <span>{{item.AddTime}}&nbsp;&nbsp;{{(userImfor.Id==item.ReceiveUser.Id) ? item.SendUser.RealName : item.ReceiveUser.RealName}}</span>
+        </a>
+        <paper name="Message_MailGroupUsersList" current="RJ_current" onepage="RJ_onepage"></paper>
+        
+      </div>
+
+      <div class="noneContent" ng-show="Message_InformList.length<=0 && Message_MailGroupUsersList.length<=0">
+        <i class="ion-social-freebsd-devil"></i>
+        暂无消息
+      </div>
+
+
+    </div>
+    
+  </ion-content>
+  
+
+  
+  
+</ion-view>

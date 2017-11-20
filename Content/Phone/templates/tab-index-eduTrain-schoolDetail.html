@@ -1,0 +1,84 @@
+<ion-view hide-tabs="true" view-title="学历教育详情" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar ng-hide="isApp" align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">学历教育详情</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true">
+
+    <div class="articleDetail">
+      <div class="articleTitle">{{eduSchoolDetail.Name}}</div>
+
+      <div class="articleContent f12 gray">
+        <div class="tabContent" ng-class="{true:'isHide'}[isHide]" ng-bind-html="eduSchoolDetail.Intro"></div>
+        <a href="javascript:;" ng-click="toggleTabContent()" ng-show="hasMore">
+          查看更多
+          <i ng-show="isHide" class="ion-android-arrow-down" style="margin:0 0 0 2px;font-size:16px;"></i>
+          <i ng-hide="isHide" class="ion-android-arrow-up" style="margin:0 0 0 2px;font-size:16px;"></i>
+        </a>
+      </div>
+
+      <div class="articleButton">
+        <ul>
+          <li ng-repeat="itemAddition in eduSchoolDetail.Additions">
+            <a href="javascript:;" ng-click="showIntroduce(itemAddition)" class="menuColor-{{$index}}"><i class="ion-record"></i>{{itemAddition.Name}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 用 service.js封装 -->
+      <div id="eduTrainDetailList">
+
+        <div ng-repeat="item in eduTrainDetailList">
+          
+          <div class="item item-divider" ng-click="tabSchool($index)">{{item.Level}}<i class="ion-ios-arrow-down"></i></div>
+          <div ng-show="tabSchoolContent_{{$index}}">
+            <div class="item" ng-repeat="childItem in item.Value">
+              <a href="#/tab/index/eduTrain/schoolDetail/{{eduSchoolDetail.Id}}/classDetail/{{childItem.Id}}">{{childItem.Name}}</a><span>{{childItem.Subhead}}</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <!--<div id="eduTrainDetailList">
+        <div class="item item-divider" ng-show="d1.length>0" ng-click="tabSchool(1)">高起专<i class="ion-ios-arrow-down"></i></div>
+        <div ng-show="tabSchoolContent_1">
+          <div class="item" ng-repeat="item in d1">
+            <a href="#/tab/index/eduTrain/schoolDetail/{{eduSchoolDetail.Id}}/classDetail/{{item.Id}}">{{item.Name}}</a><span>{{item.Subhead}}</span>
+          </div>
+        </div>
+        <div class="item item-divider" ng-show="d2.length>0" ng-click="tabSchool(2)">高升本<i class="ion-ios-arrow-down"></i></div>
+        <div ng-show="tabSchoolContent_2">
+          <div class="item" ng-repeat="item in d2">
+            <a href="#/tab/index/eduTrain/schoolDetail/{{eduSchoolDetail.Id}}/classDetail/{{item.Id}}">{{item.Name}}</a><span>{{item.Subhead}}</span>
+          </div>
+        </div>
+        <div class="item item-divider" ng-show="d3.length>0" ng-click="tabSchool(3)">专升本<i class="ion-ios-arrow-down"></i></div>
+        <div ng-show="tabSchoolContent_3">
+          <div class="item" ng-repeat="item in d3">
+            <a href="#/tab/index/eduTrain/schoolDetail/{{eduSchoolDetail.Id}}/classDetail/{{item.Id}}">{{item.Name}}</a><span>{{item.Subhead}}</span>
+          </div>
+        </div>
+        <div class="item item-divider" ng-show="d4.length>0" ng-click="tabSchool(4)">中专起点本科<i class="ion-ios-arrow-down"></i></div>
+        <div ng-show="tabSchoolContent_4">
+          <div class="item" ng-repeat="item in d4">
+            <a href="#/tab/index/eduTrain/schoolDetail/{{eduSchoolDetail.Id}}/classDetail/{{item.Id}}">{{item.Name}}</a><span>{{item.Subhead}}</span>
+          </div>
+        </div>
+      </div>-->
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

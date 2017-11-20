@@ -1,0 +1,104 @@
+<ion-view hide-tabs="true" view-title="{{releaseTitle}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <a ng-click="backTo('/#/company/my/releaseJob')" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title" ng-bind="releaseTitle"></h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll='true'>
+
+    <div class="releaseJob">
+
+      <!-- submitForm(myForm.$valid,'{{app_config.links}}/#/tab/my') -->
+      <form role="form" name="myForm" ng-submit="submitForm(myForm.$valid)" novalidate>
+        
+        <div class="list list-inset">
+          <div class="item item-input">
+            <span class="input-label">职位名称<b>*</b></span>
+            <input type="text" placeholder="请输入职位名称" ng-model="datas.Name" required>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">所属区域<b>*</b></span>
+            <selection-city placeholder="选择城市" url="/Config/Area.xml" ng-model="datas.WorkAreaId"></selection-city>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">工作性质<b>*</b></span>
+            <selection placeholder="选择工作性质" xml-name="JobNature" bind-value="datas.Nature"></selection>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">职位类型<b>*</b></span>
+            <selection-jobtypes ng-model="datas.JobTypeId" max="1"></selection-jobtypes>
+          </div>
+        </div>
+
+        <div class="list list-inset">
+          <div class="item item-input">
+            <span class="input-label">所属部门<b>*</b></span>
+            <selection input-select="true" placeholder="所属部门" bind-value="datas.Department" default-value="datas.Department"></selection>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">招聘人数<b>*</b></span>
+            <input type="text" placeholder="请输入招聘人数" ng-model="datas.RecruitingCount" required>
+          </div>
+          <div class="item item-input">
+            <span class="input-label">计薪方式<b>*</b></span>
+            <selection placeholder="选择计薪方式" xml-name="JobPayWay" bind-value="datas.PayWay"></selection>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">职位薪资<b>*</b></span>
+            <input type="number" placeholder="薪资" max="{{datas.PayMax}}" ng-model="datas.PayMin" name="payMin" required>
+            <div style="margin-right:12%;margin-left:-20px;">-</div>
+            <input type="number" placeholder="薪资" min="{{datas.PayMin}}" ng-model="datas.PayMax" name="payMax" required>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">职位福利</span>
+            <selection multiline="10" placeholder="选择职位福利" xml-name="Welfare" bind-value="datas.Welfare"></selection>
+          </div>
+        </div>
+
+        <div class="list list-inset">
+          <div class="item">
+            <div class="label-title">职位描述<b>*</b></div>
+            <div class="content">
+              <textarea placeholder="输入该职位的描述内容" class="textarea" ng-model="datas.JobDescribe" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="list list-inset mt10">
+          <div class="item item-input">
+            <span class="input-label">联系人</span>
+            <input type="text" placeholder="请输入联系人姓名" ng-model="datas.ContactManName">
+          </div>
+          <div class="item item-input">
+            <span class="input-label">联系电话</span>
+            <input type="text" placeholder="请输入联系电话" ng-model="datas.ContactManPhone">
+          </div>
+
+          <address-location title="工作地址" bind-address="datas.WorkAddress" bind-location="datas.MapLocation"></address-location>
+
+        </div>
+
+        <div class="myResume-tip tip-positive" ng-show="isErrorForSubmit">
+          <p><i class="ion-android-alert"></i>请检查<b>*</b>必填项是否有误</p>
+        </div>
+
+        <div class="list-inset">
+          <button type="submit" class="button button-small button-full button-positive">{{releaseTitle}}</button>
+        </div>
+
+      </form>
+
+    </div>
+      
+  </ion-content>
+  <!-- end Content -->
+  
+  
+</ion-view>

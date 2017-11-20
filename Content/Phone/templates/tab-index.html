@@ -1,0 +1,165 @@
+<ion-view hide-tabs="false" view-title="职得 - 手机找工作，就上职得" animation="slide-left-right">
+<div>
+<ion-side-menus>
+  <ion-side-menu-content edge-drag-threshold="true" drag-content="true">
+
+    <theme-header type="{{entryName}}"></theme-header>
+
+    <!-- Header -->
+    <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+      <button menu-toggle="left" class="button icon ion-ditu"></button>
+      <div class="search-index">
+        <input type="text" placeholder="输入职位名称进行搜索" ng-model="searchDatas.inputKeyword" ng-keydown="searchKeydown($event, searchDatas.inputKeyword)">
+        <a href="javascript:;" ng-click="searchKeyword(searchDatas.inputKeyword)" class="ion-sousuo"></a>
+      </div>
+    </ion-header-bar>
+    
+    <!-- Content --> <!--  overflow-scroll="true" delegate-handle="indexScroll" -->
+    <ion-content class="has-tabs" lazy-container delegate-handle="indexScroll">
+      <img title="微信分享小图片" src="/Content/Phone/images/default/wx_logo.png" style="display:block;width:0;height:0;margin:0;">
+
+      <div class="banner">
+        <ion-slide-box ng-if="banners" active-slide="0" does-continue="true" auto-play="true">
+          <ion-slide ng-repeat="item in banners">
+            <div class="box">
+              <a ng-href="{{::item.Url}}" ng-if="item.Url!=''"><img lazy-src="{{::item.Pic}}" err-src="/Content/Phone/images/banner/b0.jpg"/></a>
+              <img ng-hide="item.Url!=''" lazy-src="{{::item.Pic}}" err-src="/Content/Phone/images/banner/b0.jpg"/>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+
+      <!-- Button(8B) -->
+      <div id="menu-list">
+        <div class="row row-center mb5">
+          <div class="col col-25 col-text-center"><a href="#/tab/index/jobfair" class="colorful-bg-1"><i class="ion ion-theme-menu-1"></i>招聘会</a></div>
+          <div class="col col-25 col-text-center"><a href="#/tab/index/partTimeJob" class="colorful-bg-2"><i class="ion ion-theme-menu-2"></i>兼职频道</a></div>
+          <!-- <div class="col col-25 col-text-center"><a href="#/tab/index/jobPlatform" class="colorful-bg-3"><i class="ion ion-theme-menu-3"></i>店家直招</a></div> -->
+          <div class="col col-25 col-text-center"><a href="#/tab/index/eduTrain/school" class="colorful-bg-3"><i class="ion ion-theme-menu-3"></i>学历教育</a></div>
+          <div class="col col-25 col-text-center"><a href="#/tab/index/eduTrain/skill" class="colorful-bg-4"><i class="ion ion-theme-menu-4"></i>技能培训</a></div>
+        </div>
+        <div class="row row-center">
+          <div class="col col-25 col-text-center"><a href="#/tab/index/jobList/WellKnowJob" class="colorful-bg-5"><i class="ion ion-theme-menu-5"></i>名企招聘</a></div>
+          <div class="col col-25 col-text-center"><a href="#/tab/search" class="colorful-bg-6"><i class="ion ion-theme-menu-6"></i>高级搜索</a></div>
+          <div class="col col-25 col-text-center"><a href="#/tab/index/jobCate" class="colorful-bg-7"><i class="ion ion-theme-menu-7"></i>职位分类</a></div><!-- 微生活 #/tab/my/weilife-->
+          <div class="col col-25 col-text-center"><a href="#/tab/publicArticle" class="colorful-bg-8"><i class="ion ion-theme-menu-8"></i>职场资讯</a></div>
+        </div>
+      </div>
+      <!-- end Button(8B) -->
+
+      <notice title="公告" interval="3000" offset="35"></notice>
+
+      <!-- 图文版块(3P) -->
+      <div class="quickly-1">
+        <div class="left">
+          <a href="#/tab/index/jobList/FullWelfareJob">
+            <div class="slogan">
+              <strong>企业福利</strong>
+              <em>公积金、年终奖..</em>
+            </div>
+            <img ng-src="/Content/Phone/images/theme/index-p1.png">
+          </a>
+        </div>
+        <div class="right">
+          <div class="right-bar right-bar-1">
+              <a href="#/tab/index/jobList/NewestJob">
+                <div class="slogan">
+                  <strong>近期更新</strong>
+                  <em>职位每日更新</em>
+                </div>
+                <img ng-src="/Content/Phone/images/theme/index-p2.png">
+              </a>
+          </div>
+           <div class="right-bar right-bar-2">
+              <a href="#/tab/index/industryCate">
+                <img ng-src="/Content/Phone/images/theme/index-p3.png">
+                <div class="slogan">
+                  <strong>行业招聘</strong>
+                  <em>行行出状元</em>
+                </div>
+              </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotSearchJob">
+        <div class="title-center">热搜职位</div>
+        <div class="list">
+          <ul>
+            <li ng-repeat="item in HotSearchJobLists track by $index"><a href="javascript:;" ng-click="ClickHotJob(item)" ng-bind="::item"></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 猜你喜欢 - 职位列表 -->
+      <div class="jobs_list">
+        <!--<div class="title">每日职位</div>-->
+        <div class="scroller">
+          <ul>
+            <li ng-repeat="item in responseJob track by $index" on-finish-render-filters>
+              <i class="hot" ng-if="item.IsHot"><b>热</b></i>
+              <a ng-href="{{app_config.links}}/#/tab/job/detail/index/{{item.Id}}">
+                <div class="ll companyLogo">
+                  <img lazy-src="{{item.EnterpriseLogoSmall || '/Content/Phone/images/default/companyLogo.jpg'}}" err-src="/Content/Phone/images/default/companyLogo.jpg" class="my-galleryImg"/>
+                </div>
+                <div class="rr companyJob">
+                  <div class="companyJobSection">
+                    <div class="top over">
+                      <div class="ll">{{item.Name}}</div>
+                      <div class="rr"><span>{{item.Pay}}</span> <em ng-if="item.Pay!='面议'">{{item.JobPayUnit}}</em></div>
+                    </div>
+                    <div class="mid over">
+                      <div class="ll">{{item.EnterpriseName}}</div>
+                      <!-- <div class="rr">{{item.ReleaseTime | FuckDater | date:"MM-dd"}}</div> -->
+                    </div>
+                    <div class="bottom over" ng-if="item.WelfareValue!=''">
+                      <div class="ll">
+                        <div class="signGroup">
+                          <span ng-repeat="i in item.WelfareValue.split(',') | limitTo:4">{{i}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <infinite-scroll-end ng-model="responseJob" one-page="10"></infinite-scroll-end>
+        <div ng-if="responseJob.length<=0">
+          <list-status ng-model="responseResume" null-msg="暂无职位"></list-status>
+        </div>
+        
+      </div>
+      <!-- end 职位列表 -->
+
+    </ion-content>
+    <!-- end Content -->
+  </ion-side-menu-content>
+  
+  <!-- 选择位置 -->
+  <ion-side-menu side="left">
+    <ion-header-bar align-title="left" class="bar bar-positive">
+      <h1 class="title" style="padding-left:16px;">选择城市</h1>
+    </ion-header-bar>
+    <div class="content has-header">
+      <div class="list">
+        <div class="item item-divider"><i class="ion ion-theme-nav-1"></i>当前位置：<b>{{CurrentCityValue}}</b></div>
+        <div class="item item-divider"><i class="ion ion-theme-nav-2" style="font-size:16px;margin-left:1px;margin-right:7px;"></i>选择位置</div>
+        <div class="list-scroll-y" style="height:{{ leftScrollHeight }}">
+          <a ng-repeat="itemCity in CityLists track by $index" menu-toggle="left" ng-click="chooseCity(itemCity._key,itemCity._value)" class="item" href="javascript:;">{{::itemCity._value}}</a>
+        </div>
+      </div>
+    </div>
+  </ion-side-menu>
+  
+</ion-side-menus>
+
+</div>
+
+</ion-view>
+
+<div class="bottomCircle right">
+  <a href="javascript:;" ng-click="backToTop()" id="backToTop"><i class="ion ion-theme-backtotop-1"></i></a>
+</div>

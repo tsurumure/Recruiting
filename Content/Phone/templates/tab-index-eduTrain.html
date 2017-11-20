@@ -1,0 +1,49 @@
+<ion-view hide-tabs="true" view-title="{{eduTitle}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar ng-hide="isApp" align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">{{eduTitle}}</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content class="bg-white" lazy-container>
+
+    <div class="eduBanner">
+      <img ng-if="isActive.school" src="/Content/Phone/images/banner/b6.jpg"/>
+      <img ng-if="isActive.skill" src="/Content/Phone/images/banner/b10.jpg"/>
+    </div>
+    <!-- end banner -->
+
+    <div id="eduTrainList">
+
+      <!-- <div class="item item-divider">{{eduTag}}</div> -->
+
+      <div ng-if="isActive.school">
+        <a class="item" ng-repeat="item in eduSchoolList" ng-href="#/tab/index/eduTrain/schoolDetail/{{item.Id}}">
+          <strong>{{item.Name}}</strong>
+          <p>{{item.Subhead}}</p>
+        </a>
+      </div>
+
+      <div ng-if="isActive.skill">
+        <div class="item" ng-repeat="item in eduSkillList">
+          <a ng-if="!item.IsLink" href="#/tab/index/eduTrain/skillDetail/{{item.Id}}">{{item.Name}}</a>
+          <a ng-if="item.IsLink" href="{{item.Url}}" target="_blank">{{item.Name}}</a>
+        </div>
+      </div>
+
+    </div>
+
+
+    
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

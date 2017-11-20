@@ -1,0 +1,83 @@
+<ion-view hide-tabs="true" view-title="职位分类" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo('/#/{{entry}}/index')" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">职位分类</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content class="bg-white">
+
+    <!-- <div class="eduBanner">
+      <img src="/Content/Phone/images/banner/b5.jpg"/>
+    </div> -->
+
+    <div class="bar-menu col-3"> <!-- col-3-->
+      <ul>
+        <li ng-repeat="item in JobCates track by $index">
+            <a ng-href="{{app_config.links}}/#/tab/index/jobCate/list/{{item.Id}}">
+                <i class="sprite_jc sp_jc{{$index+1}}"></i>
+                <p>{{item.Name}}</p>
+            </a>
+        </li>
+        
+        <!-- <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/4071516fcf7b4d55bc74da7bc8eac5ad">
+            <i class="sprite_jc sp_jc1"></i><p>普工作业员</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/78836c53b7644aa780c31e1e9c253a91">
+            <i class="sprite_jc sp_jc2"></i><p>技术员</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/cbca4bb0265644ac8de0130ea14c5e4b">
+            <i class="sprite_jc sp_jc3"></i><p>物业管理</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/af0768b2dd9c4f9d89f1cf65dc84b12d">
+            <i class="sprite_jc sp_jc4"></i><p>公司文职</p>
+        </a></li>
+        
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/c3ead397df974d46a85a81e5fce12172">
+            <i class="sprite_jc sp_jc5"></i><p>餐饮旅游</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/5069a1f3755544abaf887c2620e84666">
+            <i class="sprite_jc sp_jc6"></i><p>行政后勤</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/abb66930935e4338b19e32e701085bec">
+            <i class="sprite_jc sp_jc7"></i><p>服务员</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/4cad0dc10c5f4a33b1763158f13ebcd9">
+            <i class="sprite_jc sp_jc8"></i><p>营销销售</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/7e8cbc933e38445d90f3dafbfdfd5f7a">
+            <i class="sprite_jc sp_jc9"></i><p>财务审计</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/0c00b592dfdb43e2bf74c25c57ae1e87">
+            <i class="sprite_jc sp_jc10"></i><p>咨询顾问</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/39e36b0d48a34e598cfa85d88ccda805">
+            <i class="sprite_jc sp_jc11"></i><p>商店零售</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/c80af99a306a4cd0841c2431d75f2d6a">
+            <i class="sprite_jc sp_jc12"></i><p>美工设计</p>
+        </a></li>
+
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/b3b3edc0583240b0aee3bcf5d152b694">
+            <i class="sprite_jc sp_jc13"></i><p>物流运输</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/7e2795d70c6b4773be78750c7da2e77a">
+            <i class="sprite_jc sp_jc14"></i><p>化工制药</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/963f7eb12c9e4ac7a0e4888228a65ff5">
+            <i class="sprite_jc sp_jc15"></i><p>电子电器</p>
+        </a></li>
+        <li><a href="{{app_config.links}}/#/tab/index/jobcate/list/228b64e3efa248058ef2e62f56b09771">
+            <i class="sprite_jc sp_jc16"></i><p>其它</p>
+        </a></li> -->
+      </ul>
+    </div>
+
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

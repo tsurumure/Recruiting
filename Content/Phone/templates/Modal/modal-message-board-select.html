@@ -1,0 +1,38 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <!--<button class="button button-clear button-primary" ng-click="SaveModal()">发送</button>-->
+    <h1 class="title">选择模板</h1>
+    <button class="button button-clear button-primary" ng-click="modalTemplate.remove()">取消</button>
+  </ion-header-bar>
+
+  <!-- overflow-scroll="true"-->
+  <ion-content overflow-scroll="true" class="bg-white has-footer checkList-content">
+    
+    <ion-list class="checkList">
+      <ion-radio ng-repeat="item in templateList" ng-value="item.Name" ng-click="changeTemplate()">{{item.Name}}</ion-checkbox>
+    </ion-list>
+
+    <div ng-if="templateList.length<=0">
+      <list-status ng-model="templateList" null-msg="暂无模板"></list-status>
+    </div>
+    
+  </ion-content>
+
+  <div class="bar bar-footer board-select">
+    <div class="theme-button-group">
+      <div class="theme-button">
+        <a href="javascript:;" ng-click="SetTemplateTop()" ng-disabled="!isSelectTemplate" style="margin-bottom:5px;" class="button button-small button-full">
+          置顶
+        </a>
+        <a href="javascript:;" ng-click="DeleteTemplate()" ng-disabled="!isSelectTemplate" style="margin-bottom:5px;" class="button button-small button-full">
+          删除模板
+        </a>
+        <a href="javascript:;" ng-click="SaveTemplate()" class="button button-positive button-small button-full">
+          确定
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+</ion-modal-view>

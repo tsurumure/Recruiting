@@ -1,0 +1,39 @@
+<ion-view hide-tabs="true" view-title="注册" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">第二步 验证手机</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content>
+    
+    <div id="register">
+      <div class="item item-input">
+        <span class="input-label">验　　证</span>
+        <input type="text" ng-model="datas.vercode" placeholder="请输入收到的验证码"/>
+      </div>
+      <div class="item item-error" ng-show="isEmpty||isError">
+        <span ng-hide="isError">验证码不能为空</span>
+        <span ng-show="isError">验证码输入错误</span>
+      </div>
+
+      <div class="wp over">
+        <a href="javascript:;" ng-click="goStep3()" class="button button-block button-small button-positive">下一步</a>
+        <a href="javascript:;" ng-hide="hadRegMessage" ng-click="countStart(30,0)" class="button button-block button-small button-dark" ng-disabled="isCountDown">{{countDown}} 重新发送短信验证码</a>
+        <a href="javascript:;" ng-show="hadRegMessage" ng-click="countStart(30,1)" class="button button-block button-small button-dark" ng-disabled="isCountDown">{{countDown}} 重新发送来电语音验证码</a>
+      </div>
+
+      <p class="f12" ng-hide="hadRegMessage" style="text-align:center;">请注意接收短信或者语音来电</p>
+      <!--<p class="f12" ng-show="hadRegMessage" style="text-align:center;">{{hadRegMessage}}</p>-->
+      
+
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

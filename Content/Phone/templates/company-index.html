@@ -1,0 +1,125 @@
+<ion-view hide-tabs="false" view-title="职得 - 手机找工作，就上职得" animation="slide-left-right">
+<div>
+<ion-side-menus>
+  <ion-side-menu-content edge-drag-threshold="true" drag-content="true">
+    
+    <theme-header type="{{entryName}}"></theme-header>
+
+    <!-- Header -->
+    <!--<ion-header-bar align-title="center" class="bar bar-positive bar-minus">-->
+      <!--<button menu-toggle="left" class="button icon ion-ditu"></button>
+      <div class="search-index">
+        <input type="text" placeholder="输入职位名称进行搜索" ng-model="searchDatas.inputKeyword">
+        <a href="javascript:;" ng-click="searchKeyword(searchDatas.inputKeyword)" class="ion-sousuo"></a>
+      </div>-->
+    <!--</ion-header-bar>-->
+    
+    <!-- Content -->
+    <ion-content class="has-tabs" style="top:44px;" lazy-container> <!--overflow-scroll="true"-->
+
+      <img src="/Content/Phone/images/default/wx_logo.png" style="display:block;width:0;height:0;margin:0;" title="微信显示小图">
+
+      <!-- banner -->
+      <div class="banner">
+        <ion-slide-box active-slide="0" does-continue="true" auto-play="true">
+          <ion-slide ng-repeat="item in banners">
+            <div class="box">
+              <a ng-href="{{::item.Url}}" ng-if="item.Url!=''"><img lazy-src="{{::item.Pic}}" err-src="/Content/Phone/images/banner/b0.jpg"/></a>
+              <img ng-hide="item.Url!=''" lazy-src="{{::item.Pic}}" err-src="/Content/Phone/images/banner/b0.jpg"/>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+      
+      <!-- Button(4B) -->
+      <div id="menu-list" class="mb10">
+        <div class="row row-center">
+          <div class="col col-25 col-text-center"><a href="#/company/index/jobfair" class="colorful-bg-1"><i class="ion ion-theme-menu-1"></i>招聘会</a></div>
+          <div class="col col-25 col-text-center"><a href="#/company/searchResume" class="colorful-bg-6"><i class="ion ion-theme-menu-6"></i>简历搜索</a></div>
+          <div class="col col-25 col-text-center"><a href="#/company/index/partTimeJob" class="colorful-bg-2"><i class="ion ion-theme-menu-2"></i>兼职频道</a></div>
+          <div class="col col-25 col-text-center"><a href="#/company/publicArticle" class="colorful-bg-8"><i class="ion ion-theme-menu-8"></i>职场资讯</a></div>
+        </div>
+      </div>
+      <!-- end Button(4B) -->
+
+      <!-- 职位列表 -->
+      <div class="jobs_list">
+        <div class="title-center">可能感兴趣的简历</div>
+        <div class="scroller">
+          <ul>
+            <li ng-repeat="item in responseResume track by $index" on-finish-render-filters> <!--  style="height:400px;" -->
+              <div ng-if="$index==0||$index%10!=0">
+                <!--<i class="hot" ng-show="item.IsHot"><b>热</b></i>-->
+                <a href="#/company/resume/{{item.Id}}">
+                  <div class="ll companyLogo circleLogo">
+                    <img lazy-src="{{::item.HeadImage}}" err-src="/Content/Phone/images/head/none.jpg" class="my-galleryImg"/>
+                  </div>
+                  <div class="rr companyJob">
+                    <div class="companyJobSection">
+                      <div class="top over">
+                        <div class="ll">
+                          {{::item.Realname}}
+                          <i class="ion ion-theme-boy" ng-show="item.Gender==A01"></i>
+                          <i class="ion ion-theme-girl" ng-show="item.Gender==A02"></i>
+                          <span class="f12 fgray">
+                          {{::item.EducationCode | KeyToName:'Education':ConstantXML}}
+                          |
+                          {{::item.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML}}
+                          |
+                          {{::item.Birthday | CallbackAge}}岁
+                          </span>
+                        </div>
+                        <div class="rr">
+                          <span>{{::item.IntentionPayCode | KeyToName:'IntentionPay':ConstantXML}}</span>
+                        </div>
+                      </div>
+                      <div class="mid over">
+                        <div class="ll">
+                          <span class="fblack">{{::item.IntentionJobTypeNames}}</span>
+                        </div>
+                      </div>
+                      <div class="bottom over f12" ng-if="ConstantXML && item.Labels">
+                        <div class="ll">
+                          <div class="signGroup">
+                            <span ng-repeat="itemLabel in ::item.Labels.split(',')">{{::itemLabel | KeyToName:'ResumeLabel':ConstantXML}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <infinite-scroll-end ng-model="responseResume" one-page="10"></infinite-scroll-end>
+
+        <list-status ng-model="responseResume" null-msg="暂无简历"></list-status>
+        
+      </div>
+      
+
+    </ion-content>
+    <!-- end Content -->
+  </ion-side-menu-content>
+  
+  <!-- 选择位置 -->
+  <ion-side-menu side="left">
+    <ion-header-bar align-title="left" class="bar bar-positive">
+      <h1 class="title" style="padding-left:16px;">选择城市</h1>
+    </ion-header-bar>
+    <div class="content has-header">
+      <div class="list">
+        <div class="item item-divider"><i class="ion ion-theme-nav-1"></i>当前位置：<b>{{CurrentCityValue}}</b></div>
+        <div class="item item-divider"><i class="ion ion-theme-nav-2" style="font-size:16px;margin-left:1px;margin-right:7px;"></i>选择位置</div>
+        <div class="list-scroll-y" style="height:{{ leftScrollHeight }}">
+          <a ng-repeat="itemCity in CityLists track by $index" menu-toggle="left" ng-click="chooseCity(itemCity._key,itemCity._value)" class="item" href="#">{{itemCity._value}}</a>
+        </div>
+      </div>
+    </div>
+  </ion-side-menu>
+
+</ion-side-menus>
+</div>
+</ion-view>

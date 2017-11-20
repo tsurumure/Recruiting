@@ -1,0 +1,13 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title" ng-bind="SelectTitle"></h1>
+    <button class="button button-clear button-primary" ng-click="modal.remove()">取消</button>
+  </ion-header-bar>
+  <ion-content overflow-scroll="true">
+    
+    <ion-radio ng-repeat="item in SelectLists" ng-change="SelectChange()" ng-click="SelectClick()" ng-value="item.Id" ng-model="SelectDatas.Id">
+      {{ item.Title }}
+    </ion-radio>
+    
+  </ion-content>
+</ion-modal-view>

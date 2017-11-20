@@ -1,0 +1,93 @@
+<ion-view hide-tabs="false" view-title="附近" animation="slide-left-right">
+<div>
+<ion-side-menus>
+  <ion-side-menu-content edge-drag-threshold="true" drag-content="true">
+
+    <simple-tips name="near"></simple-tips>
+
+    <theme-header type="{{entryName}}"></theme-header>
+
+    <!-- Header -->
+    <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+      <button menu-toggle="left" class="button button-large icon ion-ionic rotateAnimate" style="background:transparent;"></button>
+      <h1 class="title">附近<!--<a href="{{app_config.links}}/#/tab/near/juwei">凤凰居委测试</a>--></h1>
+      <button class="button icon ion-dingwei" id="myLocation"></button>
+    </ion-header-bar>
+    
+    <!-- Content -->
+    <ion-content class="has-header has-tabs" overflow-scroll="true" style="bottom:49px;">
+
+      <nearmap id="nearmap" location="" style="height:{{ nearMapHeight }}"></nearmap>     
+      
+      <!-- 职位信息简介 -->
+      <div id="nearmap_imformation" ng-show="jobImforShow">
+        <div class="jobs_list" longitude="{{ locations.imforMapLng }}" latitude="{{ locations.imforMapLat }}">
+
+          <div class="jobs_content">
+            <i class="close" ng-click="closeImfor()">x</i>
+            <div class="m10 over" style="margin-bottom:0;">
+              <div class="companyJob">
+                <div class="companyJobSection">
+                  <div class="top over">
+                    <div class="ll">{{ locations.imforName }}</div>
+                    <div class="rr"><span>{{ locations.imforPay }}</span></div>
+                  </div>
+                  <div class="mid m0 over">
+                    <div class="ll">{{ locations.imforEnterpriseName }}</div>
+                    <div class="rr">距离我 <span>{{ locations.imforDistance }}</span>m</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-25"><a href="javascript:;" ng-click="getJobLocation_simple(locations.imforMapLng,locations.imforMapLat)" id="btn_location" class="button button-small icon-left ion ion-theme-nav-2">定位</a></div>
+              <div class="col col-25"><a href="javascript:;" id="btn-navigation" ng-click="navigation()" id="btn_mapNavigation" class="button button-small icon-left ion ion-theme-apply-1">导航</a></div>
+              <div class="col col-25"><a href="{{app_config.links}}/#/tab/near/panorama/{{getJobLoc.lng}}/{{getJobLoc.lat}}" id="btn-panorama" class="button button-small icon-left ion ion-theme-menu-7">全景</a></div>
+              <div class="col col-25"><a href="{{app_config.links}}/#/tab/near/job/detail/near/{{getJobId}}" id="" class="button button-small icon-left ion-android-list">详情</a></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+    </ion-content>
+    <!-- end Content -->
+  </ion-side-menu-content>
+  
+  <!-- 左侧边栏 -->
+  <ion-side-menu side="left">
+    <ion-header-bar align-title="left" class="bar bar-positive">
+      <h1 class="title" style="padding-left:16px;">附近工作</h1>
+    </ion-header-bar>
+    <ion-content class="content has-header">
+      <div class="list">
+        <!-- 职位信息列表 -->
+        <div class="jobs_list" id="near_jobs_list" style="height:{{nearMapHeight}}">
+          <ul>
+            <li ng-repeat="job in nearJobLists" longitude="{{job.MapLng}}" latitude="{{job.MapLat}}">
+              <a href="javascript:;" class="job" ng-click="getJobLocation(job.MapLng,job.MapLat)" menu-toggle="left">
+                <div class="rr companyJob">
+                  <div class="companyJobSection">
+                    <div class="top over">
+                    <div class="ll">{{job.Name}}</div>
+                    <div class="rr"><span>{{job.Pay}}</span></div>
+                    </div>
+                    <div class="mid m0">{{job.EnterpriseName}}</div>
+                    <div class="bottom">距离我 {{parseInt(job.Distance)}}m</div>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <ion-infinite-scroll ng-if="hasMore" immediate-check="false" on-infinite="loadMore()" distance="1%" pulling-text="上滑加载更多"></ion-infinite-scroll>
+          <ion-spinner ng-hide="nearJobLists" id="icon-loading" icon="dots" class="spinner spinner-dark" alt="加载中"></ion-spinner>
+        </div>
+        <!-- end -->
+      </div>
+    </ion-content>
+  </ion-side-menu>
+</div>
+</ion-view>
+
+
+

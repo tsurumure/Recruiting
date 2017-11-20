@@ -1,0 +1,25 @@
+<ion-view hide-tabs="true" view-title="{{datas.Name}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">{{datas.Name}}</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content class="bg-white">
+    
+    <div id="my">
+      
+      <div class="contentText" ng-bind-html="datas.Content"></div>
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+  
+  
+</ion-view>

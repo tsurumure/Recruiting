@@ -1,0 +1,26 @@
+<ion-tabs class="tabs-light tabs-icon-top tabs-color-active-positive" ng-class="{'tabs-item-hide':hideTabs}">
+
+  <ion-tab title="职位" icon="ion ion-theme-nav-1" ng-click="linkChangePage('/#/tab/index')">
+    <ion-nav-view name="tab-index"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="附近" icon="ion ion-theme-nav-2" ng-click="linkChangePage('/#/tab/near')">
+    <ion-nav-view name="tab-near"></ion-nav-view>
+  </ion-tab>
+  
+  <ion-tab title="发布" icon="ion ion-theme-nav-center" ng-click="CenterButton_Open()">
+    <ion-nav-view>123</ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="广场" icon="ion ion-theme-nav-3" ng-click="linkChangePage('/#/tab/square')">
+    <ion-nav-view name="tab-square"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="我的" icon="ion ion-theme-nav-4" badge="IsHasMessageApply" badge-style="badgeDot" ng-click="linkChangePage('/#/' + entry + '/my', true, entry)">
+    <ion-nav-view name="tab-my"></ion-nav-view>
+  </ion-tab>
+
+  <em class="hasMessage" ng-show="hasMessage">{{hasMessageCount}}</em>
+
+</ion-tabs>
+

@@ -1,0 +1,20 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">添加好友</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()">取消</button>
+  </ion-header-bar>
+  <ion-content>
+    
+    <div class="modalAdd">
+      <div class="item">
+        <textarea placeholder="用一句话介绍你自己" ng-model="datas.toFriendMsg"></textarea>
+      </div>
+      <div class="item item-text-wrap">
+        <a href="javascript:;" ng-click="addFriendMessage()" class="button button-block button-small button-positive">提交</a>
+      </div>
+      
+    </div>
+    
+  </ion-content>
+  
+</ion-modal-view>

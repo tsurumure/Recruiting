@@ -1,0 +1,40 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <button class="button button-clear button-primary" ng-click="SaveModal()">保存</button>
+    <h1 class="title">职位类型</h1>
+    <button class="button button-clear button-primary" ng-click="modal.remove()">取消</button>
+  </ion-header-bar>
+
+  <ion-content overflow-scroll="true" class="bg-white">
+    
+    <div class="JobCatesSelected">
+      <label ng-repeat="item in CurrentSelected" ng-click="SelectCate_Del($index, item.Id)">
+        {{item.Name}}<a href="javascript:;"><i class="ion-android-close"></i></a>
+      </label>
+    </div>
+
+    <div class="JobCatesTip">最多可以选择<b ng-bind="MaxCount"></b>个，当前选择了<b ng-bind="CurrentSelected.length"></b>个</div>
+    
+    <div class="JobCatesList">
+      <div class="JobCatesList-side scroll">
+        <ul>
+          <li ng-repeat="item in JobTypesJSON" ng-click="FirstCate_Change($index)" ng-class="{true:'on'}[$index==CurrentIndex]">{{item.Name}}</li>
+        </ul>
+      </div>
+      <div class="JobCatesList-main">
+        <dl ng-repeat="item in JobTypesJSON[CurrentIndex].Child" ng-class="{true:'noFloat'}[item.Id==JobTypesJSON[CurrentIndex].Id]">
+          <span ng-if="item.Id==JobTypesJSON[CurrentIndex].Id">
+            <a href="javascript:;" ng-click="SelectCate(item)" ng-class="{true:'on'}[cur]">{{item.Name}}</a>
+          </span>
+          <span ng-if="item.Id!=JobTypesJSON[CurrentIndex].Id">
+            <dt>{{item.Name}}</dt>
+            <dd>
+              <a href="javascript:;" ng-click="SelectCate(itemThird)" ng-class="{true:'on'}[cur]" ng-repeat="itemThird in item.Child">{{itemThird.Name}}</a>
+            </dd>
+          </span>
+        </dl>
+      </div>
+    </div>
+    
+  </ion-content>
+</ion-modal-view>

@@ -1,0 +1,22 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <button class="button button-clear button-primary" ng-click="SaveModal()">保存</button>
+    <h1 class="title">定位</h1>
+    <button class="button button-clear button-primary" ng-click="modal.remove()">取消</button>
+  </ion-header-bar>
+  <ion-content overflow-scroll="true">
+    
+    <div class="item item-input">
+      <span class="input-label">公司地址</span>
+      <input type="text" placeholder="输入公司地址" ng-model="datas.tempAddress">
+      <a href="javascript:;" ng-click="ResetAddressPoint()" class="iconLink"><i class="ion-ditu"></i></a>
+    </div>
+    <div class="item item-input">
+      <span class="input-label">坐标定位</span>
+      <input type="text" ng-disabled="true" ng-value="datas.tempLocation">
+    </div>
+
+    <div id="ModalMap" style="width:100%;height:100%;"></div>
+    
+  </ion-content>
+</ion-modal-view>

@@ -1,0 +1,154 @@
+<ion-view hide-tabs="true" view-title="名片详情" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar ng-hide="isApp" align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="(StateRoutesBefore) ? backTo() : backTo('/#/{{entry}}/square')" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">名片详情</h1>
+    <!-- <button class="button icon ion-ios-compose-outline"></button> -->
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll='true' class="bg-white" ng-class="{true:'has-footer'}[entry=='company'&&IsShowDetail&&(CardDetail.Resume.Phone!=''||CardDetail.Resume.Email!='')]" lazy-container>
+    <div class="SquareJob">
+      <!-- <div class="ResumeDetailPreview CommonDetail">
+        <div class="centerHead">
+          <div class="head"><div class="head-a"><img ng-src="/Content/Phone/images/head/none.jpg" err-src="/Content/Phone/images/head/none.jpg"></div></div>
+          <h2>
+            {{CardDetail.Resume.Realname}}
+            <i class="ion ion-theme-boy colorful-font-5" ng-show="CardDetail.Resume.Gender==A01"></i>
+            <i class="ion ion-theme-girl colorful-font-7" ng-show="CardDetail.Resume.Gender==A02"></i>
+          </h2>
+          <div class="inform">
+            <div>
+              <span ng-bind="CardDetail.Resume.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML"></span>
+              <i>|</i>
+              <span ng-bind="CardDetail.Resume.EducationCode | KeyToName:'Education':ConstantXML"></span>
+              <i>|</i>
+              <span ng-bind="CardDetail.Resume.Skill"></span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+       <div class="CardDetail CommonDetail" ng-class="{true:'preview'}[IsShowDetail]">
+
+        <div class="centerHead">
+          <div class="head-a"><img ng-src="{{CardDetail.Resume.HeadImage||'/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg"></div>
+          <h3>
+            {{CardDetail.Resume.Realname}}
+            <i class="ion ion-theme-boy colorful-font-5" ng-show="CardDetail.Resume.Gender=='A01'"></i>
+            <i class="ion ion-theme-girl colorful-font-7" ng-show="CardDetail.Resume.Gender=='A02'"></i>
+          </h3>
+          <div class="small-title unborder">正在寻找{{ (CardDetail.Type=='FulltimeResume') ? '全职':'兼职'}}工作</div>
+          <div class="buttonGroup">
+            <a href="javascript:;" ng-click="ShowDetail()" class="button button-positive button-small">点击查看详情</a>
+          </div>
+
+          <div id="my-menu-horizontal-them">
+              <div class="row">
+                <div class="col col-33">
+                  <span>年龄</span><strong ng-bind="CardDetail.Resume.Birthday | CallbackAge">-</strong>
+                </div>
+                <div class="col col-33">
+                  <span>身高(cm)</span><strong ng-bind="CardDetail.Resume.Stature">-</strong>
+                </div>
+                <div class="col col-33">
+                  <span>工作经验</span><strong ng-bind="CardDetail.Resume.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML"></strong>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="CardDetailItems">
+
+          <div class="item item-group">
+            <div class="title">求职信息</div>
+            <div class="content">
+              <div class="content-ul">
+                <p><em>意向职位</em>{{CardDetail.Resume.IntentionJobTypeNames}}</p>
+                <p><em>意向城市</em>{{CardDetail.Resume.IntentionAreaNames}}</p>
+                <p><em>期望薪资</em>{{CardDetail.Resume.IntentionPayCode | KeyToName:'IntentionPay':ConstantXML}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="item item-group">
+            <div class="title">教育经历</div>
+            <div class="content">
+              <div class="content-section" ng-repeat="item in CardDetail.Resume.EduExperience">
+                <div class="hd">{{item.EduinTime}} - {{item.EduoutTime}}</div>
+                <div class="bd">
+                  {{item.EduSchool}}　{{item.EduLevelValue | KeyToName:'Education':ConstantXML }}　{{item.EduProfessional}}
+                </div> 
+              </div>
+            </div>
+          </div>
+
+          <div class="item item-group">
+            <div class="title">工作经历</div>
+            <div class="content">
+              <div class="content-section" ng-repeat="item in CardDetail.Resume.WorkExperience">
+                <div class="hd">{{item.JobinTime}} - {{item.JoboutTime}}</div>
+                <div class="bd">
+                  {{item.JobName}}　{{item.JobCompany }}
+                </div>
+                <div class="bm">{{item.JobDetail}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item item-group">
+            <div class="title">个人介绍</div>
+            <div class="content" ng-bind-html="CardDetail.Resume.PersonalProfile"></div>
+          </div>
+
+          <div class="item item-group"> <!-- ng-show="entry=='company'"-->
+            <div class="title">联系方式</div>
+            <div class="content">
+
+              <div class="content-ul" ng-if="CardDetail.Resume.Phone!=''||CardDetail.Resume.Email!=''">
+                <p><em>手机号码</em><a href="tel:{{CardDetail.Resume.Phone}}">{{CardDetail.Resume.Phone}}</a></p>
+                <p><em>邮箱地址</em>{{CardDetail.Resume.Email}}</p>
+              </div>
+
+              <div class="noAllow mt20 mb20 f12" ng-if="CardDetail.Resume.Phone==''&&CardDetail.Resume.Email==''">
+                <p class="fcenter">请点击<strong>查看按钮</strong>查看该求职者联系方式</p>
+                <p class="fcenter"><a href="javascript:;" ng-click="SetAllow()" class="button button-positive button-small">查看</a></p>
+                <p class="fcenter" ng-show="entry=='company'">（剩余<strong>{{userImfor.AllowReadResumeCount||'-'}}</strong>次查看机会）</p>
+              </div>
+
+            </div>
+          </div>
+          <div class="item fgray bggray f12" style="padding-top:5px;padding-bottom:5px;" ng-show="entry=='company'">
+            联系我时，请说明是在职得招聘上看到的
+          </div>
+
+        </div>
+        <!-- end item -->
+      </div>
+      <!-- end CardDetail -->
+    </div>
+  </ion-content>
+
+
+  <div class="bar bar-footer" id="job-application" ng-show="entry=='company'&&IsShowDetail&&(CardDetail.Resume.Phone!=''||CardDetail.Resume.Email!='')">
+    <a href="javascript:;" ng-click="BottomClick_Invite()" class="large button button-positive icon-left ion ion-theme-resume-invite">邀请面试</a>
+    <a href='javascript:;' ng-click="BottomClick_Message()" class='button ion ion-theme-message-1'>私信</a>
+    <a href='#/{{entry}}/appdownloadZl' class='button ion ion-theme-message-2'>职聊</a>
+    <a href='javascript:;' ng-click='ButtonClick_Collect()' class='button ion ion-theme-zan-1' ng-class="{true:'button-active'}[CardDetail.Resume.IsEnterpriseCollect==true]">{{CardDetail.Resume.IsEnterpriseCollect ? '已收藏' : '收藏'}}</a>
+  </div>
+
+
+  <div class="appDownload" ng-class="{true:'preview'}[IsShowDetail]">
+    <div class="eweima">
+      <img ng-src="/Content/Phone/images/default/ewei_app.png">
+      <p>扫码下载职得APP</p>
+      <p><span>精彩尽在职得招聘</span></p>
+    </div>
+    <div class="bottom"></div>
+  </div>
+  <!-- end Content -->
+  
+</ion-view>

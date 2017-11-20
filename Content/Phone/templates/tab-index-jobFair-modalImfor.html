@@ -1,0 +1,11 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">{{jobFairImfor.Title}}</h1>
+    <button class="button button-clear button-primary" ng-click="modalImfor.remove()">返回</button>
+  </ion-header-bar>
+  <ion-content overflow-scroll="true" class="bg-white">
+    
+    <div ng-bind-html="jobFairImfor.Content" class="m15"></div>
+    
+  </ion-content>
+</ion-modal-view>

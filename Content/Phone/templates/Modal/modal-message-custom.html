@@ -1,0 +1,31 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <!--<button class="button button-clear button-primary" ng-click="SaveModal()">发送</button>-->
+    <h1 class="title" ng-bind="ModalTitle"></h1>
+    <button class="button button-clear button-primary" ng-click="modal.remove()">取消</button>
+  </ion-header-bar>
+
+  <!-- overflow-scroll="true"-->
+  <ion-content overflow-scroll="true" class="bg-white">
+    
+    <div class="modalAdd">
+      
+        <div class="item">
+          <textarea placeholder="内容不超过200个字" ng-model="datas.Content"></textarea>
+        </div>
+
+        
+        <div class="list-inset">
+          <a href="javascript:;" ng-click="SaveModal()" class="button button-small button-full button-positive">发送{{ModalTitle}}</a>
+        </div>
+
+        <div ng-if="ModalSmallTip" class="item item-text-wrap" style="border-top:1px solid #e8e8e8">
+          <span class="tip">提示：{{ModalSmallTip}}</span>
+        </div>
+
+      <!--</form>-->
+      
+    </div>
+    
+  </ion-content>
+</ion-modal-view>

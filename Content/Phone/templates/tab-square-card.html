@@ -1,0 +1,67 @@
+<ion-view hide-tabs="true" view-title="全职名片" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo('/#/tab/square')" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">全职名片</h1>
+    <!-- <button class="button icon ion-ios-compose-outline"></button> -->
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll='false' class="bg-white" lazy-container>
+    
+    <div class="SquareJob">
+      <div class="templateJob">
+        <img ng-if="IsCreated==false" ng-src="/content/phone/images/default/template_jobfull.png" class="templateJobImg">
+        <!-- 已创建Card -->
+        <div class="SquareCards" ng-if="IsCreated">
+          <div class="card-left">
+            <div class="title">
+              <strong ng-bind="MyCard.Resume.Realname"></strong>
+              <span>正在寻找{{MyCardType}}工作</span>
+            </div>
+            <div class="content">
+              <ul>
+                <li><em>性别：</em><span ng-bind="MyCard.Resume.Gender | KeyToName:'Gender':ConstantXML"></span></li>
+                <li><em>年龄：</em><span ng-bind="(MyCard.Resume.Birthday | CallbackAge)+'岁'"></span></li>
+                <li><em>学历：</em><span ng-bind="MyCard.Resume.EducationCode | KeyToName:'Education':ConstantXML">本科</span></li>
+                <li><em>身高：</em><span ng-bind="MyCard.Resume.Stature+'cm'"></span></li>
+                <li class="long"><em>意向：</em><span ng-bind="MyCard.Resume.IntentionJobTypeNames"></span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-right">
+            <div class="headpic">
+              <img ng-src="{{MyCard.Resume.HeadImage||'/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg">
+            </div>
+          </div>
+        </div>
+        <!-- end Card -->
+
+      </div>
+      <div class="list-inset">
+
+        <div ng-if="IsCreated">
+          <a ng-href="#/tab/square/cardResumeDetail/{{MyCard.Resume.Id}}" class="button button-block button-small">编辑简历</a>
+          <a href="#/tab/square/cardShare/{{MyCard.Id}}" class="button button-block button-small button-calm">名片分享</a>
+          <a href="javascript:;" ng-click="ShowSendText()" class="button button-block button-small button-positive mb20">发布名片到广场</a>
+        </div>
+
+        <!-- #/tab/square/card/{{SquareJob_Type}}/create -->
+        <a href="javascript:;" ng-click="Create(SquareJob_Type)" ng-if="IsCreated==false" class="button button-block button-small button-positive">创建全职名片</a>
+        <div class="bottom-text mb10">
+          <p>1. 全职名片信息将读取 [默认简历] 作为呈现内容，可以在 <a href="#/tab/my/resume">我的简历</a> 设置默认简历</p>
+          <p>2. 发布的内容将在 <a href="#/tab/square">广场</a> 进行展示</p>
+          <p>3. 每日仅可发布一次</p>
+          <p>4. 二维码名片分享，可以获得更多曝光机会</p>
+        </div>
+
+      </div>
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

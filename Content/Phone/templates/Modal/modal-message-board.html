@@ -1,0 +1,35 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <!--<button class="button button-clear button-primary" ng-click="SaveModal()">发送</button>-->
+    <h1 class="title" ng-bind="ModalTitle"></h1>
+    <button class="button button-clear button-primary" ng-click="modal.remove()">取消</button>
+  </ion-header-bar>
+
+  <!-- overflow-scroll="true"-->
+  <ion-content overflow-scroll="true" class="bg-white">
+    
+    <div class="modalAdd">
+      
+        <div class="item">
+          <textarea placeholder="请输入私信内容，添加到模板可方便下次使用" ng-model="datas.Content"></textarea>
+        </div>
+        
+        <div class="list-inset">
+          <a href="javascript:;" ng-click="SelectTemplate()" class="button button-small button-full">选择模板</a>
+          <a href="javascript:;" ng-click="SaveModal()" class="button button-small button-full button-positive">发送私信</a>
+          <label class="checkbox small">
+            <input type="checkbox" ng-model="vm.isSave">
+            将私信内容添加到模板{{isSave}}
+          </label>
+        </div>
+
+        <div ng-if="ModalSmallTip" class="item item-text-wrap" style="border-top:1px solid #e8e8e8">
+          <span class="tip">提示：{{ModalSmallTip}}</span>
+        </div>
+
+      <!--</form>-->
+      
+    </div>
+    
+  </ion-content>
+</ion-modal-view>

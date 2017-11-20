@@ -1,0 +1,79 @@
+<ion-view hide-tabs="true" view-title="{{ResumeListTitle}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title" ng-bind="ResumeListTitle"></h1>
+    <!--<button ng-click="uploadImg(files)" class="button">上传</button>-->
+  </ion-header-bar>
+
+  <!-- Content  overflow-scroll="true"  class="bg-white"-->
+  <ion-content class="bg-white" lazy-container>
+
+    <div class="ResumeList">
+
+      <div class="section-style mt10">
+        <!--  | filter: {IsRead:IsReadType}-->
+        <div class="section-item hasHead" ng-repeat="item in JobApplyList track by $index" on-finish-render-filters>
+          <div class="left-head">
+            <a href="javascript:;" class="circleLogo">
+              <img lazy-src="{{ item.Resume.HeadImage || '/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg" class="my-galleryImg"/>
+            </a>
+          </div>
+          <div class="left">
+            <a ng-click="ReadResume()" href="javascript:;" class="title">
+              {{item.Resume.Realname || '未命名'}}
+              <i class="ion ion-theme-boy" ng-show="item.Resume.Gender==A01"></i>
+              <i class="ion ion-theme-girl" ng-show="item.Resume.Gender==A02"></i>
+            </a>
+            <p style="margin-bottom:3px;" class="fblack">
+              <span>{{item.Resume.EducationCode | KeyToName:'Education':ConstantXML}}</span>
+              <i>|</i>
+              <span>{{item.Resume.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML}}</span>
+              <i>|</i>
+              <span>{{item.Resume.Birthday | CallbackAge}}岁</span>
+              <i>|</i>
+              <span>{{item.Resume.IntentionJobTypeNames}}</span>
+            </p>
+            <div class="signGroup mb5" ng-if="ConstantXML && item.Resume.Labels">
+              <span style="padding:0 2px;margin-right:2px;" ng-repeat="itemLabel in item.Resume.Labels.split(',')">{{itemLabel | KeyToName:'ResumeLabel':ConstantXML}}</span>
+            </div>
+            <p>
+              <span>申请职位：<a ng-href="{{app_config.links}}/#/company/releaseJobDetail/{{item.Job.Id}}">{{item.Job.Name}}</a></span>
+            </p>
+            <p>
+              <span>申请时间：{{item.ApplyTime | FuckDater | date:"yyyy-MM-dd"}}</span>
+            </p>
+          </div>
+          <div class="right">
+            <span>{{item.Resume.IntentionPayCode | KeyToName:'IntentionPay':ConstantXML}}</span>
+          </div>
+          <div class="clr"></div>
+          <div class="bottom">
+            <ul ng-if="!item.IsDispose">
+              <li class="w w50"><a href="javascript:;" ng-click="Dispose(item.Id, 'Pass')">表示满意</a></li>
+              <li class="w w50"><a href="javascript:;" ng-click="Dispose(item.Id, 'Reject')">表示不满意</a></li>
+            </ul> 
+            <ul ng-if="item.IsDispose">
+              <li class="w w100" ng-if="item.IsPass"><a href="javascript:;" class="fgreen">满意</a></li>
+              <li class="w w100" ng-if="!item.IsPass"><a href="javascript:;" class="fpositive">不满意</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <infinite-scroll-end ng-model="JobApplyList" one-page="10" is-auth></infinite-scroll-end>
+        <!-- <paper name="JobApplyList" hasborder current="RJ_current" onepage="RJ_onepage"></paper> -->
+
+        <list-status ng-model="JobApplyList"></list-status>
+        
+      </div>
+
+    </div>
+
+
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

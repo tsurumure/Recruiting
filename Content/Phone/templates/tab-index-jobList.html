@@ -1,0 +1,65 @@
+<ion-view hide-tabs="true" view-title="{{rsTitle}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <a ng-show="isBackToIndex" href="{{app_config.links}}/#/tab/index" class="button icon ion-ios-arrow-left"></a>
+    <button ng-hide="isBackToIndex" ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">{{rsTitle}}</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content class="bg-white" lazy-container>
+    
+    <ion-list>
+      <div class="jobs_list">
+      <ul>
+        <li ng-repeat="item in CommonJobList track by $index" on-finish-render-filters>
+          <i class="hot" ng-show="item.IsHot"><b>热</b></i>
+          <a href="{{app_config.links}}/#/tab/job/detail/index/{{item.Id}}">
+            <div class="ll companyLogo">
+              <img lazy-src="{{item.EnterpriseLogoSmall || '/Content/Phone/images/default/companyLogo.jpg'}}" err-src="/Content/Phone/images/default/companyLogo.jpg" class="my-galleryImg"/>
+            </div>
+            <div class="rr companyJob">
+              <div class="companyJobSection">
+                <div class="top over">
+                  <div class="ll">{{item.Name}}</div>
+                  <div class="rr"><span>{{item.Pay}}</span> <em ng-if="item.Pay!='面议'">{{item.JobPayUnit}}</em></div>
+                </div>
+                <div class="mid over">
+                  <div class="ll">{{item.EnterpriseName}}</div>
+                  <div class="rr">{{item.ReleaseTime | FuckDater | date:"MM-dd"}}</div>
+                </div>
+                <div class="bottom over" ng-if="item.WelfareValue!=''">
+                  <div class="signGroup">
+                    <span ng-repeat="i in item.WelfareValue.split(',')">{{i}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+      </div>
+    </ion-list>
+
+    <infinite-scroll-end ng-model="CommonJobList" one-page="10" common-url="CommonUri"></infinite-scroll-end>
+    
+    <div ng-if="CommonJobList.length<=0">
+      <list-status ng-model="CommonJobList" null-msg="暂无职位"></list-status>
+    </div>
+
+    <!-- <ion-infinite-scroll ng-if="activeMore&&hasMore" immediate-check="false" on-infinite="refreshDown()" distance="1%" alt="上滑加载更多"></ion-infinite-scroll> -->
+    <!--<div class="noneContent nobg" ng-hide="hasData">
+      <i class="ion-social-freebsd-devil"></i>
+      {{hasDataText}}
+    </div>-->
+
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

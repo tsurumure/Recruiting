@@ -1,0 +1,103 @@
+<ion-view hide-tabs="true" view-title="{{jobDetailData.Name||'职得'}} - {{jobDetailData.EnterpriseName||'手机找工作，就上职得'}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar ng-hide="isApp" align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">职位详情</h1>
+    <a href="javascript:;" ng-click='clickEvent_RightMenu()' ng-hide="isPreview" ng-class="{true:'active'}[isRightMenu]" class="button button-right icon ion-ios-more" style="right:5px;"></a>
+    <button ng-click="backTo('/#/{{entry}}/index')" class="button icon ion-ios-home"></button>
+    <!-- <div class="button-right-menu-list" ng-if="isRightMenu">
+      <ul>
+        <li><a href="javascript:;" ng-click='clickEvent_returnIndex()'>返回首页</a></li>
+      </ul> 
+    </div> -->
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content class="empty" ng-class="{ 'has-footer':(!isPreview && !IsNotPersonal), 'bg-white':(!jobDetailData) }" overflow-scroll="true" lazy-container>
+    <img src="/Content/Phone/images/default/wx_logo.png" style="display:block;width:0;height:0;margin:0;" title="微信显示小图">
+
+    <div id="job" ng-if="jobDetailData">
+      
+      <div class="item" id="job-top" style="padding-bottom:10px;">
+        <h1>
+          {{jobDetailData.Name}}
+          <span ng-show="jobDetailData.IsSelf">职得发布</span>
+          <em ng-show="jobDetailData.IsPutaway==false">该职位目前已下架</em>
+        </h1>
+        <strong>{{jobDetailData.Pay}} <em ng-if="item.Pay!='面议'">{{jobDetailData.JobPayUnit}}</em></strong>
+        <div class="row row-umargin">
+          <div class="col col-50 overEllipsis"><span>类型</span>{{jobDetailData.JobTypeName}}</div>
+          <div class="col col-50 overEllipsis"><span>性质</span>{{jobDetailData.Nature | KeyToName:'JobNature':ConstantXML}}</div>
+        </div>
+        <div class="row row-umargin">
+          <div class="col col-50 overEllipsis"><span>部门</span>{{jobDetailData.Department}}</div>
+          <div class="col col-50 overEllipsis"><span>人数</span>{{jobDetailData.RecruitingCount!=0?jobDetailData.RecruitingCount:'无限制'}}</div>
+        </div>
+        <div class="row row-umargin">
+          <div class="col col-50 overEllipsis"><span>计薪</span>{{jobDetailData.PayWay | KeyToName:'JobPayWay':ConstantXML}}</div>
+          <div class="col col-50 overEllipsis"><span>发布</span>{{jobDetailData.ReleaseTime | limitTo:10}}</div> <!-- FuckDater | date:"yyyy-MM-dd" -->
+        </div>
+      </div>
+      
+      <a href="{{app_config.links}}/#/{{entry}}/job/detailCompany/{{jobDetailData.EnterpriseId}}" class="item" id="job-company">
+        <img ng-src="{{jobDetailData.EnterpriseLogoSmall || '/Content/phone/images/head/company-none.jpg'}}" err-src="/Content/phone/images/head/company-none.jpg" class="headpic">
+        <div class="job-company-inform">
+          <h2>{{jobDetailData.EnterpriseName}}</h2>
+          <p><span>外资企业</span><span>100万以下</span><span>50-100人</span></p>
+        </div>
+        <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+      </a>
+
+      <div class="item item-group" style="padding-top:10px;padding-bottom:10px;">
+        已报名人数：<b>{{jobDetailData.ApplyCount}}</b> 人
+      </div>
+
+      <div class="item item-group" ng-if="jobDetailData.WelfareValue!=''">
+        <div class="title">职位福利</div>
+        <div class="signGroup mt10">
+          <span ng-repeat="i in jobDetailData.WelfareValue.split(',') | limitTo:4">{{i}}</span>
+        </div>
+      </div>
+      
+      <div class="item item-group item-wrap">
+        <div class="title">职位描述</div>
+        <div class="content" ng-bind-html="jobDetailData.Describe"></div>
+      </div>
+      <div class="item item-group" ng-if="jobDetailData.Accommodation!=''">
+        <div class="title">住宿情况</div>
+        <div class="content" ng-bind-html="jobDetailData.Accommodation"></div>
+      </div>
+      <div class="item item-group item-wrap" ng-if="jobDetailData.WorkAddress!=''">
+        <div class="title">工作地址</div>
+        <div class="content" ng-bind-html="jobDetailData.WorkAddress">暂无</div>
+      </div>
+      <div class="item item-group item-text-wrap">
+        <div class="title">联系方式</div>
+        <div class="content">
+          <p ng-show="!ShowContact">请<a href="javascript:;" ng-click="ShowContactClick()">登录</a>后查看</p>
+          <p ng-show="ShowContact && jobDetailData.ContactManPhone && jobDetailData.ContactManName"><!--   stop-href-->
+            <span ng-repeat="item in jobDetailData.ContactManPhone"><a ng-href="tel:{{item.Num}}">{{item.Num}}</a> {{item.Name}}, </span>
+            {{jobDetailData.ContactManName}}
+          </p>
+          <p ng-hide="jobDetailData.ContactManPhone && jobDetailData.ContactManName">暂无</p>
+        </div>
+        <div class="tip mt10">联系我时，请说明是在职得上看到的</div>
+      </div>
+      
+    </div>
+    <list-status ng-if="!jobDetailData" ng-model="jobDetailData" null-msg="{{errMsg}}"></list-status>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+  <div class="bar bar-footer" id="job-application" ng-if="jobDetailData" ng-hide="isPreview || IsNotPersonal">
+    <a href="javascript:;" ng-click="SelectResume()" ng-disabled="IsJobApply || jobDetailData.IsPutaway==false" class="large button button-positive icon-left ion ion-theme-apply-1">{{ApplyJobText}}</a>
+    <a href='javascript:;' ng-click="BottomClick_Message()" class='button ion ion-theme-message-1'>私信</a>
+    <a href='#/tab/appdownloadZl' class='button ion ion-theme-message-2'>职聊</a>
+    <a href='javascript:;' ng-click='collectJob()' class='button ion ion-theme-zan-1' ng-class="{true:'button-active'}[IsJobCollect]">{{IsJobCollect ? '已收藏' : '收藏'}}</a>
+  </div>
+
+</ion-view>

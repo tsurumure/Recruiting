@@ -1,0 +1,66 @@
+<ion-view hide-tabs="false" view-title="求职者登录" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <!--<a href="{{app_config.links}}/#/tab/index" class="button icon ion-ios-arrow-left"></a>-->
+    <!--<a href="javascript:;" ng-click="backTo(CurrentURL)" class="button icon ion-ios-arrow-left"></a>-->
+    <h1 class="title">求职者登录</h1>
+    <a href="{{app_config.links}}/#/tab/register-new/none" class="button">注册</a> 
+  </ion-header-bar>
+  
+  <!-- Content overflow-scroll="true" -->
+  <ion-content overflow-scroll="true" class="bg-white" ng-class="{'has-tabs':!hideTabs}">
+    
+    <div id="login">
+      <form role="form" name="myForm" ng-submit="submitForm(myForm.$valid, myForm)" novalidate>
+
+        <div class="item item-input">
+          <span class="input-title"><i class="ion ion-theme-nav-4"></i></span>
+          <div class="input-text-group">
+            <input type="number" ng-focus="BottomStatus(1)" ng-blur="BottomStatus(2)" placeholder="请输入手机号码" name="username" ng-model="datas.UserName" ng-pattern="/^(1)\d{10}$/" required/>
+          </div>
+        </div>
+        <div class="item item-input">
+          <span class="input-title"><i class="ion-locked"></i></span>
+          <div class="input-text-group">
+            <input type="password" ng-focus="BottomStatus(1)" ng-blur="BottomStatus(2)" name="password" ng-model="datas.Password" placeholder="请输入密码" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,16}$/" required/>
+          </div>
+        </div>
+        <div class="item item-input">
+          <span class="input-title"><i class="ion ion-theme-yanzheng-1"></i></span>
+          <div class="input-text-group">
+            <input type="number" ng-focus="BottomStatus(1)" ng-blur="BottomStatus(2)" placeholder="输入图形验证码" name="vercode" ng-model="datas.Vercode" required>
+          </div>
+          <a href="javascript:;" ng-click="ChangeVercodeImg()" class="VercodeImg"><img ng-src="{{VercodeImg}}"></a>
+        </div>
+        <div class="mt20">
+          <input type="submit" ng-disabled="!readAndAgree||isPost" class='button button-block button-small button-positive button-newStyle' value="登录">
+          <label id="login-had-read"><input type="checkbox" ng-model="readAndAgree" checked/> 我已阅读并同意</label> <a href="{{app_config.links}}/#/tab/my/set/detail/P_Agreement">《用户协议》</a>
+          <a id="forget-password" href="{{app_config.links}}/#/tab/login/forgetPwd">忘记密码?</a>
+        </div>
+
+
+        <div class="login-bottom" ng-hide="isHideBottom">
+          <div class="otherway-icons">
+            <a href="javascript:;" class="qq" ng-click="LoginQQClick()" id="LoginQQ"><i class="ion ion-theme-qq-circle"></i></a><!-- <i class="ion ion-theme-qq-circle"></i> -->
+            <!-- <a href="javascript:;" ng-click="LoginWechatClick()" id="LoginWechat">
+              <img src="/Content/Phone/images/default/wechat_16x16.png">
+            </a> -->
+          </div>
+
+          <div class="title-center">还没账号？<a href="{{app_config.links}}/#/tab/register-new/none">马上注册</a></div>
+        </div>
+
+
+      </form>
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

@@ -1,0 +1,35 @@
+<ion-view hide-tabs="true" view-title="404错误" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo(CurrentURL)" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">404错误</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true" style="background:#fff;">
+    
+    <div id="register" class="over">
+      
+      <div class="status status_404">
+        
+        <i>404</i>
+        <h3>找不到该页面</h3>
+        <p>您可以进行以下操作</p>
+        <div class="buttonGroup">
+          <button ng-click="backTo()" class="button button-small button-positive">返回上一页</button>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

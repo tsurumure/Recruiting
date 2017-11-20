@@ -1,0 +1,25 @@
+<ion-view hide-tabs="true" view-title="简历保密设置" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <!--<button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>-->
+    <a href="{{app_config.links}}/#/tab/my" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title">简历保密设置</h1>
+    <!--<input type="submit" class="button" ng-click="submitForm()" value="保存">-->
+  </ion-header-bar> 
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true" class="bg-white">
+    
+    <ion-list>
+      <ion-radio ng-model="resumeMode" ng-value="'1'" ng-click="changeMode(resumeMode)">任何人可查看</ion-radio>
+      <ion-radio ng-model="resumeMode" ng-value="'2'" ng-click="changeMode(resumeMode)">任何人不可查看</ion-radio>
+      <!--<ion-radio ng-model="choice" ng-value="'1'">仅猎手可查看</ion-radio>-->
+    </ion-list>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

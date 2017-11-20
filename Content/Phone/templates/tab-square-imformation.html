@@ -1,0 +1,55 @@
+<ion-view hide-tabs="true" view-title="个人资料" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <!--<a href="{{app_config.links}}/#/tab/square" class="button icon ion-ios-arrow-left"></a>-->
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">个人资料</h1>
+    <!--<a href="{{app_config.links}}/#/tab/square" class="button icon ion-ios-color-filter"></a>-->
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content lazy-container>
+    
+    <div id="my" class="square">
+      
+      <div class="item" id="my-top">
+        <div id="my-top-imformation">
+          <a href="javascript:;">
+            <img id="my-top-head" ng-src="{{Imfors.HeadPic||'/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg">
+          </a>
+          <h2>{{Imfors.NickName}}</h2>
+        </div>
+        <!-- <div class="buttonGroup" ng-if="isNotMe"> -->
+
+          <!--<p ng-show="isFriend">是好友</p>
+          <p ng-hide="isFriend">还不是好友</p>-->
+
+          <!-- <a href="javascript:;" ng-hide="isFriend" ng-click="addFriend(Imfors.Id)" class="button button-small button-positive">加为好友</a>
+          <p class="mt10">{{isApplyMsg}}</p> -->
+          <!--<a href="javascript:;" ng-show="isFriend" ng-click="removeFriend(Imfors.Id)" class="button button-small">移除好友</a>-->
+          
+          <!--<a href="javascript:;" ng-click="hidePerson()" class="button button-small">屏蔽此人</a>-->
+        <!-- </div> -->
+      </div>
+      
+      <div class="item-group" style="margin-top:0;">
+        <a ng-href="{{app_config.links}}/#{{StateCurrentUrl}}otherSquare/{{Imfors.Id}}" class="item item-icon-right">
+          <i class="icon ion-ios-arrow-right"></i>TA发布的信息
+        </a>
+        <!-- <a ng-href="{{app_config.links}}/#{{StateCurrentUrl}}otherSquare/{{Imfors.Id}}" ng-show="isNotMe" class="item item-icon-right">
+          <i class="icon ion-ios-arrow-right"></i>TA发布的信息
+        </a>
+        <a ng-href="{{app_config.links}}/#/tab/my/square" ng-hide="isNotMe" class="item item-icon-right">
+          <i class="icon ion-ios-arrow-right"></i>我发布的动态
+        </a> -->
+      </div>
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

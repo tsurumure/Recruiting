@@ -1,0 +1,28 @@
+<ion-view hide-tabs="true" view-title="{{item.Name}}" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">{{item.Name}}</h1>
+    <a ng-if="StateRoutes[2]=='tab.ArticleDetail'" ng-href="#/{{entry}}/publicArticle" class="button ion-ios-list-outline" style="font-size:22px;"></a>
+    <a ng-if="StateRoutes[2]=='tab.index-notice-detail'" ng-href="#/{{entry}}/index/notice" class="button ion-ios-list-outline" style="font-size:22px;"></a>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content class="bg-white">
+
+    <div id="jobFair" class="articleDetail">
+      <div class="articleTitle">{{item.Name}}</div>
+      <div class="articleTime">{{item.ReleaseTime}}</div>
+      <div class="articleContent" ng-bind-html="item.Content"></div>
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

@@ -1,0 +1,60 @@
+<ion-view hide-tabs="true" view-title="忘记密码" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">忘记密码</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content>
+    
+    <div id="register">
+
+
+      <form role="form" name="myForm" ng-submit="submitForm(myForm.$valid)" novalidate>
+
+        <verify-input check-no-exist title="手机" type="2" submit-error="submitError" my-form="myForm" datas-bind="datas.Phone" datas-v-bind="datas.PhoneVercode" rule="phone"></verify-input>
+
+        <div class="item item-input">
+          <span class="input-label">新密码<b>*</b></span>
+          <input type="password" name="password" ng-model="datas.NewPwd" placeholder="6-16位数字或字母" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,12}$/" required/>
+        </div>
+        <div class="item item-error" ng-show="myForm.password.$dirty && myForm.password.$invalid || isErrorForSubmit">
+          <span ng-show="myForm.password.$error.required">密码不能为空</span>
+          <span ng-show="!myForm.password.$error.required && myForm.password.$dirty && myForm.password.$invalid">密码必须是6-16位数字或字母</span>
+        </div>
+        <div class="item item-input">
+          <span class="input-label">确认密码<b>*</b></span>
+          <input type="password" name="confirmPassword" ng-model="confirmPassword" compare-to="datas.NewPwd" placeholder="请再次输入密码" required/>
+        </div>
+        <div class="item item-error" ng-show="myForm.confirmPassword.$error.compareTo || myForm.confirmPassword.$dirty && myForm.confirmPassword.$invalid || isErrorForSubmit">
+          <span ng-show="myForm.confirmPassword.$error.required">密码不能为空</span>
+          <span ng-show="!myForm.confirmPassword.$error.required && myForm.confirmPassword.$invalid">两次密码不一致</span>
+        </div>
+        <div class="item item-input">
+          <span class="input-label">图形验证<b>*</b></span>
+          <input type="text" placeholder="输入图形验证码" ng-model="datas.Vercode">
+          <a href="javascript:;" ng-click="ChangeVercodeImg()" class="VercodeImg"><img ng-src="{{VercodeImg}}"></a>
+        </div>
+
+        <div class="item-input-button">
+          <input type="submit" class="button button-block button-small button-positive" value="提交"/>
+        </div>
+
+        <p style="text-align:center;color:#666;" ng-show="registerError">{{registerError}}</p>
+
+      </form>
+      
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

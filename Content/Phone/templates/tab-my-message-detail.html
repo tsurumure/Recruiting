@@ -1,0 +1,47 @@
+<ion-view hide-tabs="true" view-title="站内信" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">{{userImfor.Id==Message_MailGroupUsersDetail[0].ReceiveUser.Id ? Message_MailGroupUsersDetail[0].SendUser.RealName : Message_MailGroupUsersDetail[0].ReceiveUser.RealName}}</h1>
+  </ion-header-bar>
+  
+  <!--  overflow-scroll="true" -->
+  <!-- on-scroll="onScroll()" -->
+  <ion-content>
+    
+    <div class="MessageItemDetail">
+      
+      <!--<paper name="Message_MailGroupUsersDetail" current="RJ_current" onepage="RJ_onepage"></paper>-->
+      <!--<ion-refresher on-refresh="refreshUp()" ng-if="Message_MailGroupUsersDetail.length>OnePage&&StepPage!=0" pulling-text="下拉刷新"></ion-refresher>-->
+      
+      <div class="dialogGroup">
+        <div class="tip" ng-if="StepPage==0"><span>没有更多了</span></div>
+        <!-- 无刷新加载 |  limitTo:OnePage*CurrentPage:StepPage-->
+        <!-- 翻页 | reverse | limitTo:RJ_onepage:RJ_current*RJ_onepage -->
+        <dl class="dialogItem" ng-class="{true:'own'}[userImfor.Id!=item.ReceiveUser.Id]" ng-repeat="item in Message_MailGroupUsersDetail " on-finish-render-filters>
+          <dt><span ng-bind="item.AddTime"></span></dt>
+          <dd><span ng-bind="item.Content"></span></dd>
+        </dl>
+        <!--<div class="tip" ng-if="isAllowRefresh==false"><span>没有更多了</span></div>-->
+      </div>
+
+      <!--<ion-infinite-scroll ng-if="isAllowRefresh" immediate-check="false" on-infinite="refreshDown()" distance="1%" alt="上滑加载更多"></ion-infinite-scroll>-->
+
+    </div>
+    
+  </ion-content>
+
+
+  <div class="detailComment">
+    <div class="row">
+      <div class="col col-80">
+        <input type="text" ng-model="commentContent" ng-focus="CommentFocus()" class="text ng-pristine ng-valid ng-touched" placeholder="发表回复内容">
+      </div>
+      <div class="col col-20">
+        <input type="button" ng-click="SubmitComment(commentContent, Message_MailGroupUsersDetail[0].SendUser.Id)" class="button button-small button-positive" value="发送">
+      </div>
+    </div>
+  </div>
+  
+</ion-view>

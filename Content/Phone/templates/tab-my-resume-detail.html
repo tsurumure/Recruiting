@@ -1,0 +1,139 @@
+<ion-view hide-tabs="true" view-title="我的简历" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">我的简历</h1>
+    <a ng-href="{{(backToUrl=='/tab/square/card/full') ? '#/tab/square/cardInformDetail' : '#/tab/my/imformation'}}" class="button ion-ios-list-outline" style="font-size:22px;"></a>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true">
+    
+    <div id="my" class="myResume">
+      <!-- 1 -->
+      <div class="word-tip">
+        <p>提示：请认真填写简历，以便让用人单位更快地了解您的情况，填写后即可投递简历（<b>*</b>号为必填项）</p>
+      </div>
+
+      <div class="myResumeProgress" ng-if="datas.Proportion">
+        <div class="progress_bg">
+          <i>{{datas.Proportion*100}}%</i>
+          <span style="width:{{datas.Proportion*100}}%"></span>
+        </div>
+        <p>简历完整度达到 60% 以上即可提交工作申请</p>
+      </div>
+      
+      <form role="form" name="myForm" ng-submit="submitForm(myForm.$valid,'{{app_config.links}}/#/tab/my')" novalidate>
+        
+        <div class="list list-inset">
+          <div class="item item-input">
+            <span class="input-label">简历标题<b>*</b></span>
+            <input type="text" placeholder="请输入简历标题" name="resumeTitle" ng-model="ResumeDetail.Title" required>
+          </div>
+          <div class="item item-error" ng-show="myForm.resumeTitle.$dirty && myForm.resumeTitle.$invalid">
+            <span ng-show="myForm.resumeTitle.$error.required">简历标题不能为空</span>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="list list-inset">
+
+          <div class="item item-input">
+            <span class="input-label">意向城市<b>*</b></span>
+            <selection multiline="3" placeholder="选择意向城市" xml-name="City" bind-value="ResumeDetail.IntentionAreaIds"></selection>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">意向职位<b>*</b></span>
+            <!--<selection multiline="3" placeholder="选择职位" xml-name="JobType" bind-value="ResumeDetail.IntentionJobTypeIds"></selection>-->
+            <selection-jobtypes ng-model="ResumeDetail.IntentionJobTypeIds" max="3"></selection-jobtypes>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">期望薪资<b>*</b></span>
+            <selection placeholder="选择期望薪资" xml-name="IntentionPay" bind-value="ResumeDetail.IntentionPayCode"></selection>
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">资格证书</span>
+            <input type="text" placeholder="请输入资格证书" ng-model="ResumeDetail.Certificate">
+          </div>
+
+          <div class="item item-input">
+            <span class="input-label">专业技能</span>
+            <input type="text" placeholder="请输入专业技能" ng-model="ResumeDetail.Skill">
+          </div>
+
+        </div>
+        <!-- 3 -->
+        
+        <div class="list list-inset">
+          <div class="item">
+            <!-- <em class="f12">(最多添加3个，当前：{{tempEduExperience.length}}个)</em> -->
+            <div>教育经历</div>
+            <div class="experienceContent">
+              <!--  ng-if="ResumeDetail.EduExperience!=''"-->
+              <div ng-repeat="item in tempEduExperience track by $index" class="experienceItem"> <!--  track by $index-->
+                <div class="itemName">
+                  <a href="javascript:;" ng-click="editEducation($index)">{{item.EduSchool}}({{item.EduLevelValue| KeyToName:'Education':ConstantXML}})</a> {{item.EduProfessional}}
+                  <a href="javascript:;" ng-click="deleteEducation($index)" class="ion-ios-trash-outline"></a>
+                </div>
+                <div class="itemDate">{{item.EduinTime|date:'yyyy-MM-dd'}} 至 {{item.EduoutTime|date:'yyyy-MM-dd'}}</div>
+              </div>
+            </div>
+            <!-- ng-if="tempEduExperience.length<3" -->
+            <p><a href="javascript:;" ng-click="addEducation()" class="button button-small button-full">添加教育经历</a></p>
+          </div>
+        </div>
+        
+        <div class="list list-inset">
+          <div class="item">
+             <!-- <em class="f12">(最多添加3个，当前：{{tempWorkExperience.length}}个)</em> -->
+            <div>工作经历</div>
+            <div class="experienceContent"> <!--  ng-if="ResumeDetail.WorkExperience!=''"-->
+              <div ng-repeat="item in tempWorkExperience track by $index" class="experienceItem">
+                <div class="itemName">
+                  <a href="javascript:;" ng-click="editJob($index)">{{item.JobCompany}}</a> {{item.JobName}}
+                  <a href="javascript:;" ng-click="deleteJob($index)" class="ion-ios-trash-outline"></a>
+                </div>
+                <div class="itemDetail">{{item.JobDetail}}</div>
+                <div class="itemDate">{{item.JobinTime|date:'yyyy-MM-dd'}} 至 {{item.JoboutTime|date:'yyyy-MM-dd'}}</div>
+              </div>
+            </div>
+            <!--<input type="text" value="{{ResumeDetail.WorkExperience}}"/>-->
+            <!-- ng-if="tempWorkExperience.length<3" -->
+            <p><a href="javascript:;" ng-click="addJob()" class="button button-small button-full">添加工作经历</a></p>
+          </div>
+        </div>
+        
+        <div class="list list-inset">
+          <div class="item">
+            <div>自我评价<b>*</b></div>
+            <div class="content">
+              <textarea placeholder="描述自己的技能特长、性格爱好及优缺点，更好帮助您找到合适的工作。" class="textarea" ng-model="ResumeDetail.PersonalProfile" name="personalProfile" required></textarea>
+            </div>
+          </div>
+          <div class="item item-error" ng-show="myForm.personalProfile.$dirty && myForm.personalProfile.$invalid">
+            <span ng-show="myForm.personalProfile.$error.required">自我评价不能为空</span>
+          </div>
+        </div>
+                
+        <div class="myResume-tip tip-positive" ng-show="isErrorForSubmit">
+          <p><i class="ion-android-alert"></i>请检查<b>*</b>必填项是否有误</p>
+        </div>
+
+        <div class="list-inset">
+          <button type="submit" class="button button-small button-full button-positive">保存资料</button>
+        </div>
+        
+      </form>
+
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+</ion-view>

@@ -1,0 +1,86 @@
+<ion-view hide-tabs="true" view-title="店家直招" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <!--<button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>-->
+    <a href="#/tab/index/jobPlatform" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title">店家直招</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true" class="empty">
+    
+
+    <div class="modalAdd">
+      
+      <form role="form" name="myForm" ng-submit="submitForm(myForm.$valid)" novalidate>
+        
+        <div class="item item-input" style="position:initial;overflow:inherit;">
+          <span class="input-label">城市</span>
+          <selection placeholder="可选城市" json="{{CityType}}" name="ChangeMap"></selection>
+        </div>
+
+        <div id="OwnMap" style="height:140px;"></div>
+
+        <div class="item item-input">
+          <span class="input-label">标题*</span>
+          <input type="text" placeholder="请输入标题" name="Name" ng-model="JobPlatformDatas.Name" required>
+        </div>
+        <div class="item item-error" ng-show="myForm.Name.$dirty && myForm.Name.$invalid || isErrorForSubmit">
+          <span ng-show="myForm.Name.$error.required">标题不能为空</span>
+        </div>
+
+        <div class="item item-input">
+          <span class="input-label">电话*</span>
+          <input type="text" placeholder="请输入电话" name="Phone" ng-model="JobPlatformDatas.Phone" required>
+        </div>
+        <div class="item item-error" ng-show="myForm.Phone.$dirty && myForm.Phone.$invalid || isErrorForSubmit">
+          <span ng-show="myForm.Phone.$error.required">电话不能为空</span>
+        </div>
+
+        <div class="item item-input">
+          <span class="input-label">地址</span>
+          <input type="text" placeholder="请输入详细地址" name="Address" ng-model="JobPlatformDatas.Address">
+          <a href="javascript:;" ng-click="locationAddress()" class="button button-small button-positive">定位</a>
+        </div>
+
+        <div class="item">
+          <textarea placeholder="无换行，不带文本格式" name="Content" ng-model="JobPlatformDatas.Content" required></textarea>
+          <input type="hidden" ng-model="JobPlatformDatas.ImgsData" ng-value="dataImages"/>
+        </div>
+        <div class="item item-error" ng-show="myForm.Content.$dirty && myForm.Content.$invalid || isErrorForSubmit">
+          <span ng-show="myForm.Content.$error.required">内容不能为空</span>
+        </div>
+
+        <div class="item">
+          <span class="tip" ng-if="JobPlatformType=='add'">提示：图片上传数量不得超过3张；</span>
+          <span class="tip" ng-if="JobPlatformType=='edit'">提示：修改内容需要重新上传图片；</span>
+          <div class="fileUpload">
+            <upload-file></upload-file>
+            上传图片
+          </div>
+          <div class="fileUpload-list"></div>
+        </div>
+
+
+        <!--<div class="item">
+          
+          <p style="margin-top:5px;font-size:14px;">地图中的红点是您当前所在的位置，拖曳进行位置调整</p>
+        </div>-->
+        
+        <div class="item item-text-wrap">
+          <p ng-show="errMsg" style="text-align:center;margin-top:5px;font-size:14px;">{{errMsg}}</p>
+          <input type="submit" class="button button-block button-small button-positive" style="margin:0;" ng-value="modelView">
+        </div>
+      </form>
+        
+    </div>
+
+
+  </ion-content>
+
+  <!-- end Content -->
+  
+</ion-view>

@@ -1,0 +1,100 @@
+<ion-view hide-tabs="false" view-title="我的" animation="slide-left-right">
+  
+  <!--<theme-header type="{{entryName}}"></theme-header>-->
+
+  <!-- Header -->
+  <!--<ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <h1 class="title">我的</h1>
+  </ion-header-bar>-->
+  
+  <!-- Content overflow-scroll="true" -->
+  <ion-content>
+    
+    <div id="my">
+
+      <div class="item" id="my-top">
+        
+        <div class="my-top-links">
+          <div class="left"><a href="#/tab/index"><i class="ion ion-theme-top-home"></i></a></div>
+          <div class="right"><a href="javascript:;" ng-click="logout()"><i class="ion ion-theme-top-logout"></i></a></div>
+        </div>
+
+        <div id="my-top-imformation">
+          <a href="{{app_config.links}}/#/tab/my/head">
+            <img id="my-top-head" ng-src="{{userImforHead || '/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg">
+          </a>
+          <!-- {{app_config.links}}/#/tab/my/nickname-->
+          <a href="javascript:;"><h2>{{userImfor.NickName || userImfor.Phone || '加载中..'}}</h2></a>
+        </div>
+        
+      </div>
+
+      <div class="item" id="my-menu-horizontal-them">
+        <div class="row">
+          <div class="col col-25">
+            <a href="{{app_config.links}}/#/tab/my/jobCollect"><span>收藏职位</span><strong ng-bind="userImfor.JobCollectsCount || '0'">-</strong></a>
+          </div>
+          <div class="col col-25">
+            <a href="{{app_config.links}}/#/tab/my/compCollect"><span>收藏企业</span><strong ng-bind="userImfor.EnterpriseCollectsCount || '0'">-</strong></a>
+          </div>
+          <div class="col col-25">
+            <a href="{{app_config.links}}/#/tab/my/jobrecord"><span>申请记录</span><strong ng-bind="userImfor.JobApplysCount || '0'">-</strong></a>
+          </div>
+          <div class="col col-25">
+            <a href="{{app_config.links}}/#/tab/my/message"><span>站内信</span><strong ng-class="{true:'hasNew'}[IsHasMessageApply]" ng-bind="(userImfor.MailCount + userImfor.InformCount) || '0'">-</strong></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-message warning" ng-if="userImfor.IsHasResumeBaseInfo===false">
+        <a href="{{app_config.links}}/#/tab/my/imformation" class="block">
+          <i class="ion-alert-circled"></i>完善个人信息，即可添加简历，获得工作机会！
+        </a>
+      </div>
+
+      <div class="item-group">
+        <a href="{{app_config.links}}/#/tab/my/imformation" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-1 colorful-font-1"></i>
+          基本资料
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a>
+        <a href="{{app_config.links}}/#/tab/my/resume" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-2 colorful-font-2"></i>
+          我的简历
+          <div class="ion-right">{{defaultResume.Title}}<i class="ion-ios-arrow-right"></i></div>
+        </a>
+        <a href="{{app_config.links}}/#/tab/my/resumeSet" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-3 colorful-font-3"></i>
+          简历保密设置
+          <div class="ion-right">{{resumeModeText}}<i class="ion-ios-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <div class="item-group">
+        <a href="{{app_config.links}}/#/tab/my/square" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-5 colorful-font-5"></i>
+          我的广场动态
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <div class="item-group">
+        <a href="{{app_config.links}}/#/tab/my/account" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-6 colorful-font-7" style="margin-right:14px;"></i>
+          账号设置
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a>
+        <a href="{{app_config.links}}/#/tab/my/set" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-7 colorful-font-6"></i>
+          关于职得
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a>
+      </div>
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+  
+</ion-view>

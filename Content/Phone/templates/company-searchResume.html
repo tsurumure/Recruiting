@@ -1,0 +1,82 @@
+<ion-view hide-tabs="true" view-title="搜索简历" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <a ng-click="backTo()" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title">搜索简历</h1>
+  </ion-header-bar>
+
+  <!-- Content  overflow-scroll="true"  class="bg-white"-->
+  <ion-content>
+
+    <div class="ResumeList">
+
+      <div class="list list-inset mt10">
+        <div class="item item-input">
+          <span class="input-label">关键字</span>
+          <input type="text" placeholder="搜索个人介绍/技能/经历" ng-model="datas.Key">
+        </div>
+      </div>
+
+      <div class="list list-inset mt10">
+        <div class="item item-input">
+          <span class="input-label">意向城市</span>
+          <selection multiline="3" placeholder="选择意向城市" xml-name="City" bind-value="datas.IntentionAreas"></selection>
+        </div>
+        <div class="item item-input">
+          <span class="input-label">意向职位</span>
+          <selection-jobtypes ng-model="datas.IntentionJobTypes" max="3"></selection-jobtypes>
+        </div>
+        <div class="item item-input">
+          <span class="input-label">月薪范围</span>
+          <selection placeholder="选择月薪范围" xml-name="IntentionPay" bind-value="datas.Pays"></selection>
+        </div>
+        <div class="item item-input">
+          <span class="input-label">性别</span>
+          <!--<radioer bind-value="datas.Gender" params='[{"key":"A00","value":"不限"},{"key":"A01","value":"男"},{"key":"A02","value":"女"}]'></radioer>-->
+          <selection placeholder="选择性别" xml-name="DemandGender" bind-value="datas.Gender"></selection>
+        </div>
+        <div class="item item-input">
+          <span class="input-label">最近登录</span>
+          <!-- <input type="number" placeholder="最近登录时间(天)" ng-model="datas.LastLoginDay"> -->
+          <selection placeholder="选择最近登录时间" xml-name="LastLoginDate" bind-value="datas.LastLoginDay"></selection>
+          <div class="iconLink">天</div>
+        </div>
+      </div>
+
+      <div class="list-inset">
+        <a href="javascript:;" ng-click="submitSearch()" class="button button-small button-full button-positive">开始搜索</a>
+      </div>
+
+      <div class="list-inset list-record">
+        <div class="item">
+          <dl>
+            <dt>最近搜索记录<a href="javascript:;" class="rr" ng-click="clearDatasHistory()">清空</a></dt>
+            <dd class="list-record-box" ng-if="datasHistory">
+              <a href="javascript:;" ng-repeat="item in datasHistory track by $index" ng-click="historySearch()">
+                <span ng-bind="item.Key"></span>
+                <span ng-if="item.IntentionJobTypesName" ng-bind="item.IntentionJobTypesName"></span>
+                <span ng-if="item.IntentionAreas" ng-bind="item.IntentionAreas | KeyToName:'OpenCity':ConstantXML"></span>
+                <span ng-if="item.PaysName" ng-bind="item.PaysName"></span>
+                <span ng-if="item.GenderName" ng-bind="item.GenderName"></span>
+                <span ng-if="item.LastLoginDayName">
+                  {{item.LastLoginDayName | KeyToName:'LastLoginDate':ConstantXML}}天内
+                </span>
+              </a>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+
+  </ion-content>
+
+  <!--<div class="bar bar-footer ResumeDetailFooter"></div>-->
+  <!--<ion-content class="has-footer">-->
+
+
+
+</ion-view>

@@ -1,0 +1,93 @@
+<ion-view hide-tabs="false" view-title="我的" animation="slide-left-right">
+  
+  <ion-content>
+    
+    <div id="my">
+
+      <div class="item" id="my-top">
+        <div class="my-top-links">
+          <div class="left"><a href="#/company/index"><i class="ion ion-theme-top-home"></i></a></div>
+          <div class="right"><a href="javascript:;" ng-click="logout()"><i class="ion ion-theme-top-logout"></i></a></div>
+        </div>
+        <div id="my-top-imformation">
+          <a href="{{app_config.links}}/#/company/my/head">
+            <img id="my-top-head" ng-src="{{userImforHead || '/Content/Phone/images/head/company-none.jpg'}}" err-src="/Content/Phone/images/head/company-none.jpg">
+          </a>
+          <a href="javascript:;"><h2>{{userImfor.RealName || '加载中..'}}</h2></a>
+        </div>
+      </div>
+
+      <div class="item" id="my-menu-horizontal-them">
+        <div class="row">
+          <div class="col col-25">
+            <a href="{{app_config.links}}/#/company/jobApply/newest" ng-if="BusinessResult.Status==1"><span>未读简历</span><strong ng-bind="userImfor.IsApplyNotReadCount || '0'">-</strong></a>
+            <a href="javascript:;" class="disabled" ng-if="BusinessResult.Status!=1"><span>未读简历</span><strong ng-bind="userImfor.IsApplyNotReadCount || '0'">-</strong></a>
+          </div>
+          <div class="col col-25">
+            <a href="{{app_config.links}}/#/company/jobApply/readed" ng-if="BusinessResult.Status==1"><span>已读简历</span><strong ng-bind="userImfor.IsApplyReadCount || '0'">-</strong></a>
+            <a href="javascript:;" class="disabled" ng-if="BusinessResult.Status!=1"><span>已读简历</span><strong ng-bind="userImfor.IsApplyReadCount || '0'">-</strong></a>
+          </div>
+          <div class="col col-25">
+            <a href="{{app_config.links}}/#/company/collectResume"><span>简历库</span><strong ng-bind="userImfor.ResumeCount || '0'">-</strong></a>
+          </div>
+          <div class="col col-25">
+            <a href="{{app_config.links}}/#/company/my/message"><span>站内信</span><strong ng-class="{true:'hasNew'}[IsHasMessageApply]" ng-bind="(userImfor.MailCount + userImfor.InformCount) || '0'">-</strong></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="item-message warning mb5" ng-if="BusinessResult.Status==-1||BusinessResult.Status==0||BusinessResult.Status==2||BusinessResult.Status==3">
+        <a href="javascript:;" class="block"><!-- {{app_config.links}}/#/company/my/businessLicense-->
+          <i class="ion-alert-circled"></i>{{BusinessResult.Status | CallbackStatus}}
+        </a>
+      </div>
+      <!-- 
+      <div class="item-message warning" ng-if="isInitBaseInfo==false">
+        <a href="{{app_config.links}}/#/company/my/imformation" class="block">
+          <i class="ion-alert-circled"></i>未完善企业信息
+        </a>
+      </div> -->
+      
+      <div class="item-group">
+        <a href="{{app_config.links}}/#/company/my/imformation" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-1 colorful-font-1"></i>
+          企业信息
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a>
+        <a href="{{app_config.links}}/#/company/my/images" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-company-my-1 colorful-font-2"></i>
+          企业图集
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a>
+        <!-- <a href="{{app_config.links}}/#/company/my/businessLicense" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-company-my-2 colorful-font-3"></i>
+          营业执照
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a> -->
+      </div>
+
+      <div class="item-group">
+        <a href="{{app_config.links}}/#/company/my/releaseJob" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-5 colorful-font-4"></i>
+          职位管理
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <div class="item-group">
+        <a href="{{app_config.links}}/#/company/my/account" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-6 colorful-font-5"></i>
+          账号设置
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a>
+        <a href="{{app_config.links}}/#/company/my/set" class="item item-icon-right">
+          <i class="ion ion-left ion-theme-my-7 colorful-font-6"></i>
+          关于职得
+          <div class="ion-right"><i class="ion-ios-arrow-right"></i></div>
+        </a>
+      </div>
+
+    </div>
+
+  </ion-content>
+</ion-view>

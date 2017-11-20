@@ -1,0 +1,48 @@
+<ion-view hide-tabs="true" view-title="留言反馈" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <a ng-click="backTo('/#/{{entry}}/my/set')" href="javascript:;" class="button icon ion-ios-arrow-left"></a>
+    <h1 class="title">留言反馈</h1>
+  </ion-header-bar>
+
+  <ion-content lazy-container>
+
+    <form role="form" name="myForm" ng-submit="submitForm(myForm.$valid)" novalidate>
+
+      <div class="list list-inset">
+        <div class="item item-input">
+          <span class="input-label">标题<b>*</b></span>
+          <input type="text" placeholder="请输入标题" name="leaveTitle" ng-model="LeaveMessage.Name" required>
+        </div>
+        <div class="item item-error" ng-show="myForm.leaveTitle.$dirty && myForm.leaveTitle.$invalid">
+          <span ng-show="myForm.leaveTitle.$error.required">标题不能为空</span>
+        </div>
+
+        <div class="item">
+          <div>内容<b>*</b></div>
+          <div class="content">
+            <textarea placeholder="请输入内容" class="textarea" name="leaveContent" ng-model="LeaveMessage.Content"></textarea>
+          </div>
+        </div>
+        <div class="item item-error" ng-show="myForm.leaveContent.$dirty && myForm.leaveContent.$invalid">
+          <span ng-show="myForm.leaveContent.$error.required">内容不能为空</span>
+        </div>
+      </div>
+
+      <div class="myResume-tip tip-positive" ng-show="isErrorForSubmit">
+        <p><i class="ion-android-alert"></i>请检查<b>*</b>必填项是否有误</p>
+      </div>
+
+      <div class="list-inset">
+        <button type="submit" class="button button-small button-full button-positive">提交</button>
+      </div>
+
+    </form>
+
+    
+
+  </ion-content>
+
+</ion-view>

@@ -1,0 +1,36 @@
+<ion-view hide-tabs="true" view-title="注册成功" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">注册成功</h1>
+  </ion-header-bar>
+  
+  <!-- Content -->
+  <ion-content overflow-scroll="true" style="background:#fff;">
+    
+    <div id="register" class="over">
+      
+      <div class="status success">
+        
+        <i class="ion-checkmark-circled"></i>
+        <h3>注册成功</h3>
+        <p>{{secound}} 秒后跳转，或者您可以进行以下操作</p>
+        <div class="buttonGroup">
+          <a href="{{app_config.links}}/#/tab/my/imformation" class="button button-small button-positive">完善资料</a>
+          <a href="{{app_config.links}}/#/tab/my" class="button button-small f12" style="color:#aaa;">返回个人中心</a>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+  
+  
+</ion-view>

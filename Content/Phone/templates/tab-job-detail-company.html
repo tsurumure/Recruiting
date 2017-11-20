@@ -1,0 +1,140 @@
+<ion-view hide-tabs="true" view-title="企业信息" animation="slide-left-right">
+  
+  <theme-header type="{{entryName}}"></theme-header>
+
+  <!-- Header -->
+  <ion-header-bar ng-hide="isApp" align-title="center" class="bar bar-positive bar-minus">
+    <button ng-click="backTo()" class="button icon ion-ios-arrow-left"></button>
+    <h1 class="title">企业信息</h1>
+    <button ng-click="backTo('/#/{{entry}}/index')" class="button icon ion-ios-home"></button>
+  </ion-header-bar>
+  
+  <!-- Content  overflow-scroll="true"-->
+  <ion-content lazy-container>
+    <img src="/Content/Phone/images/default/wx_logo.png" style="display:block;width:0;height:0;margin:0;" title="微信显示小图">
+    
+    <div id="job">
+
+      <div class="jobCompanyBackground">
+        <img src="/Content/Phone/images/default/companyBackground.jpg">
+      </div>
+
+      <div class="jobCompany">
+        
+        <div class="centerHead">
+          <!-- <a href="javascript:;" class="head-a"> -->
+          <div class="head"><div class="head-a"><img ng-src="{{companyData.Logo || '/Content/Phone/images/default/companyLogo.jpg'}}" err-src="/Content/Phone/images/default/companyLogo.jpg"></div></div>
+          <h2>{{companyData.Name}}</h2>
+          <div class="inform">
+            <span>{{companyData.Nature || '-'}}</span>
+            <i>|</i>
+            <span>{{companyData.RegisteredCapital || '-'}}</span>
+            <i>|</i>
+            <span>{{companyData.PeopleNum || '-'}}</span>
+          </div>
+
+          <div class="buttonGroup" ng-if="entry=='tab'">
+            <a href="javascript:;" ng-click="CollectCompany(IsCompanyCollect)" class="button button-small" ng-class="{false:'button-positive'}[IsCompanyCollect]" ng-bind="(IsCompanyCollect)?'取消关注':'关注企业'"></a>
+            <a href="javascript:;" ng-click="BottomClick_Message()" class="button button-small">在线留言</a>
+          </div>
+
+        </div>
+
+        <div class="jobCompanyContent">
+          
+          <dl class="table-dl">
+            <dt><i class="ion ion-ios-telephone colorful-font-4"></i></dt>
+            <dd>
+              <em ng-repeat="item in companyData.ContactManPhone" ng-show="IsLogin">
+                <a ng-href="tel:{{item.Num}}">{{item.Num}}</a><span ng-if="item.Name!=''">({{item.Name}})</span>
+                &nbsp;&nbsp;
+              </em>
+              <em ng-hide="IsLogin"><a href="/#/{{entry}}/login">登录</a> 后即可查看企业联系方式</em>
+            </dd>
+          </dl>
+
+          <dl class="table-dl">
+            <dt><i class="ion ion-theme-nav-2 colorful-font-5"></i></dt>
+            <dd>{{companyData.Address}}</dd>
+          </dl>
+          <dl class="table-dl">
+            <dt><i class="ion ion-theme-menu-5 colorful-font-6"></i></dt>
+            <dd>
+              <span ng-class="{true:'omit'}[IsOmit]">{{companyData.Intro}}</span>
+              <a href="javascript:;" ng-if="companyData.Intro.length>80" ng-click="ToggleOmit()" ng-bind="ToggleOmitText"></a>
+            </dd>
+          </dl>
+
+        </div>
+
+        <div class="jobCompanyPhoto" ng-if="companyData.Images.length>0">
+          <div class="banner">
+            <ion-slide-box active-slide="0" does-continue="true" auto-play="true" ng-if="companyData.Images.length>0">
+              <ion-slide ng-repeat="item in companyData.Images">
+                <div class="box">
+                  <!--  ng-click="ShowBigImg()" -->
+                  <a href="javascript:;"><img ng-src="{{item}}" err-src="/Content/Phone/images/banner/b0.jpg"/></a>
+                </div>
+              </ion-slide>
+            </ion-slide-box>
+            <div class="box" ng-if="companyData.Images.length==0">
+              <a href="javascript:;"><img class="none" ng-src="/Content/Phone/images/banner/b0.jpg"/></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item item-group">
+          <div class="title">该企业发布的职位</div>
+          <div class="jobs_list jobs_list_mini">
+            <ul>
+              <li ng-repeat="jobItem in companyDataJobs | limitTo:RJ_onepage:RJ_current*RJ_onepage">
+                <a href="{{app_config.links}}/#/{{entry}}/job/detail/index/{{jobItem.Id}}">
+                  <div class="ll companyLogo">
+                    <img lazy-src="{{jobItem.EnterpriseLogoSmall || '/Content/Phone/images/default/companyLogo.jpg'}}" err-src="/Content/Phone/images/default/companyLogo.jpg" class="my-galleryImg"/>
+                  </div>
+                  <div class="rr companyJob">
+                    <div class="companyJobSection">
+                      <div class="top over">
+                        <div class="ll">{{jobItem.Name}}</div>
+                        <div class="rr"><span>{{jobItem.Pay}} <em ng-if="item.Pay!='面议'">{{jobItem.JobPayUnit}}</em></span></div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <paper name="companyDataJobs" hasborder current="RJ_current" onepage="RJ_onepage" no-scroll-top></paper>
+
+        </div>
+
+        <!--
+        <div class="item item-group item-text-wrap">
+          <div class="title">公交线路</div>
+          <div class="content" ng-bind-html="companyData.BusRoutes"></div>
+        </div>-->
+
+        <!--<div class="item item-group item-text-wrap" ng-if="companyData.Images.length>0">
+          <div class="content">
+            <ul>
+              <li ng-repeat="item in companyData.Images">
+                <img lazy-src="{{app_config.imgUrl}}{{item}}" class="img100 mb10"/>
+              </li>
+            </ul>
+          </div>
+        </div>-->
+
+        <!--<div class="item item-group">
+          <nearmap id="nearmap2" style="height:300px" location="{{location}}" hidecenter="true"></nearmap>
+        </div>-->
+      
+      </div>
+
+    </div>
+    
+  </ion-content>
+  <!-- end Content -->
+  
+
+</ion-view>

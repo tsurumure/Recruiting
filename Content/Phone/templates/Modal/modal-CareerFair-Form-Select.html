@@ -1,0 +1,29 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <!--<button class="button button-clear button-primary" ng-click="SaveModal()">发送</button>-->
+    <h1 class="title">选择职位</h1>
+    <button class="button button-clear button-primary" ng-click="modal.remove()">取消</button>
+  </ion-header-bar>
+
+  <!-- overflow-scroll="true"-->
+  <ion-content class="bg-white has-footer">
+    
+    <ion-list class="checkList">
+      <ion-checkbox ng-change="changeAll()" ng-model="selectDatas.IsCheckedAll">全选</ion-checkbox>
+      <ion-checkbox ng-change="changeNormal()" ng-repeat="item in ReleaseJobList" ng-model="item.IsChecked">{{item.Name}}</ion-checkbox>
+    </ion-list>
+    
+  </ion-content>
+
+  <div class="bar bar-footer">
+    <div class="theme-button-group">
+      <div class="theme-button">
+        <a href="javascript:;" ng-click="SaveModal()" class="button button-positive button-small button-full">
+          确定
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+</ion-modal-view>
