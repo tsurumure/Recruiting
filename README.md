@@ -9,7 +9,27 @@
 [![mockjs](https://img.shields.io/badge/mockjs-v1.0.1%20beta3-blue.svg)](http://mockjs.com)
 [![http-server](https://img.shields.io/badge/httpserver-v0.10.0%20beta3-blue.svg)](https://www.npmjs.com/package/http-server)
 
-这是一个移动端招聘网站项目前端框架。只需要根据Mock数据结构编写RestfulAPI接口，不论后台是用什么语言都可以完美接入。基于Angular+Ionic，使用Gulp分别对控制器、装饰器、视图进行压缩整合，使用数据Mockjs模拟后台接口数据，Http-server模拟运行环境，FontCreator字体编辑软件自定义图标，Requirejs异步加载非实时加载文件，图片均通过Tinypng进行深度压缩
+这是一个移动端招聘网站项目前端框架，构建简单，功能完善，界面流畅，开箱即用！只需要根据Mock数据结构编写RestfulAPI接口，不论后台是用什么语言都可以完美接入。
 
 [访问线上项目](http://m.zdzp.cn)
 
+* Gulp 对控制器、装饰器、视图进行压缩整合
+* Mockjs 模拟后台接口数据
+* Http-Server 模拟运行环境
+* FontCreator 字体编辑软件自定义图标
+* Requirejs 异步加载非实时加载文件
+* Tinypng 进行深度压缩图片
+
+运行前请确保已经安装了[NodeJS](https://nodejs.org)与[NPM](https://www.npmjs.com)，并且不占用本地端口(8080)
+## 安装
+```
+npm install
+```
+
+## 快速开始
+```
+npm start
+```
+
+## 欢迎与我交流
+QQ:405348097
