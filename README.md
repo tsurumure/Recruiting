@@ -21,18 +21,19 @@
 * Tinypng 进行深度压缩图片
 
 ## 安装
-运行前请确保已经安装了[NodeJS](https://nodejs.org)
+运行前确保已经安装了[NodeJS](https://nodejs.org)
 ```
 npm install
 ```
 
 ## 快速开始
-运行时请确保不占用本地端口(8080)
+运行时确保不占用本地端口(8080)
 ```
 npm start
 ```
 
 ## 调试环境
+修改任何内容需要启动调试模式，使用前可先阅读gulpfile.js了解构建情况
 ```
 npm run dev
 ```
