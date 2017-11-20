@@ -64,7 +64,6 @@ angular.module('starter', ['ionic', 'ngAnimate', 'template-bundle', 'starter.con
       views: {
         'company-index': {
           controller: 'CompanyIndexCtrl', templateUrl: 'company-index.html'
-          ///Content/Phone/templates/company-index.html
         }
       }
     })
@@ -632,7 +631,7 @@ angular.module('starter', ['ionic', 'ngAnimate', 'template-bundle', 'starter.con
       url: '/index/jobCate', cache: false, params:{ entry:'tab' },
       views: {
         'tab-index': {
-          controller: 'JobCateCtrl', templateUrl: '/Content/Phone/templates/tab-index-jobCate.html'
+          controller: 'JobCateCtrl', templateUrl: 'tab-index-jobCate.html'
         }
       }
     })
@@ -648,7 +647,7 @@ angular.module('starter', ['ionic', 'ngAnimate', 'template-bundle', 'starter.con
       url: '/index/industryCate', cache: false, params:{ entry:'tab' },
       views: {
         'tab-index': {
-          controller: 'IndustryCateCtrl', templateUrl: '/Content/Phone/templates/tab-index-industryCate.html'
+          controller: 'IndustryCateCtrl', templateUrl: 'tab-index-industryCate.html'
         }
       }
     })

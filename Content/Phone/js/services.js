@@ -1082,7 +1082,7 @@ angular.module('starter.services', ['ngCookies'])
         scope.SelectAreas = function(currentDatasId){
 
           // [ionicModal]
-          $ionicModal.fromTemplateUrl("/Content/Phone/templates/Modal/modal-areas.html",{
+          $ionicModal.fromTemplateUrl("modal-areas.html",{
             scope:scope,
           }).then(function(modal){
             scope.modal = modal;
@@ -1260,7 +1260,7 @@ angular.module('starter.services', ['ngCookies'])
             scope.MaxCount = scope.max || 1;
 
             // [ionicModal]
-            $ionicModal.fromTemplateUrl("/Content/Phone/templates/Modal/modal-jobType.html",{
+            $ionicModal.fromTemplateUrl("modal-jobType.html",{
               scope:scope,
             }).then(function(modal){
               scope.modal = modal;
@@ -1565,7 +1565,7 @@ angular.module('starter.services', ['ngCookies'])
 
       scope.SelectMapLocation = function(){
         
-        var ionModal = $ionicModal.fromTemplateUrl("/Content/Phone/templates/Modal/modal-map.html",{
+        var ionModal = $ionicModal.fromTemplateUrl("modal-map.html",{
           scope:scope,
         }).then(function(modal){
           
