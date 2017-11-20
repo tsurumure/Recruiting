@@ -2045,7 +2045,7 @@ angular.module('starter.controllers', ['ngCookies'])
   if(!$cookies.get("FirstSelectCity")){
     $scope.datas = {};
 
-    $ionicModal.fromTemplateUrl("/Content/Phone/templates/tab-index-modalSelectCity.html",{
+    $ionicModal.fromTemplateUrl("tab-index-modalSelectCity.html",{
       scope:$scope,
     }).then(function(modal){
       $scope.modalSelectCity = modal;
