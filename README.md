@@ -1,8 +1,8 @@
 # Recruiting
 一个基本于 AngularJS+Ionic 的单页面应用前端构架（无后台）
 
-[![npm](https://img.shields.io/badge/npm-v5.51-green.svg)](https://www.npmjs.com)
 [![node](https://img.shields.io/badge/node-v6.11.3-green.svg)](https://nodejs.org)
+[![npm](https://img.shields.io/badge/npm-v5.51-green.svg)](https://www.npmjs.com)
 [![angularjs](https://img.shields.io/badge/angularjs-v1.4.3-red.svg)](https://angularjs.org)
 [![ionic](https://img.shields.io/badge/ionic-v1.2.4-red.svg)](http://ionicframework.com)
 [![gulp](https://img.shields.io/badge/gulp-v3.9.1-blue.svg)](https://nodejs.org)
@@ -21,12 +21,13 @@
 * Tinypng 进行深度压缩图片
 
 ## 安装
-运行前请确保已经安装了[NodeJS](https://nodejs.org)与[NPM](https://www.npmjs.com)，并且不占用本地端口(8080)
+运行前请确保已经安装了[NodeJS](https://nodejs.org)
 ```
 npm install
 ```
 
 ## 快速开始
+运行时请确保不占用本地端口(8080)
 ```
 npm start
 ```
