@@ -1,8 +1,0 @@
-uglifyjs app.js > app.min.js
-uglifyjs controllers.js > controllers.min.js
-uglifyjs services.js > services.min.js
-
-
-
-
-npm install uglify-js -g
