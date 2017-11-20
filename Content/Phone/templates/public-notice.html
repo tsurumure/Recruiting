@@ -14,8 +14,8 @@
     <div class="jobs_list" ng-if="NoticeList">
       <ul>
         <li ng-repeat="item in NoticeList" class="f14">
-          <a ng-if="item.Url!=''" ng-href="{{item.Url}}">A.{{item.Name}}</a>
-          <a ng-if="item.Url==''" ng-click="GoNoticeDetail(item.Id)" href="javascript:;">B.{{item.Name}}</a>
+          <a ng-if="item.Url!=''" ng-href="{{item.Url}}">{{item.Name}}</a>
+          <a ng-if="item.Url==''" ng-click="GoNoticeDetail(item.Id)" href="javascript:;">{{item.Name}}</a>
         </li>
       </ul>
     </div>

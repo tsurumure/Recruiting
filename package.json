@@ -2,7 +2,8 @@
   "name": "gulp-package",
   "author": "405348097@qq.com",
   "scripts": {
-    "start": "gulp watch"
+    "start": "http-server -o -s -a localhost -p 8080",
+    "dev": "gulp watch"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

@@ -1231,6 +1231,12 @@ angular.module('starter', ['ionic', 'ngAnimate', 'template-bundle', 'starter.con
   // console.log($state);
   // console.log($stateParams);
 
+  // require(['mock'], function(){
+  //   $http.get('/api/d').success(function(rs){
+  //     console.log(rs);
+  //   })
+  // });
+
   // 切换路由删除弹出框
   $rootScope.$on('$stateChangeStart', function(){
       if($rootScope.modal){

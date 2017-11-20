@@ -66,7 +66,6 @@ angular.module('starter.services', ['ngCookies'])
           function httpCallBack(res){
             // ----------------------------------------------
             $rootScope.NoticeList = res.body;
-            
             ulElement.html("");
 
             angular.forEach($rootScope.NoticeList, function(data){
