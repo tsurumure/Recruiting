@@ -9,7 +9,7 @@
 [![mockjs](https://img.shields.io/badge/mockjs-v1.0.1%20beta3-blue.svg)](http://mockjs.com)
 [![http-server](https://img.shields.io/badge/httpserver-v0.10.0%20beta3-blue.svg)](https://www.npmjs.com/package/http-server)
 
-这是一个移动端招聘网站项目前端框架，构建简单，功能完善，界面流畅，开箱即用！只需要根据Mock数据结构编写RestfulAPI接口，不论后台是用什么语言都可以完美接入。
+这是一个移动端招聘网站的项目前端框架，构建简单，功能完善，界面流畅，开箱即用！只需要根据Mock数据结构编写RestfulAPI接口，不论后台是用什么语言都可以完美接入。
 
 [访问线上项目](http://m.zdzp.cn)
 
