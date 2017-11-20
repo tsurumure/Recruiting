@@ -20,8 +20,8 @@
 * Requirejs 异步加载非实时加载文件
 * Tinypng 进行深度压缩图片
 
-运行前请确保已经安装了[NodeJS](https://nodejs.org)与[NPM](https://www.npmjs.com)，并且不占用本地端口(8080)
 ## 安装
+运行前请确保已经安装了[NodeJS](https://nodejs.org)与[NPM](https://www.npmjs.com)，并且不占用本地端口(8080)
 ```
 npm install
 ```
@@ -29,6 +29,11 @@ npm install
 ## 快速开始
 ```
 npm start
+```
+
+## 调试环境
+```
+npm run dev
 ```
 
 ## 欢迎与我交流
