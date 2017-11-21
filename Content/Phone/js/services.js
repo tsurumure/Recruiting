@@ -3998,7 +3998,6 @@ angular.module('starter.services', ['ngCookies'])
                               // Type类型(1=注册，2=忘记密码，3=绑定或更换绑定手机，4=解绑手机，5=绑定或更换绑定邮箱，6=解绑邮箱，99=其它情况)
                               data:{ Phone:scope.datasBind, Type:scope.type }
                             }).success(function(rs){
-                              console.log(rs);
                               if(rs.code!=0){
                                 $ionicPopup.alert({
                                   title: '提示', template: rs.msg + '(' + rs.code +')'

@@ -1,3 +1,5 @@
+var SimpleSuccess = { "code": "0", "msg": "成功", "body": {}, "count": 0 };
+
 Mock.Random.string();
 
 // [GET] Head meta Attribute [name:keywords]
@@ -229,6 +231,14 @@ Mock.mock(/\/api\/Common\/Square\/GetMessage\?msgId\=\w+/,{
     }
 });
 
+// [POST][广场] 添加/删除 点赞
+Mock.mock('/api/Common/Square/AddMessagePraise', SimpleSuccess);
+Mock.mock('/api/Common/Square/DeleteMyMessagePraise', SimpleSuccess);
+
+// [POST][广场] 添加/删除 评论
+Mock.mock('/api/Common/Square/AddMessageReply',SimpleSuccess);
+Mock.mock('/api/Common/Square/DeleteMyMessageReply',SimpleSuccess);
+
 // [GET][广场] 获得广场个人信息
 Mock.mock(/\/api\/Common\/Square\/GetUserInfo\?UserId\=\w+/,{
     "code": "0", "msg": "ok", "count": 0,
@@ -272,11 +282,25 @@ Mock.mock(/\/api\/Common\/ResumeCard\/GetCard\?resumeCardId\=\w+/,{
     
 });
 
-// [POST] (通用)退出登录
 
-Mock.mock('/api/Common/User/LoginOff',{
-    "code": "0", "msg": "成功", "body": {}, "count": 0
-});
+var CommomExistUser = { "code": "40502", "msg": "手机号码已被注册，请更换后重新尝试。", "body": {}, "count": 0 };
+// [POST] 判断手机是否已注册
+Mock.mock('/api/Common/User/PhoneIsUse',CommomExistUser);
+
+// [POST] 获取短信验证码
+Mock.mock('/api/Common/VerificationCode/SendSMS',CommomExistUser);
+
+// [POST] 注册
+Mock.mock(/\/api\/\w+\/User\/Register/,CommomExistUser);
+
+// [POST] 忘记密码
+Mock.mock('/api/Common/User/PhoneForgotPwd',CommomExistUser);
+
+
+
+
+// [POST] (通用)退出登录
+Mock.mock('/api/Common/User/LoginOff',Simple);
 
 // [POST] (企业Company)(求职者JobSeeker)登录
 Mock.mock(/\/api\/\w+\/User\/Login/,{

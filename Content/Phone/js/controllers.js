@@ -3726,7 +3726,7 @@ angular.module('starter.controllers', ['ngCookies'])
     //end reset
 
     //发布新动态[Modal]
-    var p = $ionicModal.fromTemplateUrl("tab-square-modalAdd.html?v="+Math.random(),{
+    var p = $ionicModal.fromTemplateUrl("tab-square-modalAdd.html",{
       scope:$scope,
     }).then(function(modal){
       $rootScope.modal = modal;
