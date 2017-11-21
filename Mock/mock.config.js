@@ -160,7 +160,6 @@ Mock.mock(/\/api\/Common\/Job\/GetJobMapList\?lng\=\w+\.\w+\&lat\=\w+\.\w+/,{
     ]
 });
 
-
 var SquareList = {
     "code": "0",
     "msg": "ok",
@@ -202,12 +201,12 @@ var SquareList = {
       }
     ] 
 };
-Mock.mock('/api/Common/Square/GetNewestMessageList',SquareList);                    // [GET][广场] 获取广场列表
-Mock.mock('/api/Common/Square/GetHotMessageList',SquareList);                       // [GET][广场] 获取热门广场列表
-Mock.mock(/\/api\/Common\/Square\/GetNextMessageList\?msgId\=\w+/,SquareList);      // [GET][广场] 获取广场列表（下滑刷新）
-
-
-
+// [GET][广场] 获取广场列表
+Mock.mock('/api/Common/Square/GetNewestMessageList',SquareList);
+// [GET][广场] 获取热门广场列表
+Mock.mock('/api/Common/Square/GetHotMessageList',SquareList);
+// [GET][广场] 获取广场列表（下滑刷新）
+Mock.mock(/\/api\/Common\/Square\/GetNextMessageList\?msgId\=\w+/,SquareList);
 // [GET][广场] 获取广场动态的评论列表
 Mock.mock(/\/api\/Common\/Square\/GetMessage\?msgId\=\w+/,{
     "code": "0", "msg": "ok", "count": 0,
@@ -234,10 +233,11 @@ Mock.mock(/\/api\/Common\/Square\/GetMessage\?msgId\=\w+/,{
 // [POST][广场] 添加/删除 点赞
 Mock.mock('/api/Common/Square/AddMessagePraise', SimpleSuccess);
 Mock.mock('/api/Common/Square/DeleteMyMessagePraise', SimpleSuccess);
-
 // [POST][广场] 添加/删除 评论
 Mock.mock('/api/Common/Square/AddMessageReply',SimpleSuccess);
 Mock.mock('/api/Common/Square/DeleteMyMessageReply',SimpleSuccess);
+// [POST][广场] 添加新动态
+Mock.mock('/api/Common/Square/AddMessage',SimpleSuccess);
 
 // [GET][广场] 获得广场个人信息
 Mock.mock(/\/api\/Common\/Square\/GetUserInfo\?UserId\=\w+/,{
@@ -282,7 +282,6 @@ Mock.mock(/\/api\/Common\/ResumeCard\/GetCard\?resumeCardId\=\w+/,{
     
 });
 
-
 var CommomExistUser = { "code": "40502", "msg": "手机号码已被注册，请更换后重新尝试。", "body": {}, "count": 0 };
 // [POST] 判断手机是否已注册
 Mock.mock('/api/Common/User/PhoneIsUse',CommomExistUser);
@@ -298,9 +297,8 @@ Mock.mock('/api/Common/User/PhoneForgotPwd',CommomExistUser);
 
 
 
-
 // [POST] (通用)退出登录
-Mock.mock('/api/Common/User/LoginOff',Simple);
+Mock.mock('/api/Common/User/LoginOff',SimpleSuccess);
 
 // [POST] (企业Company)(求职者JobSeeker)登录
 Mock.mock(/\/api\/\w+\/User\/Login/,{
@@ -352,14 +350,13 @@ Mock.mock('/api/JobSeeker/User/GetCurrentUser',{
     }
 });
 
-
 //[GET] (企业)是否完善基本资料
 Mock.mock('/api/Company/Enterprise/IsInitBaseInfo',{
     "code": "0", "msg": "ok", "body": true, "count": 0
 });
 
 //[GET] (企业)获取基本资料
-Mock.mock('/api/Company/Enterprise/GetEnterpriseBaseInfo',{
+Mock.mock('/api/Company/Enterprise/GetEnterpriseBaseInfo', {
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "Name": "广东人力资源有限公司",
@@ -371,12 +368,27 @@ Mock.mock('/api/Company/Enterprise/GetEnterpriseBaseInfo',{
       "BusinessLicensePic": "/Mock/Images/Head/company_1.png"
     }
 });
+//[GET] (求职者)获取基本资料
+Mock.mock('/api/JobSeeker/Resume/GetBaseInfo',{
+    "code": "0", "msg": "ok", "count": 0,
+    "body": {
+      "Name": "张三", "GenderCode": "A01", "NationCode": "A01", "MaritalStatusCode": "A01",
+      "Birthday": "2017-10-18 15:28:22", "Stature": 160, "Phone": "13612309640", "Email": "405348097@qq.com",
+      "QQ": "405348097", "Address": "汕头市龙湖区金龙大厦B座1楼", "ComputerLevelCode": "A04", "EnglishLevelCode": "A04",
+      "LiveAreaId": "00000000000000000000000000140425", "LiveAreaName": "平顺县",
+      "LiveAreaCascadeName": "山西省 长治市 平顺县", "NativePlaceAreaId": "00000000000000000000000000120100",
+      "NativePlaceAreaName": "天津市", "NativePlaceAreaCascadeName": "天津 天津市",
+      "EducationCode": "A05", "WorkingAgeCode": "A01", "GraduateSchool": "汕头大学",
+      "MajorIn": "软件开发", "Labels": "A01,A02,A03"
+    }
+  });
+//[GET] (求职者)更新基本资料
+Mock.mock(/\/api\/JobSeeker\/Resume\/UpdateBaseInfo/,SimpleSuccess);
 
-//[GET] (求职者)获取简历保密设置
+//[GET] (求职者/企业)获取简历保密设置
 Mock.mock('/api/JobSeeker/Resume/GetSecuritySet',{
     "code": "0", "msg": "ok", "count": 0, "body": { "Mode": 0, "ShieldEnterpriseNames": [] }
 });
-
 //[GET] (求职者)获取默认选中简历（新建第一份简历自动选中简历）
 Mock.mock('/api/JobSeeker/Resume/GetDefaultResume',{
     "code": "0", "msg": "ok", "count": 0,
@@ -401,10 +413,13 @@ Mock.mock('/api/JobSeeker/Resume/GetDefaultResume',{
     }
 });
 
+
+
+
 // [GET] (通用)获取通知（系统）
 Mock.mock('/api/Common/Inform/GetInformList',{ "code": "0", "msg": "ok", "count": 0, "body": [] });
 
-// [GET] 获取通知（私信）
+// [GET] (通用)获取通知（私信）
 Mock.mock('/api/Common/Mail/GetMailGroupUsers',{ "code": "0", "msg": "ok", "count": 0, "body": [] });
 
 // [GET] (通用)获取单页文章（用户协议/等等..)
@@ -415,4 +430,7 @@ Mock.mock(/\/api\/Common\/Single\/GetSingle\?code\=\w+/,{
       "Content": "<p>\n\t一、前提声明：<br />\n\t1.1、达工宝网站及程序将按照本协议及不定时发布的补充协议提供达工宝网络招聘服务。达工宝保留更新本协议的权利，在必要时，达工宝可以修改、添加协议内容并以电子邮箱通知到使用者。为获得达工宝服务，服务使用人(以下称为用户，包括求职者等注册者)应当同意本协议的全部条款并按照注册页面提示完成注册。用户在注册过程中确认勾选&ldquo;同意&rdquo;本条款即表示用户完全接受本协议的全部条款。注册后因任何原因拒绝接受协议，应通知达工宝，并停止使用本产品，可不再受本协议约束；如果继续使用达工宝产品，将视为重新同意所有条款。<br />\n\t<br />\n\t1.2、用户注册成功后，其账号和密码由用户负责保管；用户对其账户的操作及所有活动、事件负法律责任。<br />\n\t<br />\n\t<br />\n\t二、版权声明<br />\n\t<br />\n\t2.1、达工宝网站及应用程序的内容和图表信息受《中华人民共和国著作权法》及相关法律法规和中国加入的所有知识产权方面的国际条约的保护。达工宝拥有达工宝网站及应用程序一切权利，包括达工宝对外公开的所有内容的著作权，未经达工宝许可，禁止全部或部分复制、转载或以其他方式使用。<br />\n\t<br />\n\t2.2达工宝网站及应用程序是达工宝创造的用以制成网页的HTML及程序。HTML及程序的版权同样属于达工宝所有。达工宝对其网站及应用程序上的所有标识、图标、图饰、图表、色彩、文字表述及其组合、版面设计、数据库均享有完全的著作权及其衍生的其他全部权利，对发布的信息均享有专有的发布和使用权。未经达工宝许可，网站或程序上任何信息均为禁止复制、使用、转载或其他方式使用。<br />\n\t<br />\n\t2.3达工宝用户发布的任何内容仅代表用户自己的观点和立场，与达工宝无关，由内容作者承担一切法律责任。<br />\n\t<br />\n\t<br />\n\t三、产品使用规则<br />\n\t<br />\n\t3.1使用达工宝网站、应用程序等产品应遵守中华人民共和国相关法律法规，包括但不限于《中华人民共和国计算机信息系统安全保护条例》、《计算机软件保护条例》、《最高人民法院关于审理涉及计算机网络著作权纠纷案件适用法律若干问题的解释(法释[2004]1号)》、《全国人大常委会关于维护互联网安全的决定》、《互联网电子公告服务管理规定》、《互联网新闻信息服务管理规定》、《互联网著作权行政保护办法》和《信息网络传播权保护条例》等有关计算机互联网规定和知识产权的法律和法规。<br />\n\t<br />\n\t3.2使用产品时必须向达工宝提供准确的个人资料，如资料变动，必须及时更新。<br />\n\t<br />\n\t3.3用户不允许将其帐号、密码转让或出借予他人使用。如用户发现其帐号遭他人非法使用，应立即通知达工宝。因黑客行为或用户的保管疏忽导致帐号、密码遭他人非法使用，达工宝不承担任何责任。<br />\n\t<br />\n\t3.4用户需为在达工宝上传、存储、发表、发送的全部内容负全部责任。所有用户禁止在任何页面上传、存储、发表、发送下列信息，否则达工宝有权自行处理并不通知用户：<br />\n\t(1)违反宪法确定的基本原则的；<br />\n\t(2)危害国家安全，泄漏国家机密，颠覆国家政权，破坏国家统一的；<br />\n\t(3)损害国家荣誉和利益的；<br />\n\t(4)煽动民族仇恨、民族歧视，破坏民族团结的；<br />\n\t(5)破坏国家宗教政策，宣扬邪教和封建迷信的；<br />\n\t(6)散布谣言，扰乱社会秩序，破坏社会稳定的；<br />\n\t(7)散布淫秽、色情、赌博、暴力、恐怖或者教唆犯罪的；<br />\n\t(8)侮辱或者诽谤他人，侵害他人合法权益的；<br />\n\t(9)煽动非法集会、结社、游行、示威、聚众扰乱社会秩序的；<br />\n\t(10)以非法民间组织名义活动的；<br />\n\t(11)含有法律、行政法规禁止的其他内容的。<br />\n\t<br />\n\t3.5用户在使用达工宝产品同时应做到：<br />\n\t(1)遵守所有与网络服务有关的网络协议、规定和程序；<br />\n\t(2)不得为任何非法目的而使用网络服务系统；<br />\n\t(3)不得侵犯其他任何第三方的专利权、著作权、商标权、名誉权或其他任何合法权益；<br />\n\t(4)不得利用达工宝网络服务系统进行未经达工宝授权的广告；<br />\n\t(5)未经达工宝同意，禁止给公布信息的个人或公司发电子邮件、打电话、寄信或进行其他接触的行为。<br />\n\t(6)用户接受以其注册的电子邮件地址接受达工宝发送的邮件或其他邮件资料，若希望&quot;退订&quot;这些邮件资料，可点击电子邮件中的退订链接退订或联系达工宝取消订阅。<br />\n\t(7)用户不得通过任何技术手段，侵入达工宝数据库、网站、应用程序，进行任何达工宝未对外开放的功能操作。不得进行数据采集。不得影响干涉其他用户或网络正常运行。一经发现达工宝有权停止该用户的账户所有功能。破坏系统或网络可能导致犯罪，达工宝将依法采取法律途径追究造成的损失。<br />\n\t<br />\n\t3.6用户违反上述使用规则，达工宝有权禁止其继续使用达工宝产品。<br />\n\t<br />\n\t3.7达工宝有权拒绝与本单位经营同类业务、有业务竞争关系或者其他利害关系的单位及个人提供服务。<br />\n\t<br />\n\t3.8达工宝有权在预先通知或不予通知的情况下终止任何免费服务。<br />\n\t<br />\n\t四、隐私保护<br />\n\t4.1达工宝不对外公开或向第三方提供单个用户的注册资料及用户在使用网络服务时存储在达工宝的非公开内容，但下列情况除外：<br />\n\t(1)事先获得用户的明确授权；<br />\n\t(2)根据有关的法律法规要求；<br />\n\t(3)按照相关政府主管部门的要求；<br />\n\t(4)为维护社会公众的利益。<br />\n\t<br />\n\t4.2在不透露单个用户隐私资料的前提下，达工宝有权对整个用户数据库进行分析并对用户数据库进行商业上的利用。<br />\n\t<br />\n\t<br />\n\t五、免责条款<br />\n\t<br />\n\t5.1<br />\n\t用户明确同意其使用达工宝产品所存在的风险将完全由其自己承担；因其使用达工宝产品而产生的一切后果也由其自己承担，达工宝对用户不承担任何责任。<br />\n\t<br />\n\t5.2<br />\n\t达工宝不担保能满足用户的要求，也不担保网络服务不会中断，对网络服务的及时性、安全性、准确性也都不作担保。同时，不保证能够长期无错误运营，也不保证服务器不受病毒或其他故障的侵扰。如果用户在使用本网站时发生数据丢失的情况，与达工宝无关。<br />\n\t<br />\n\t5.3<br />\n\t达工宝不能保证产品中信息会有一定数量的用户来浏览，也不能保证会有一位特定的用户来浏览。达工宝不保证所有信息、文本、图形、链接及其它项目的绝对准确性和完整性，故仅供用户参考使用。<br />\n\t<br />\n\t5.4<br />\n\t用户必须独自承担由于使用达工宝产品或通过达工宝产品登录到其他站点而形成的全部风险。用户需独立承担与他人交流信息所造成的后果。达工宝不担保用户发送给另一方用户的资料的真实性、精确性与可靠性。用户对所接受的资料的信任纯属个人风险。<br />\n\t<br />\n\t5.5<br />\n\t达工宝仅为招聘网络信息发布平台，任何通过达工宝产品发布的任何信息均系用户自行发布，达工宝对其合法性概不负责，亦不承担任何法律责任；用户在通过达工宝产品得到资讯和信息后，与信息发布人所进行的任何交易均系其双方自主交易，双方若发生纠纷，皆与达工宝无关，达工宝不承担任何法律责任；达工宝对于用户由于使用达工宝产品而造成的任何金钱、商誉、名誉的损失，或任何特殊的、间接的、或结果性的损失都不负任何责任。<br />\n\t<br />\n\t<br />\n\t六、风险说明<br />\n\t<br />\n\t6.1用户使用达工宝产品将承担自行风险。达工宝对产品所提供材料材料不作明显的或暗含的保证。除非适用的法律法规有明确规定，达工宝及其所属网络/产品对销售性的和适合于某一特定目的的一切保证不予承认。 达工宝不能保证材料的特殊目的不受阻挠不出错误，也不能保证错误会得到纠正，也不能保证达工宝产品或制成达工宝产品的材料不含有病毒或其他有害成分。在有关材料的使用或使用结果方面对材料的正确性、准确性、可靠性或其他方面，达工宝不作出保证或任何说明。用户承担一切必要的服务、修理或改正费用。在适用法规不允许暗含保证可免除承担一切费用的范围里，免除上述承担费用不适用于你。<br />\n\t<br />\n\t6.2警告<br />\n\t在使用达工宝产品时违背了这些法规将构成对达工宝权利的侵犯或违反，并可采取法律行动。<br />\n\t&nbsp;</p>"
     }
 });
+
+//[GET] (通用)获取地区ID
+Mock.mock(/\/api\/Common\/Data\/GetAreaAbbr\w+/,mockArea);
 
