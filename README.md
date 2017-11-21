@@ -13,7 +13,7 @@
 
 ![](https://raw.githubusercontent.com/tsurumure/Recruiting/master/Mock/Images/online.png)
 
-推荐扫描二维码，体验线上项目，也可以直接 [访问线上项目](http://m.zdzp.cn)
+推荐扫描二维码，体验线上项目，也可以直接 [访问](http://m.zdzp.cn)
 
 * Gulp 对控制器、装饰器、视图进行压缩整合
 * Mockjs 模拟后台接口数据
