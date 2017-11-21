@@ -11,7 +11,9 @@
 
 这是一个移动端招聘网站的项目前端框架，构建简单，功能完善，界面流畅，开箱即用！只需要根据Mock数据结构编写RestfulAPI接口，不论后台是用什么语言都可以完美接入。
 
-[访问线上项目](http://m.zdzp.cn)
+![](https://raw.githubusercontent.com/tsurumure/Recruiting/master/static/img/online.png)
+推荐扫描二维码，体验线上项目
+也可以直接 [访问线上项目](http://m.zdzp.cn)
 
 * Gulp 对控制器、装饰器、视图进行压缩整合
 * Mockjs 模拟后台接口数据
