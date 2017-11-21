@@ -4190,108 +4190,109 @@ angular.module('starter.controllers', ['ngCookies'])
         }
       }catch(e){ }
 
-      
-      require(['base64'], function(){
-        var JSON_d = JSON.parse(new Base64().decode($cookies.get('s')));
-        if(JSON_d.Type=='Company'){
-          $scope.GetResumeDetail_Company($scope.CardDetail.Resume.Id, true);
+      if($cookies.get('s')){      
+        require(['base64'], function(){
+          var JSON_d = JSON.parse(new Base64().decode($cookies.get('s')));
+          if(JSON_d.Type=='Company'){
+            $scope.GetResumeDetail_Company($scope.CardDetail.Resume.Id, true);
 
-          //[Click] 邀请面试
-          $scope.BottomClick_Invite = function(){
-            if($cookies.get("Ticket")){
-              var thisId = $scope.CardDetail.Resume.Id;
-              $ionicModal.fromTemplateUrl("modal-message-custom.html",{
-                scope:$scope,
-              }).then(function(modal){
-                $rootScope.modal = modal;
-                $scope.ModalTitle = '邀请面试'
-                $scope.modal.show();
-        
-                //[POST] 发送
-                $scope.datas = { ResumeId:thisId, Content:'' }
-                $scope.SaveModal = function(){
-                  if($scope.datas.Content!=''){
-                    $scope.modal.remove();
-        
-                    (function(){
-                      function httpCallBack(rs){
-                        // console.log(rs);
-                      }
-                      var httpFn = function(){
-                        mEvent.http("POST", "/api/Company/Resume/Invite", true, httpCallBack, $scope.datas);
-                      }
-                      httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
-                    })();
-        
-                  }else{
-                    var confirmPopup = $ionicPopup.alert({
-                      title: '提示', template: '内容不能为空'
-                    });
-                  }
-                }
-              });
-            }else{
-              $state.go($rootScope.entry + '.my');
-            }
-          }
-
-          //[Click] 私信
-          $scope.BottomClick_Message = function(){
-            mEvent.ShowModelMessages($scope.CardDetail.Resume.Realname, $scope.CardDetail.Resume.UserId);
-          }
-
-          //[Click] 收藏/取消收藏
-          $scope.ButtonClick_Collect = function(){
-
-            var isCollect = $scope.CardDetail.Resume.IsEnterpriseCollect;
-            var thisResumeId = $scope.CardDetail.Resume.Id;
-            if(isCollect){
-              // [POST] 取消收藏简历
-              (function(){
-                function httpCallBack(rs){
-                  if(rs.code==0){
-                    // 静态操作
-                    $scope.CardDetail.Resume.IsEnterpriseCollect = false;
-                    $rootScope.userImfor.ResumeCount--;
-                    $ionicHistory.clearCache();
-                  }else{
-                    $ionicPopup.alert({
-                      title: '提示', template: rs.msg + '(' + rs.code + ')'
-                    });            
-                  }
-                }
-                var httpFn = function(){ //DeleteCollectResume
-                  mEvent.http("POST", "/api/Company/ResumeBook/DeleteResume", true, httpCallBack, { ResumeId:thisResumeId });
-                }
-                httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
-              })();
-            }else{
-              // [POST] 收藏简历
-              (function(){
-                function httpCallBack(rs){
-                  if(rs.code==0){
-                    // 静态操作
-                    $scope.CardDetail.Resume.IsEnterpriseCollect = true;
-                    $rootScope.userImfor.ResumeCount++;
-                    $ionicHistory.clearCache();
-                  }else{
-                    $ionicPopup.alert({
-                      title: '提示', template: rs.msg + '(' + rs.code + ')'
-                    });            
-                  }
-                }
-                var httpFn = function(){
-                  mEvent.http("POST", "/api/Company/ResumeBook/AddResume", true, httpCallBack, { ResumeId:thisResumeId });
-                }
-                httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
-              })();
-            }
-
-          }
-          // end [Click] 收藏/取消收藏
+            //[Click] 邀请面试
+            $scope.BottomClick_Invite = function(){
+              if($cookies.get("Ticket")){
+                var thisId = $scope.CardDetail.Resume.Id;
+                $ionicModal.fromTemplateUrl("modal-message-custom.html",{
+                  scope:$scope,
+                }).then(function(modal){
+                  $rootScope.modal = modal;
+                  $scope.ModalTitle = '邀请面试'
+                  $scope.modal.show();
           
-        }
-      });
+                  //[POST] 发送
+                  $scope.datas = { ResumeId:thisId, Content:'' }
+                  $scope.SaveModal = function(){
+                    if($scope.datas.Content!=''){
+                      $scope.modal.remove();
+          
+                      (function(){
+                        function httpCallBack(rs){
+                          // console.log(rs);
+                        }
+                        var httpFn = function(){
+                          mEvent.http("POST", "/api/Company/Resume/Invite", true, httpCallBack, $scope.datas);
+                        }
+                        httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
+                      })();
+          
+                    }else{
+                      var confirmPopup = $ionicPopup.alert({
+                        title: '提示', template: '内容不能为空'
+                      });
+                    }
+                  }
+                });
+              }else{
+                $state.go($rootScope.entry + '.my');
+              }
+            }
+
+            //[Click] 私信
+            $scope.BottomClick_Message = function(){
+              mEvent.ShowModelMessages($scope.CardDetail.Resume.Realname, $scope.CardDetail.Resume.UserId);
+            }
+
+            //[Click] 收藏/取消收藏
+            $scope.ButtonClick_Collect = function(){
+
+              var isCollect = $scope.CardDetail.Resume.IsEnterpriseCollect;
+              var thisResumeId = $scope.CardDetail.Resume.Id;
+              if(isCollect){
+                // [POST] 取消收藏简历
+                (function(){
+                  function httpCallBack(rs){
+                    if(rs.code==0){
+                      // 静态操作
+                      $scope.CardDetail.Resume.IsEnterpriseCollect = false;
+                      $rootScope.userImfor.ResumeCount--;
+                      $ionicHistory.clearCache();
+                    }else{
+                      $ionicPopup.alert({
+                        title: '提示', template: rs.msg + '(' + rs.code + ')'
+                      });            
+                    }
+                  }
+                  var httpFn = function(){ //DeleteCollectResume
+                    mEvent.http("POST", "/api/Company/ResumeBook/DeleteResume", true, httpCallBack, { ResumeId:thisResumeId });
+                  }
+                  httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
+                })();
+              }else{
+                // [POST] 收藏简历
+                (function(){
+                  function httpCallBack(rs){
+                    if(rs.code==0){
+                      // 静态操作
+                      $scope.CardDetail.Resume.IsEnterpriseCollect = true;
+                      $rootScope.userImfor.ResumeCount++;
+                      $ionicHistory.clearCache();
+                    }else{
+                      $ionicPopup.alert({
+                        title: '提示', template: rs.msg + '(' + rs.code + ')'
+                      });            
+                    }
+                  }
+                  var httpFn = function(){
+                    mEvent.http("POST", "/api/Company/ResumeBook/AddResume", true, httpCallBack, { ResumeId:thisResumeId });
+                  }
+                  httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
+                })();
+              }
+
+            }
+            // end [Click] 收藏/取消收藏
+            
+          }
+        });
+      }
 
       // 如果是企业登录的话，再调一次企业简历详情的接口（临时解决方案）
       // $rootScope.$on("GetUserImfor",function(e, d){
@@ -4910,7 +4911,7 @@ angular.module('starter.controllers', ['ngCookies'])
         //method:'POST', data: {Width: 80, Height: 32, Type: 1},
         // Type：类型(登录=0，注册=1，忘记密码=2)
         method:'GET',
-        url:$rootScope.app_config.api+'/api/Common/VerificationCode/GetImage?width=80&height=32&type=1'
+        url:$rootScope.app_config.api + '/api/Common/VerificationCode/GetImage?Width=80&Height=32&Type=1'
       }).success(function(rs){
         $scope.VercodeImg = 'data:image/png;base64, ' + rs.body;
         $scope.datas.Ident = hex_md5(rs.body).toUpperCase();
@@ -6533,7 +6534,7 @@ angular.module('starter.controllers', ['ngCookies'])
       window.location.href = "#/" + $rootScope.entry + "/registerOtherway/qq";
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
   // end [QQ] 测试
 
@@ -6664,7 +6665,7 @@ angular.module('starter.controllers', ['ngCookies'])
       $scope.GetVercodeImg = function(n){
         $http({
           method:'GET',
-          url:$rootScope.app_config.api+'/api/Common/VerificationCode/GetImage?width=80&height=32&type=' + n
+          url:$rootScope.app_config.api+'/api/Common/VerificationCode/GetImage?Width=80&Height=32&Type=' + n
         }).success(function(rs){
           $scope.VercodeImg = 'data:image/png;base64, ' + rs.body;
           $scope.datas.Ident = hex_md5(rs.body).toUpperCase();
@@ -6864,7 +6865,7 @@ angular.module('starter.controllers', ['ngCookies'])
         // method:'POST', data: {Width: 80, Height: 32, Type: 1},
         // Type：类型(登录=0，注册=1，忘记密码=2)
         method:'GET',
-        url:$rootScope.app_config.api+'/api/Common/VerificationCode/GetImage?width=80&height=32&type=2'
+        url:$rootScope.app_config.api+'/api/Common/VerificationCode/GetImage?Width=80&Height=32&Type=2'
       }).success(function(rs){
         $scope.VercodeImg = 'data:image/png;base64, ' + rs.body;
         $scope.datas.Ident = hex_md5(rs.body).toUpperCase();
@@ -6931,7 +6932,7 @@ angular.module('starter.controllers', ['ngCookies'])
       // 5=绑定或更换绑定邮箱，6=解绑邮箱，99=其它情况
       $http({
         method:'GET',
-        url:$rootScope.app_config.api+'/api/Common/VerificationCode/GetImage?width=80&height=32&type=2'
+        url:$rootScope.app_config.api+'/api/Common/VerificationCode/GetImage?Width=80&Height=32&Type=2'
       }).success(function(rs){
         $scope.VercodeImg = 'data:image/png;base64, ' + rs.body;
         $scope.datas.Ident = hex_md5(rs.body).toUpperCase();
