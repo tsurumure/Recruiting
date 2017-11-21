@@ -2824,7 +2824,6 @@ angular.module('starter.services', ['ngCookies'])
         $state.go($rootScope.entry + '.login');
       }
     }
-    console.log($rootScope.app_config.api+url);
     $http({
       method:methodValue, url:$rootScope.app_config.api + url,
       data:dataParamJson, headers:headerJson

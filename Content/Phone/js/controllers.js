@@ -124,7 +124,7 @@ angular.module('starter.controllers', ['ngCookies'])
   if(!$cookies.get("FirstSelectCity")){
     $scope.datas = {};
 
-    $ionicModal.fromTemplateUrl("/Content/Phone/templates/tab-index-modalSelectCity.html",{
+    $ionicModal.fromTemplateUrl("tab-index-modalSelectCity.html",{
       scope:$scope,
     }).then(function(modal){
       $scope.modalSelectCity = modal;
@@ -2011,6 +2011,7 @@ angular.module('starter.controllers', ['ngCookies'])
   // [Get] 首页-热搜职位
   $scope.GetHotJob = function(){
     function httpCallBack(rs){
+
       $scope.HotSearchJobLists = rs.body;
       // 点击职位名，跳转到 搜索列表
       $scope.ClickHotJob = function(keyword){
@@ -2411,7 +2412,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
   //显示介绍
   $scope.showIntroduce = function(itemIntroduce){
-    $ionicModal.fromTemplateUrl("/Content/Phone/templates/tab-index-eduTrain-schoolDetail-modalAdd.html?v="+Math.random(),{
+    $ionicModal.fromTemplateUrl("tab-index-eduTrain-schoolDetail-modalAdd.html?v="+Math.random(),{
       scope:$scope,
     }).then(function(modal){
       $rootScope.modal = modal;
@@ -2422,7 +2423,7 @@ angular.module('starter.controllers', ['ngCookies'])
   
   //显示收费标准
   $scope.showCost = function(){
-    $ionicModal.fromTemplateUrl("/Content/Phone/templates/tab-index-eduTrain-schoolDetail-cost-modalAdd.html?v="+Math.random(),{
+    $ionicModal.fromTemplateUrl("tab-index-eduTrain-schoolDetail-cost-modalAdd.html?v="+Math.random(),{
       scope:$scope,
     }).then(function(modal){
       $rootScope.modal = modal;
@@ -3725,7 +3726,7 @@ angular.module('starter.controllers', ['ngCookies'])
     //end reset
 
     //发布新动态[Modal]
-    var p = $ionicModal.fromTemplateUrl("/Content/Phone/templates/tab-square-modalAdd.html?v="+Math.random(),{
+    var p = $ionicModal.fromTemplateUrl("tab-square-modalAdd.html?v="+Math.random(),{
       scope:$scope,
     }).then(function(modal){
       $rootScope.modal = modal;
@@ -7168,7 +7169,7 @@ angular.module('starter.controllers', ['ngCookies'])
   })();
   
   //修改备注
-  $ionicModal.fromTemplateUrl("/Content/Phone/templates/tab-my-friends-modalRemark.html",{
+  $ionicModal.fromTemplateUrl("tab-my-friends-modalRemark.html",{
     scope:$scope,
   }).then(function(modal){
     $rootScope.modal = modal;
@@ -7445,7 +7446,7 @@ angular.module('starter.controllers', ['ngCookies'])
   //添加推广返现申请（View）
   $scope.openReturnCash = function(){
     $scope.ReturnCashDatas = {}
-    $ionicModal.fromTemplateUrl("/Content/Phone/templates/tab-my-promoter-returnCash-modalAdd.html",{
+    $ionicModal.fromTemplateUrl("tab-my-promoter-returnCash-modalAdd.html",{
       scope:$scope,
     }).then(function(modal){
       $scope.ReturnCashModal = modal; $scope.ReturnCashModal.show();
@@ -8001,7 +8002,7 @@ angular.module('starter.controllers', ['ngCookies'])
     }
 
     fnSwitch(n);
-    $ionicModal.fromTemplateUrl("/Content/Phone/templates/tab-index-jobFair-modalImfor.html",{
+    $ionicModal.fromTemplateUrl("tab-index-jobFair-modalImfor.html",{
       scope:$scope,
     }).then(function(modal){
       $scope.modalImfor = modal;

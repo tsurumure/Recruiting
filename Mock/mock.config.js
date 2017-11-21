@@ -70,12 +70,10 @@ Mock.mock(/\/api\/Common\/Common\/GetHotSerachKeyword\?area\=\w+/,{
 Mock.mock('/api/Common/Article/GetSlideList',{
   "code": "0",
   "msg": "ok",
-  "body|3": [
-    {
-      "Id": "79a7212eabcc4c5383dab41842f348a7", "Name": "测试图片1", "Content": "测试图片1内容长文本",
-      "ReleaseTime": "2017-04-15 11:13:48", "IsLink": false, "Url": "", "Describe": "1",
-      "Pic": "http://192.168.1.21:8888/UpFile/Pic/636277579992380194_b1.jpg"
-    }
+  "body": [
+    { "Pic": "/Static/img/banner/1.jpg", "IsLink": false, "Url": "" },
+    { "Pic": "/Static/img/banner/2.jpg", "IsLink": false, "Url": "" },
+    { "Pic": "/Static/img/banner/3.jpg", "IsLink": false, "Url": "" }
   ],
   "count": 0
 });
