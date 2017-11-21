@@ -43,20 +43,69 @@ Mock.mock(/\/api\/Common\/Job\/GetHomeJobList\?AreaId\=\w+\&PageIndex\=\w+\&Page
     "body|20": [
       {
         "Id": "098e9c2257ca43e1a9fff1779cf62062", "EnterpriseId": "6abcb5e1ad5a4999b93928561c355b14",
-        "EnterpriseName": "广东人力资源有限公司(测试)",
-        "EnterpriseLogoSmall": "http://192.168.1.21:8888/UpFile/Pic/fbf49ae2-83ac-4680-abcd-fe0f9b1ac8a2.jpg",
-        "Name": "前端设计师(Mock)", "Nature": "A01",
-        "JobTypeId": "00000000000000000000000000000121", "JobTypeName": "IT行业",
-        "Department": "技术部", "RecruitingCount": 10,
-        "PayWay": "A01", "WorkAreaId": "00000000000000000000000000440507",
-        "WorkAreaName": "龙湖区", "WorkAreaCascadeName": "广东省 汕头市 龙湖区",
-        "Pay": "10000-12000", "JobPayUnit": "元/月",
-        "Welfare": "A09,A04,A05", "WelfareValue": "周末双休,返现,实习",
-        "MapLocation": "116.72710393761011,23.372009521654274",
-        "ReleaseTime": "2017-10-26 17:35:43", "IsPutaway": true, "ApplyCount": 2
+        "Name": "人力资源培训师", "EnterpriseName": "广东人力资源有限公司",
+        "EnterpriseLogoSmall": "/static/img/head/default_company.jpg", "IsPutaway": true,
+        "Pay": "10000-12000", "JobPayUnit": "元/月", "WelfareValue": "周末双休,年终奖,五险一金",
+        // "Nature": "A01", "JobTypeId": "00000000000000000000000000000121", "JobTypeName": "IT行业",
+        // "Department": "技术部", "RecruitingCount": 10, "PayWay": "A01", 
+        // "WorkAreaId": "00000000000000000000000000440507",
+        // "WorkAreaName": "龙湖区", "WorkAreaCascadeName": "广东省 汕头市 龙湖区",
+        // "Welfare": "A09,A04,A05", 
+        // "MapLocation": "116.72710393761011,23.372009521654274",
+        // "ReleaseTime": "2017-10-26 17:35:43",  "ApplyCount": 2
       }
     ]
 });
+
+// 获取职位详情
+Mock.mock(/\/api\/Common\/Job\/GetJob\?jobId\=\w+/, {
+    "code": "0", "msg": "ok", "count": 0,
+    "body": {
+        "Id": "098e9c2257ca43e1a9fff1779cf62062",
+        "Name": "人力资源培训师", "Pay": "10000-12000", "JobPayUnit": "元/月",
+        "UserId": "ad1afaf8e17c49b0a531151fc4342edc", "EnterpriseId": "6abcb5e1ad5a4999b93928561c355b14",
+        "EnterpriseName": "广东人力资源有限公司", "EnterpriseNatureCode": "A05",
+        "EnterprisePeopleNumCode": "A02", "EnterpriseRegisteredCapitalCode": "A01",
+        "EnterpriseLogoSmall": "/static/img/head/company_1.png",
+        "ShareLogo": "/static/img/head/company_1.png",
+        "Welfare": "A09,A04,A05", "WelfareValue": "周末双休,返现,实习", "ReleaseTime": "2017-10-26 17:35:43",
+        "MapLng": "23.385766", "MapLat": "116.742521", "Distance": 0, "RecruitingCount": 10,
+        "JobTypeId": "00000000000000000000000000000121", "JobTypeName": "财务/审计/税务", "Nature": "A01",
+        "Department": "啧啧啧", "PayWay": "A01", "Describe": "好像呼吸iii洗在哦在哦izoo嫁鸡随鸡看看",
+        "ApplyCount": 2, "ResumeCount": 2, "Accommodation": "", "WorkAddress": "汕头市龙湖区金霞街道金砂路104号金龙大厦12层",
+        "IsHot": false, "IsSelf": false, "ContactManName": "泽民", "ContactManPhone": "15017247642", "IsPutaway": true,
+    }
+});
+
+Mock.mock(/\/api\/Common\/Enterprise\/GetEnterprise\?entId\=\w+/,{
+    "code": "0",
+    "msg": "ok",
+    "body": {
+      "Id": "6abcb5e1ad5a4999b93928561c355b14", "UserId": "ad1afaf8e17c49b0a531151fc4342edc",
+      "Name": "广东人力资源有限公司", "Industry": "人力资源", "Nature": "民营企业",
+      "Intro": "广东人力资源有限公司由广东省对外劳务经济合作领域的优质资源整合而成，公司源自1979年4月由中华人民共和国对外贸易经济合作部批准成立的广东省劳动服务公司，是中国成立最早、规模最大的劳务合作、人才交流、各类人才派遣的专业国有大型企业。拥有国家商务部、人力资源和社会保障部以及广东省人力资源和社会保障厅、工商局批准的从事各类人力资源经营性服务的经营许可证和营业执照。公司业务范围包括：国内外人才中介服务，向港澳地区和世界各地派遣各类劳务人员，收集、整理、储存和发布国内外人才供求信息，人才推荐，人才招聘，人才测评，人才培训，人力资源开发与管理咨询，国内外劳动力职业介绍及就业服务。公司下设多个专业公司及分支机构，并拥有一支多年从事国内外人才中介服务、劳动力职业介绍及劳务输出的专业化团队，可为各界提供方便、快捷、优质的人力资源服务。 ",
+      "WebsiteUrl": "www.zdzp.com", "BusRoutes": "", "MapLocation": "23.385766,116.742521",
+      "Logo": "/static/img/head/company_1.png", "LogoLit": "/static/img/head/company_1.png",
+      "Address": "汕头市金砂东路104号金龙大厦1-2楼", "PeopleNum": "50-100人",
+      "RegisteredCapital": "100万以下",
+      "Images": [
+        "static/img/company_atlas/1.jpg","static/img/company_atlas/2.jpg","static/img/company_atlas/3.jpg"
+      ],
+      "ContactManName": "杨先生", "ContactManPhone": "13670511519",
+      "Jobs|5": [
+        {
+          "Id": "098e9c2257ca43e1a9fff1779cf62062", "UserId": "ad1afaf8e17c49b0a531151fc4342edc",
+          "Name": "人力资源培训师", "Pay": "10000-12000", "JobPayUnit": "元/月", "IsPutaway": true,
+          "EnterpriseLogoSmall": "/static/img/head/company_1.png"
+        }
+      ],
+      "IsSelf": false
+    }
+  });
+
+// [POST] 添加阅读记录
+Mock.mock(/\/api\/Common\/Job\/AddReadRecord/, { "code": "0", "msg": "成功", "body": {}, "count": 0 });
+
 
 // [首页] 获取热门搜索关键词
 Mock.mock(/\/api\/Common\/Common\/GetHotSerachKeyword\?area\=\w+/,{
@@ -71,9 +120,9 @@ Mock.mock('/api/Common/Article/GetSlideList',{
   "code": "0",
   "msg": "ok",
   "body": [
-    { "Pic": "/Static/img/banner/1.jpg", "IsLink": false, "Url": "" },
-    { "Pic": "/Static/img/banner/2.jpg", "IsLink": false, "Url": "" },
-    { "Pic": "/Static/img/banner/3.jpg", "IsLink": false, "Url": "" }
+    { "Pic": "/static/img/banner/1.jpg", "IsLink": false, "Url": "" },
+    { "Pic": "/static/img/banner/2.jpg", "IsLink": false, "Url": "" },
+    { "Pic": "/static/img/banner/3.jpg", "IsLink": false, "Url": "" }
   ],
   "count": 0
 });
@@ -84,10 +133,33 @@ Mock.mock(/\/api\/Common\/Article\/GetNotice\?areaId\=*/,{
     "msg": "ok",
     "body|4": [
       {
-        "Id": "@string(5)", "Name": "@string(15)",
-        "Content|1": ["随机内容11（可带html标签）","随机内容22（可带html标签）","随机内容33（可带html标签）"],
+        "Id": "@string(5)",
+        "Name": "@string(20)",
+        "Content|1": ["11111<b>随机</b>内容11111","22222随机内容22222","3333333随机内容33333","4444随机内容44"],
         "ReleaseTime": "2017-10-21 15:17:21", "IsLink": true, "Url": "",
         "Describe": "", "Pic": "",
       }
     ]
 });
+
+// 获取 验证码
+Mock.mock(/\/api\/Common\/VerificationCode\/GetImage\?Width\=\w+\&Height\=\w+\&Type=\w+/,{
+    "code": "0", "msg": "成功", "count": 0,
+    "body": "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"
+});
+
+// [附近] 获得附近职位列表
+Mock.mock(/\/api\/Common\/Job\/GetJobMapList\?lng\=\w+\.\w+\&lat\=\w+\.\w+/,{
+    "code": "0", "msg": "ok",
+    "body|10": [
+      {
+        "Id": "253eea8298f344c7a3097bd4cdeb1d50", "Name": "保安队长", "Pay": "3000",
+        "EnterpriseName": "汕头国泰装饰材料城", "EnterpriseLogoSmall": "/static/img/head/company_1.png",
+        "ShareLogo": "/static/img/head/company_1.png", "Welfare": "住,险", "WelfareValue": "住宿,保险",
+        "MapLng": "116.722067", "MapLat": "23.386145", "JobPayUnit": "元/月",
+        "Distance": 716
+      }
+    ]
+});
+
+
