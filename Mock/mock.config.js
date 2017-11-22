@@ -1,29 +1,27 @@
 var M = Mock.mock;
 var SimpleSuccess = { "code": "0", "msg": "成功", "body": {}, "count": 0 };
-
 var S = {
-  "Labels" : ['A01','A02','A03','A04','A05','A06','A07','A08'],
+  "Labels": ['A01','A02','A03','A04','A05','A06','A07','A08'],
+  "LabelsValue": ['热情开朗','亲和力','善于沟通','能加班','会英语','能出差','抗压力','善于创新'],
   "WelfareValue": ['住宿','班车','工作餐','返现','实习','保险','公积金','年终奖','周末双休']
 }
-
 Mock.Random.extend({
   HotSearchJobs: function(increment) {
       var ds = [ "外贸采购", "业务跟单", "外销员", "外贸业务员", "业务经理", "网页制作", "游戏开发", "工程造价", "置业顾问", "招商顾问", "房地产开发", "土建工程师"]
       return ds[increment]; //按顺序输出
   },
-  Names_Job: function(){
+  JobNames: function(){
     return this.pick(['工程技术部副经理','预结算主管','工程资料管理','后勤人员','网络销售','阿里巴巴客服','文员'])
   },
-  Names_Company: function(){
+  CompanyNames: function(){
     return this.pick(['汕头市振侨消防有限公司','汕头市柯丽雅电子科技有限公司','广东柏亚供应链股份有限公司','潮商集团（汕头）投资有限公司','广东宝颜生物科技有限公司'])
   },
   ArrayToString: function(arr, n){
-    // var ds = ['热情开朗','亲和力','善于沟通','能加班','会英语','能出差','抗压力','善于创新'];
     var ds = arr.split(',');
     var output = [];
+    // 1)打乱数组顺序, 2)再按顺序输出。这样就不会出现重复值
     ds.sort(function(){ return 0.5 - Math.random() });
     for(var i=0;i<n;i++){ output.push(ds[i]); }
-    // 1)打乱数组顺序, 2)再按顺序输出。这样就不会出现重复值
     return output.join(',');
   }
 })
@@ -71,7 +69,7 @@ M(/\/api\/Common\/Job\/GetHomeJobList\?AreaId\=\w+\&PageIndex\=\w+\&PageSize\=\w
     "body|20": [
       {
         "Id": "098e9c2257ca43e1a9fff1779cf62062", "EnterpriseId": "6abcb5e1ad5a4999b93928561c355b14",
-        "Name": "@Names_Job()", "EnterpriseName": "@Names_Company()",
+        "Name": "@JobNames()", "EnterpriseName": "@CompanyNames()",
         "EnterpriseLogoSmall": "@image(30x30)", "IsPutaway": true,
         "Pay": "@integer(1,5)000-@integer(5,10)000", "JobPayUnit": "元/月", "WelfareValue": "@ArrayToString('" + S.WelfareValue + "',4)",
         // "Nature": "A01", "JobTypeId": "00000000000000000000000000000121", "JobTypeName": "IT行业",
@@ -90,9 +88,9 @@ M(/\/api\/Common\/Job\/GetJob\?jobId\=\w+/, {
     "code": "0", "msg": "ok", "count": 0,
     "body": {
         "Id": "098e9c2257ca43e1a9fff1779cf62062",
-        "Name": "@Names_Job()", "Pay": "@integer(1,5)000-@integer(5,10)000", "JobPayUnit": "元/月",
+        "Name": "@JobNames()", "Pay": "@integer(1,5)000-@integer(5,10)000", "JobPayUnit": "元/月",
         "UserId": "ad1afaf8e17c49b0a531151fc4342edc", "EnterpriseId": "6abcb5e1ad5a4999b93928561c355b14",
-        "EnterpriseName": "@Names_Company()", "EnterpriseNatureCode": "A05",
+        "EnterpriseName": "@CompanyNames()", "EnterpriseNatureCode": "A05",
         "EnterprisePeopleNumCode": "A02", "EnterpriseRegisteredCapitalCode": "A01",
         "EnterpriseLogoSmall": "/Mock/Images/Head/company_1.png",
         "ShareLogo": "/Mock/Images/Head/company_1.png",
@@ -466,8 +464,8 @@ M(/\/api\/Common\/Resume\/GetHomeResumeList\?AreaId\=\w+\&PageIndex\=\w+\&PageSi
       "Realname": "@cname()", "GenderCode": "A01", "GraduateSchool": "1231", "Birthday": "1970-01-21 00:00:00",
       "MajorIn": "12312312312", "HeadImage": "@image(30x30)",
       "IntentionAreaIds": "00000000000000000000000000440500", "IntentionAreaNames": "汕头市",
-      "IntentionJobTypeId": "00000000000000000000000000000015", "IntentionJobType": "@Names_Job",
-      "IntentionJobTypeIds": "00000000000000000000000000000015", "IntentionJobTypeNames": "@Names_Job",
+      "IntentionJobTypeId": "00000000000000000000000000000015", "IntentionJobType": "@JobNames",
+      "IntentionJobTypeIds": "00000000000000000000000000000015", "IntentionJobTypeNames": "@JobNames",
       "WorkingAgeCode": "A01", "IntentionPayCode": "A01", "EducationCode": "A01", "IsDefault": true,
       "UserId": "9590d84a86914ecc88e27cb579b77c4e", "Labels": "@ArrayToString('" + S.Labels + "',4)"
     }
