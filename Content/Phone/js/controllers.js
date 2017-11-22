@@ -108,6 +108,11 @@ angular.module('starter.controllers', ['ngCookies'])
   $scope.refreshResume = function(){
     (function(){
       function httpCallBack(rs){
+        
+        // angular.forEach(rs.body, function(item){
+        //   console.log(item.Labels);
+        // });
+
         $rootScope.responseResume = rs.body;
       }
       var httpFn = function(){

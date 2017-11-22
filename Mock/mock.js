@@ -6572,7 +6572,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		    类似自增主键（auto increment primary key）。
 		*/
 		increment: function() {
-			var key = 0
+			var key = -1;
 			return function(step) {
 				return key += (+step || 1) // step?
 			}

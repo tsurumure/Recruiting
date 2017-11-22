@@ -1,53 +1,79 @@
+var M = Mock.mock;
 var SimpleSuccess = { "code": "0", "msg": "成功", "body": {}, "count": 0 };
 
-Mock.Random.string();
+var S = {
+  "Labels" : ['A01','A02','A03','A04','A05','A06','A07','A08'],
+  "WelfareValue": ['住宿','班车','工作餐','返现','实习','保险','公积金','年终奖','周末双休']
+}
 
-// [GET] Head meta Attribute [name:keywords]
-Mock.mock('/api/Common/Common/GetWebSiteKeyWords',{
+Mock.Random.extend({
+  HotSearchJobs: function(increment) {
+      var ds = [ "外贸采购", "业务跟单", "外销员", "外贸业务员", "业务经理", "网页制作", "游戏开发", "工程造价", "置业顾问", "招商顾问", "房地产开发", "土建工程师"]
+      return ds[increment]; //按顺序输出
+  },
+  Names_Job: function(){
+    return this.pick(['工程技术部副经理','预结算主管','工程资料管理','后勤人员','网络销售','阿里巴巴客服','文员'])
+  },
+  Names_Company: function(){
+    return this.pick(['汕头市振侨消防有限公司','汕头市柯丽雅电子科技有限公司','广东柏亚供应链股份有限公司','潮商集团（汕头）投资有限公司','广东宝颜生物科技有限公司'])
+  },
+  ArrayToString: function(arr, n){
+    // var ds = ['热情开朗','亲和力','善于沟通','能加班','会英语','能出差','抗压力','善于创新'];
+    var ds = arr.split(',');
+    var output = [];
+    ds.sort(function(){ return 0.5 - Math.random() });
+    for(var i=0;i<n;i++){ output.push(ds[i]); }
+    // 1)打乱数组顺序, 2)再按顺序输出。这样就不会出现重复值
+    return output.join(',');
+  }
+})
+
+//[GET] Head meta Attribute [name:keywords]
+M('/api/Common/Common/GetWebSiteKeyWords',{
     "code": "0", "msg": "成功", "count": 0,
     "body": "达工宝,汕头找工作,揭阳找工作,汕头打工,揭阳打工,汕头招聘网,揭阳招聘网"
 });
 
-// [GET] Head meta Attribute [name:description]
-Mock.mock('/api/Common/Common/GetWebSiteDescription',{
+//[GET] Head meta Attribute [name:description]
+M('/api/Common/Common/GetWebSiteDescription',{
     "code": "0", "msg": "成功", "count": 0,
     "body": "达工宝是广东汇才推出专注于蓝领求职+社交的免费APP。达工宝对企业的招聘信息审核归类后，发布达工宝APP。达工宝保障职位可靠同时，让蓝领便捷地通过移动互联网获取最新招聘信息。",
 });
 
-// [GET] Head meta Attribute [name:searchtitle]
-Mock.mock('/api/Common/Common/GetWebSiteSearchTitle',{
+//[GET] Head meta Attribute [name:searchtitle]
+M('/api/Common/Common/GetWebSiteSearchTitle',{
     "code": "0", "msg": "成功", "count": 0,
     "body": "汕头招聘网,达工宝,汕头人才网,汕头招聘,汕头人才市场,汕头招聘信息,汕头招聘会"
 });
 
-// [GET] 单张广告图片弹窗（小图Base64，用于判断是否有数据更新，减少数据加载量）
-Mock.mock(/\/api\/Common\/Common\/GetAdPhonePopupWindowDisplayNumber\?area\=\w+/,{
+//[GET] 单张广告图片弹窗（小图Base64，用于判断是否有数据更新，减少数据加载量）
+M(/\/api\/Common\/Common\/GetAdPhonePopupWindowDisplayNumber\?area\=\w+/,{
     "code": "0", "msg": "成功", "count": 0,
     "body": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQCAMAAAC3Yc"
 });
 
-// [GET]单张广告图片弹窗（链接跳转地址）
-Mock.mock(/\/api\/Common\/Common\/GetAdPhonePopupWindowURL\?area\=\w+/,{
+//[GET]单张广告图片弹窗（链接跳转地址）
+M(/\/api\/Common\/Common\/GetAdPhonePopupWindowURL\?area\=\w+/,{
     "code": "0", "msg": "成功", "count": 0,
     "body": "#/tab/job/detail/index/1f0479874652457185d874be59cea694"
 });
 
-// [GET]单张广告图片弹窗（大图Base64）
-Mock.mock(/\/api\/Common\/Common\/GetAdPhonePopupWindow\?area\=\w+/,{
+//[GET]单张广告图片弹窗（大图Base64）
+M(/\/api\/Common\/Common\/GetAdPhonePopupWindow\?area\=\w+/,{
     "code": "0", "msg": "成功", "count": 0,
     "body": "data:image/png;base64,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"
 });
 
-// [GET][首页] 获取职位列表
-// Mock.mock('/api/Common/Job/GetHomeJobList?AreaId=00000000000000000000000000440500&PageIndex=0&PageSize=10',{
-Mock.mock(/\/api\/Common\/Job\/GetHomeJobList\?AreaId\=\w+\&PageIndex\=\w+\&PageSize\=\w+/,{
+//[GET][首页] 获取职位列表
+// M('/api/Common/Job/GetHomeJobList?AreaId=00000000000000000000000000440500&PageIndex=0&PageSize=10',{
+M(/\/api\/Common\/Job\/GetHomeJobList\?AreaId\=\w+\&PageIndex\=\w+\&PageSize\=\w+/,{
     "code": "0", "msg": "ok",
     "body|20": [
       {
         "Id": "098e9c2257ca43e1a9fff1779cf62062", "EnterpriseId": "6abcb5e1ad5a4999b93928561c355b14",
-        "Name": "人力资源培训师", "EnterpriseName": "广东人力资源有限公司",
-        "EnterpriseLogoSmall": "/Mock/Images/Head/default_company.png", "IsPutaway": true,
-        "Pay": "10000-12000", "JobPayUnit": "元/月", "WelfareValue": "周末双休,年终奖,五险一金",
+        "Name": "@Names_Job()", "EnterpriseName": "@Names_Company()",
+        "EnterpriseLogoSmall": "@image(30x30)", "IsPutaway": true,
+        "Pay": "@integer(1,5)000-@integer(5,10)000", "JobPayUnit": "元/月", "WelfareValue": "@ArrayToString('" + S.WelfareValue + "',4)",
         // "Nature": "A01", "JobTypeId": "00000000000000000000000000000121", "JobTypeName": "IT行业",
         // "Department": "技术部", "RecruitingCount": 10, "PayWay": "A01", 
         // "WorkAreaId": "00000000000000000000000000440507",
@@ -59,14 +85,14 @@ Mock.mock(/\/api\/Common\/Job\/GetHomeJobList\?AreaId\=\w+\&PageIndex\=\w+\&Page
     ]
 });
 
-// [GET] 获取职位详情
-Mock.mock(/\/api\/Common\/Job\/GetJob\?jobId\=\w+/, {
+//[GET] 获取职位详情
+M(/\/api\/Common\/Job\/GetJob\?jobId\=\w+/, {
     "code": "0", "msg": "ok", "count": 0,
     "body": {
         "Id": "098e9c2257ca43e1a9fff1779cf62062",
-        "Name": "人力资源培训师", "Pay": "10000-12000", "JobPayUnit": "元/月",
+        "Name": "@Names_Job()", "Pay": "@integer(1,5)000-@integer(5,10)000", "JobPayUnit": "元/月",
         "UserId": "ad1afaf8e17c49b0a531151fc4342edc", "EnterpriseId": "6abcb5e1ad5a4999b93928561c355b14",
-        "EnterpriseName": "广东人力资源有限公司", "EnterpriseNatureCode": "A05",
+        "EnterpriseName": "@Names_Company()", "EnterpriseNatureCode": "A05",
         "EnterprisePeopleNumCode": "A02", "EnterpriseRegisteredCapitalCode": "A01",
         "EnterpriseLogoSmall": "/Mock/Images/Head/company_1.png",
         "ShareLogo": "/Mock/Images/Head/company_1.png",
@@ -79,8 +105,8 @@ Mock.mock(/\/api\/Common\/Job\/GetJob\?jobId\=\w+/, {
     }
 });
 
-// [GET] 获取企业详情
-Mock.mock(/\/api\/Common\/Enterprise\/GetEnterprise\?entId\=\w+/,{
+//[GET] 获取企业详情
+M(/\/api\/Common\/Enterprise\/GetEnterprise\?entId\=\w+/,{
     "code": "0",
     "msg": "ok",
     "body": {
@@ -92,7 +118,7 @@ Mock.mock(/\/api\/Common\/Enterprise\/GetEnterprise\?entId\=\w+/,{
       "Address": "汕头市金砂东路104号金龙大厦1-2楼", "PeopleNum": "50-100人",
       "RegisteredCapital": "100万以下", "IsSelf": false,
       "ContactManName": "杨先生", "ContactManPhone": "13670511519",
-      "Images": [ "Mock/Images/CompanyDetail/1.jpg","Mock/Images/CompanyDetail/2.jpg","Mock/Images/CompanyDetail/3.jpg"],
+      "Images": [ "Mock/Images/CompanyDetail/1.jpg","Mock/Images/CompanyDetail/2.jpg","@image('600x360')"],
       "Jobs|5": [{
           "Id": "098e9c2257ca43e1a9fff1779cf62062", "UserId": "ad1afaf8e17c49b0a531151fc4342edc",
           "Name": "人力资源培训师", "Pay": "10000-12000", "JobPayUnit": "元/月", "IsPutaway": true,
@@ -101,53 +127,53 @@ Mock.mock(/\/api\/Common\/Enterprise\/GetEnterprise\?entId\=\w+/,{
     }
   });
 
-// [GET][POST] 添加阅读记录
-Mock.mock(/\/api\/Common\/Job\/AddReadRecord/, { "code": "0", "msg": "成功", "body": {}, "count": 0 });
+//[GET][POST] 添加阅读记录
+M(/\/api\/Common\/Job\/AddReadRecord/, SimpleSuccess);
+M(/\/api\/Common\/Resume\/AddReadRecord/, SimpleSuccess);
 
-
-// [GET][首页] 获取热门搜索关键词
-Mock.mock(/\/api\/Common\/Common\/GetHotSerachKeyword\?area\=\w+/,{
+//[GET][首页] 获取热门搜索关键词
+M(/\/api\/Common\/Common\/GetHotSerachKeyword\?area\=\w+/,{
     "code": "0", "msg": "ok", "count": 0,
-    "body|9": [
-        "测试数据"
+    "body|12": [
+        "@HotSearchJobs(@increment)"
     ]
 });
 
-// [GET][首页] 获取Banner
-Mock.mock('/api/Common/Article/GetSlideList',{
+//[GET][首页] 获取Banner
+M('/api/Common/Article/GetSlideList',{
   "code": "0",
   "msg": "ok",
   "body": [
     { "Pic": "/Mock/Images/Banner/1.jpg", "IsLink": false, "Url": "" },
-    { "Pic": "/Mock/Images/Banner/2.jpg", "IsLink": false, "Url": "" },
-    { "Pic": "/Mock/Images/Banner/3.jpg", "IsLink": false, "Url": "" }
+    { "Pic": "@image(600x150)", "IsLink": false, "Url": "" },
+    { "Pic": "@image(600x150)", "IsLink": false, "Url": "" }
   ],
   "count": 0
 });
 
-// [GET][首页] 获取最新公告
-Mock.mock(/\/api\/Common\/Article\/GetNotice\?areaId\=*/,{
+//[GET][首页] 获取最新公告
+M(/\/api\/Common\/Article\/GetNotice\?areaId\=*/,{
     "code": "0",
     "msg": "ok",
     "body|4": [
       {
         "Id": "@string(5)",
-        "Name": "@string(20)",
-        "Content|1": ["11111<b>随机</b>内容11111","22222随机内容22222","3333333随机内容33333","4444随机内容44"],
+        "Name": "@ctitle(10,15)",
+        "Content": "@cparagraph(10,30)",
         "ReleaseTime": "2017-10-21 15:17:21", "IsLink": true, "Url": "",
         "Describe": "", "Pic": "",
       }
     ]
 });
 
-// [GET]获取 验证码
-Mock.mock(/\/api\/Common\/VerificationCode\/GetImage\?Width\=\w+\&Height\=\w+\&Type=\w+/,{
+//[GET]获取 验证码
+M(/\/api\/Common\/VerificationCode\/GetImage\?Width\=\w+\&Height\=\w+\&Type=\w+/,{
     "code": "0", "msg": "成功", "count": 0,
     "body": "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"
 });
 
-// [GET][附近] 获得附近职位列表
-Mock.mock(/\/api\/Common\/Job\/GetJobMapList\?lng\=\w+\.\w+\&lat\=\w+\.\w+/,{
+//[GET][附近] 获得附近职位列表
+M(/\/api\/Common\/Job\/GetJobMapList\?lng\=\w+\.\w+\&lat\=\w+\.\w+/,{
     "code": "0", "msg": "ok",
     "body|10": [
       {
@@ -171,7 +197,7 @@ var SquareList = {
         "PraiseCount": 2, "PraiseUserIds": [ "f9bf5e209c40492dbaa25554b4c9757c", "4bbd3217007b4bfdab201fa3c43e668f" ],
         "PraiseUserNickNames": [ "俺是张三", "李四" ], "PraiseUserHeadImages": [ "" ],
         "Content": "除了自律以外，自黑的能力也相当重要。世界之大，无奇不有。等你哪一天稍微做出点成绩，就会有很多认识或不认识的人在背后议论是非，从最开始的吐槽，到断章取义的论断甚至无趣的黑你",
-        "Images": "/Mock/Images/Square/b1.jpg,/Mock/Images/Square/b2.jpg,/Mock/Images/Square/b3.jpg",
+        "Images": "/Mock/Images/Square/b1.jpg,/Mock/Images/Square/b2.jpg,@image(400x400)",
         "ReleaseTime": "2017-11-08 10:23:04", "ReplyCount": 5, "StatusD": 1,
         "MessageReplyList|5": [
           {
@@ -181,7 +207,7 @@ var SquareList = {
           },
           {
             "Id": "c5cf2c1a879a463e94550e3b381e90e9", "Content": "是啊", "ReleaseTime": "2017-11-21 14:12:30",
-            "UserId": "4bbd3217007b4bfdab201fa3c43e668f", "UserHeadPic": "/Mock/Images/Head/default_jobseeker.png", "UserNickName": "李四",
+            "UserId": "4bbd3217007b4bfdab201fa3c43e668f", "UserHeadPic": "@image(30x30,eeeeee,人)", "UserNickName": "李四",
             "ParentId": "b1bf1ae0a7b5444895b2d2f1a7c99454", "ParentUserId": "f9bf5e209c40492dbaa25554b4c9757c",
             "ParentUserNickName": "Df9bf", "ParentUserHeadPic": ""
           }
@@ -201,14 +227,14 @@ var SquareList = {
       }
     ] 
 };
-// [GET][广场] 获取广场列表
-Mock.mock('/api/Common/Square/GetNewestMessageList',SquareList);
-// [GET][广场] 获取热门广场列表
-Mock.mock('/api/Common/Square/GetHotMessageList',SquareList);
-// [GET][广场] 获取广场列表（下滑刷新）
-Mock.mock(/\/api\/Common\/Square\/GetNextMessageList\?msgId\=\w+/,SquareList);
-// [GET][广场] 获取广场动态的评论列表
-Mock.mock(/\/api\/Common\/Square\/GetMessage\?msgId\=\w+/,{
+//[GET][广场] 获取广场列表
+M('/api/Common/Square/GetNewestMessageList',SquareList);
+//[GET][广场] 获取热门广场列表
+M('/api/Common/Square/GetHotMessageList',SquareList);
+//[GET][广场] 获取广场列表（下滑刷新）
+M(/\/api\/Common\/Square\/GetNextMessageList\?msgId\=\w+/,SquareList);
+//[GET][广场] 获取广场动态的评论列表
+M(/\/api\/Common\/Square\/GetMessage\?msgId\=\w+/,{
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "MessageReplyList|5": [
@@ -230,17 +256,17 @@ Mock.mock(/\/api\/Common\/Square\/GetMessage\?msgId\=\w+/,{
     }
 });
 
-// [POST][广场] 添加/删除 点赞
-Mock.mock('/api/Common/Square/AddMessagePraise', SimpleSuccess);
-Mock.mock('/api/Common/Square/DeleteMyMessagePraise', SimpleSuccess);
-// [POST][广场] 添加/删除 评论
-Mock.mock('/api/Common/Square/AddMessageReply',SimpleSuccess);
-Mock.mock('/api/Common/Square/DeleteMyMessageReply',SimpleSuccess);
-// [POST][广场] 添加新动态
-Mock.mock('/api/Common/Square/AddMessage',SimpleSuccess);
+//[POST][广场] 添加/删除 点赞
+M('/api/Common/Square/AddMessagePraise', SimpleSuccess);
+M('/api/Common/Square/DeleteMyMessagePraise', SimpleSuccess);
+//[POST][广场] 添加/删除 评论
+M('/api/Common/Square/AddMessageReply',SimpleSuccess);
+M('/api/Common/Square/DeleteMyMessageReply',SimpleSuccess);
+//[POST][广场] 添加新动态
+M('/api/Common/Square/AddMessage',SimpleSuccess);
 
-// [GET][广场] 获得广场个人信息
-Mock.mock(/\/api\/Common\/Square\/GetUserInfo\?UserId\=\w+/,{
+//[GET][广场] 获得广场个人信息
+M(/\/api\/Common\/Square\/GetUserInfo\?UserId\=\w+/,{
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "Id": "3317f16500124c3fa524d9726a77c098", "NickName": "俺是张三", "RealName": "张三",
@@ -248,8 +274,8 @@ Mock.mock(/\/api\/Common\/Square\/GetUserInfo\?UserId\=\w+/,{
     }
 });
 
-// [GET][广场] 获得广场名片
-Mock.mock(/\/api\/Common\/ResumeCard\/GetCard\?resumeCardId\=\w+/,{
+//[GET][广场] 获得广场名片
+M(/\/api\/Common\/ResumeCard\/GetCard\?resumeCardId\=\w+/,{
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "Id": "6bb4c6fe803a4f54a438334cc65cf44d", "Type": "FulltimeResume",
@@ -261,7 +287,7 @@ Mock.mock(/\/api\/Common\/ResumeCard\/GetCard\?resumeCardId\=\w+/,{
         "NativePlaceAreaId": "00000000000000000000000000120100",
         "NativePlaceAreaName": "天津市", "NativePlaceAreaCascadeName": "天津 天津市",
         "GraduateSchool": "北科大", "MajorIn": "计算机",
-        "HeadImage": "http://192.168.1.21:8888/UpFile/UserHead/dc47a7e8-5d8a-4501-9e2e-22556a563af1.jpg",
+        "HeadImage": "",
         "Idcard": "445121198811044545", "Gender": "A01", "Nation": "A01",
         "QQ": "", "Birthday": "1993-08-11 00:00:00",
         "LiveAreaId": "00000000000000000000000000120102",
@@ -283,37 +309,37 @@ Mock.mock(/\/api\/Common\/ResumeCard\/GetCard\?resumeCardId\=\w+/,{
 });
 
 var CommomExistUser = { "code": "40502", "msg": "手机号码已被注册，请更换后重新尝试。", "body": {}, "count": 0 };
-// [POST] 判断手机是否已注册
-Mock.mock('/api/Common/User/PhoneIsUse',CommomExistUser);
+//[POST] 判断手机是否已注册
+M('/api/Common/User/PhoneIsUse',CommomExistUser);
 
-// [POST] 获取短信验证码
-Mock.mock('/api/Common/VerificationCode/SendSMS',CommomExistUser);
+//[POST] 获取短信验证码
+M('/api/Common/VerificationCode/SendSMS',CommomExistUser);
 
-// [POST] 注册
-Mock.mock(/\/api\/\w+\/User\/Register/,CommomExistUser);
+//[POST] 注册
+M(/\/api\/\w+\/User\/Register/,CommomExistUser);
 
-// [POST] 忘记密码
-Mock.mock('/api/Common/User/PhoneForgotPwd',CommomExistUser);
+//[POST] 忘记密码
+M('/api/Common/User/PhoneForgotPwd',CommomExistUser);
 
 
 
-// [POST] (通用)退出登录
-Mock.mock('/api/Common/User/LoginOff',SimpleSuccess);
+//[POST] (通用)退出登录
+M('/api/Common/User/LoginOff',SimpleSuccess);
 
-// [POST] (企业Company)(求职者JobSeeker)登录
-Mock.mock(/\/api\/\w+\/User\/Login/,{
+//[POST] (企业Company)(求职者JobSeeker)登录
+M(/\/api\/\w+\/User\/Login/,{
     "code": "0", "msg": "成功", "count": 0,
     "body": "C1F97D5F15CDBC9D0B80D8253D5671C9B710C355C0DC417D338323159CABFB8CE406C25801B1BA58D96219E57E111C3B9C7E4AC70ACC2181465A7AC483DD96DE113DCB5D6A06BC524052807CE62A515F4504307B1397BC279E1F694E5A936F4E6A9871B4378EC495FFE14B246CC1EB03835F85B27F1F0FC65F5852F296465EB21BC3140D6D9728D317C368F2BDB252F000630C2C567A77F55807BD794F8665980F4DFFBC04DAED38ED79506C5DB55A0F3C95AFA8B7E33C80A48ECC2A899431E6AD94DF067A7F374AD2396A680915023D"
 });
 
-// [POST] (企业)获取营业执照审核状态
-Mock.mock('/api/Company/Enterprise/GetBusinessLicenseAuthenticationDisposeStatus',{
+//[POST] (企业)获取营业执照审核状态
+M('/api/Company/Enterprise/GetBusinessLicenseAuthenticationDisposeStatus',{
     "code": "0", "msg": "ok", "count": 0,
     "body": { "Status": 1, "ReplyContent": "" }
 });
 
-// [GET] (企业)获取用户信息
-Mock.mock('/api/Company/User/GetCurrentUser',{
+//[GET] (企业)获取用户信息
+M('/api/Company/User/GetCurrentUser',{
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "Id": "ac830eb985e7480d8470f98a2dcd8721", "Rold": "Enterprise", "RegisterTime": "2016-07-22 16:09:56",
@@ -336,8 +362,8 @@ Mock.mock('/api/Company/User/GetCurrentUser',{
       ]
     }
 });
-// [GET] (求职者)获取用户信息
-Mock.mock('/api/JobSeeker/User/GetCurrentUser',{
+//[GET] (求职者)获取用户信息
+M('/api/JobSeeker/User/GetCurrentUser',{
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "Id": "f9bf5e209c40492dbaa25554b4c9757c", "Rold": "JobSeeker",
@@ -351,12 +377,12 @@ Mock.mock('/api/JobSeeker/User/GetCurrentUser',{
 });
 
 //[GET] (企业)是否完善基本资料
-Mock.mock('/api/Company/Enterprise/IsInitBaseInfo',{
+M('/api/Company/Enterprise/IsInitBaseInfo',{
     "code": "0", "msg": "ok", "body": true, "count": 0
 });
 
 //[GET] (企业)获取基本资料
-Mock.mock('/api/Company/Enterprise/GetEnterpriseBaseInfo', {
+M('/api/Company/Enterprise/GetEnterpriseBaseInfo', {
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "Name": "广东人力资源有限公司",
@@ -369,7 +395,7 @@ Mock.mock('/api/Company/Enterprise/GetEnterpriseBaseInfo', {
     }
 });
 //[GET] (求职者)获取基本资料
-Mock.mock('/api/JobSeeker/Resume/GetBaseInfo',{
+M('/api/JobSeeker/Resume/GetBaseInfo',{
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "Name": "张三", "GenderCode": "A01", "NationCode": "A01", "MaritalStatusCode": "A01",
@@ -383,14 +409,14 @@ Mock.mock('/api/JobSeeker/Resume/GetBaseInfo',{
     }
   });
 //[GET] (求职者)更新基本资料
-Mock.mock(/\/api\/JobSeeker\/Resume\/UpdateBaseInfo/,SimpleSuccess);
+M(/\/api\/JobSeeker\/Resume\/UpdateBaseInfo/,SimpleSuccess);
 
 //[GET] (求职者/企业)获取简历保密设置
-Mock.mock('/api/JobSeeker/Resume/GetSecuritySet',{
+M('/api/JobSeeker/Resume/GetSecuritySet',{
     "code": "0", "msg": "ok", "count": 0, "body": { "Mode": 0, "ShieldEnterpriseNames": [] }
 });
 //[GET] (求职者)获取默认选中简历（新建第一份简历自动选中简历）
-Mock.mock('/api/JobSeeker/Resume/GetDefaultResume',{
+M('/api/JobSeeker/Resume/GetDefaultResume',{
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "Id": "9b128ad0c2c14707bec91551cff66779", "Title": "张三的简历",
@@ -413,17 +439,14 @@ Mock.mock('/api/JobSeeker/Resume/GetDefaultResume',{
     }
 });
 
+//[GET] (通用)获取通知（系统）
+M('/api/Common/Inform/GetInformList',{ "code": "0", "msg": "ok", "count": 0, "body": [] });
 
+//[GET] (通用)获取通知（私信）
+M('/api/Common/Mail/GetMailGroupUsers',{ "code": "0", "msg": "ok", "count": 0, "body": [] });
 
-
-// [GET] (通用)获取通知（系统）
-Mock.mock('/api/Common/Inform/GetInformList',{ "code": "0", "msg": "ok", "count": 0, "body": [] });
-
-// [GET] (通用)获取通知（私信）
-Mock.mock('/api/Common/Mail/GetMailGroupUsers',{ "code": "0", "msg": "ok", "count": 0, "body": [] });
-
-// [GET] (通用)获取单页文章（用户协议/等等..)
-Mock.mock(/\/api\/Common\/Single\/GetSingle\?code\=\w+/,{
+//[GET] (通用)获取单页文章（用户协议/等等..)
+M(/\/api\/Common\/Single\/GetSingle\?code\=\w+/,{
     "code": "0", "msg": "ok", "count": 0,
     "body": {
       "Id": "2d9b896923e5481d8e7c1051833c43f3", "Name": "用户协议", "Pic": null, "ReleaseTime": "2015-12-02 20:54:33",
@@ -432,5 +455,131 @@ Mock.mock(/\/api\/Common\/Single\/GetSingle\?code\=\w+/,{
 });
 
 //[GET] (通用)获取地区ID
-Mock.mock(/\/api\/Common\/Data\/GetAreaAbbr\w+/,mockArea);
+M(/\/api\/Common\/Data\/GetAreaAbbr\w+/,mockArea);
 
+//[GET] (企业)首页简历列表
+M(/\/api\/Common\/Resume\/GetHomeResumeList\?AreaId\=\w+\&PageIndex\=\w+\&PageSize\=\w+/,{
+  "code": "0", "msg": "ok",
+  "body|10": [
+    {
+      "Id": "1b5e088fbd5046c8aeb4d9876723e41c", "Title": "@cname()的简历", "Gender": "A01",
+      "Realname": "@cname()", "GenderCode": "A01", "GraduateSchool": "1231", "Birthday": "1970-01-21 00:00:00",
+      "MajorIn": "12312312312", "HeadImage": "@image(30x30)",
+      "IntentionAreaIds": "00000000000000000000000000440500", "IntentionAreaNames": "汕头市",
+      "IntentionJobTypeId": "00000000000000000000000000000015", "IntentionJobType": "@Names_Job",
+      "IntentionJobTypeIds": "00000000000000000000000000000015", "IntentionJobTypeNames": "@Names_Job",
+      "WorkingAgeCode": "A01", "IntentionPayCode": "A01", "EducationCode": "A01", "IsDefault": true,
+      "UserId": "9590d84a86914ecc88e27cb579b77c4e", "Labels": "@ArrayToString('" + S.Labels + "',4)"
+    }
+  ]
+});
+
+//[GET] (企业)简历详情
+M(/\/api\/Company\/Resume\/GetResumeDetail\?ResumeId\=\w+/,{
+  "code": "0", "msg": "ok", "count": 0,
+  "body": {
+    "Id": "1b5e088fbd5046c8aeb4d9876723e41c", "Title": "张三的简历", "Realname": "张三",
+    "GenderCode": "A01", "NationCode": "A03", "MaritalStatusCode": "A01", "Stature": 176,
+    "Address": "汕头市龙湖区金霞街道金砂路104号金龙大厦12层", "ComputerLevelCode": "A02", "EnglishLevelCode": "A01",
+    "NativePlaceAreaId": "00000000000000000000000000210600", "NativePlaceAreaName": "丹东市",
+    "NativePlaceAreaCascadeName": "辽宁省 丹东市", "GraduateSchool": "广东科技大学", "MajorIn": "软件开发",
+    "HeadImage": "/Mock/Images/Head/jobseeker_1.png", "Idcard": "440508111111111",
+    "Gender": "A01", "Nation": "A03", "QQ": "405348097", "Birthday": "1970-01-21 00:00:00",
+    "LiveAreaId": "00000000000000000000000000440500", "LiveAreaName": "汕头市",
+    "LiveAreaCascadeName": "广东省 汕头市", "IntentionAreaIds": "00000000000000000000000000440500",
+    "IntentionAreaNames": "汕头市", "IntentionJobTypeId": "00000000000000000000000000000015",
+    "IntentionJobType": "招商经理", "IntentionJobTypeIds": "00000000000000000000000000000015",
+    "IntentionJobTypeNames": "招商经理", "WorkStatusCode": "", "WorkingAgeCode": "A01",
+    "IntentionPayCode": "A01", "EducationCode": "A01",
+    "WorkExperience": "[{\"JobCompany\":\"宙斯影视有限公司\",\"JobDetail\":\"1.担任微电影剧组《神》主演之一\\u003cbr\\u003e2.揣摩人物造型、举止、语言、神态，与导演对于具体场次中人物的不同刻画方式进行交流，确立人物基本定位\\u003cbr\\u003e3.克服拍摄时地点、气候和起居条件等恶劣环境所带来的困难，全身心投入到拍摄工作\\u003cbr\\u003e4.与搭戏的演员进行大量事先交流，确保拍摄过程中尽量少的出现忘词、笑场等不应有的状况圆满完成对人物的塑造和诠释，保证影片拍摄顺利完成\",\"JobName\":\"导演\",\"JobinTime\":\"2017/07/03\",\"JoboutTime\":\"2017/07/21\"},{\"JobCompany\":\"乔布堂电视台\",\"JobDetail\":\"1.专题节目策划，脚本、解说词、新闻稿件撰写；\\u003cbr\\u003e2.节目配音与现场播报；\\u003cbr\\u003e3.采访、专访与发布会主持；\\u003cbr\\u003e4.跟进后期剪辑，确保节目质量\",\"JobName\":\"见习主持人\",\"JobinTime\":\"2014/07/14\",\"JoboutTime\":\"2015/07/18\"}]",
+    "EduExperience": "[{\"EduLevelValue\":\"A06\",\"EduProfessional\":\"空间学\",\"EduSchool\":\"宇宙大学\",\"EduinTime\":\"2017/07/16\",\"EduoutTime\":\"2017/07/15\"},{\"EduLevelValue\":\"A03\",\"EduProfessional\":\"植物学\",\"EduSchool\":\"太阳系高校\",\"EduinTime\":\"2017/07/09\",\"EduoutTime\":\"2017/07/15\"},{\"EduLevelValue\":\"A02\",\"EduProfessional\":\"空气学\",\"EduSchool\":\"大气层实验中学\",\"EduinTime\":\"2017/07/02\",\"EduoutTime\":\"2017/07/22\"}]",
+    "PersonalProfile": "本人有高度的事业心与责任心，良好的职业道德，原则性强，工作认真，积极主动，能吃苦耐劳，在工作和生活中能够不断吸取新的知识充实自己，并能从实际出发全面考虑问题，有信心向新工作挑战，和同事关系融洽！我愿到贵公司工作。我希望能与其它员工一起为贵公司奉献自己的一份力量，同时也体现自己的人生价值。",
+    "Proportion": 1, "Certificate": "全国英语6级证书", "Skill": "设计", "IsDefault": true, "Integral": 0, "Labels": "A01,A04",
+    "Phone": "", "Email": "", "UserId": "9590d84a86914ecc88e27cb579b77c4e", "ReleaseTime": "2017-11-07 16:40:01"
+  }
+});
+
+//[GET] (企业)简历详情 - 扣除次数，开放显示简历联系方式的权限（需要再刷新GetResumeDetail接口才会显示）
+M(/\/api\/Company\/Resume\/GetResumeContactWay\?resumeId\=\w+/,{
+  "code": "0", "msg": "ok", "count": 0,
+  "body": { "QQ": "405348097", "Phone": "15914385220", "Email": "tsurumure@hotmail.com" }
+});
+
+//[POST] (企业)判断简历是否有收藏
+M('/api/Company/ResumeBook/IsExist',{ "code": "0", "msg": "ok", "body": false, "count": 0 });
+
+//[POST] (企业)添加/移除 简历收藏
+M('/api/Company/ResumeBook/AddResume',SimpleSuccess);
+M('/api/Company/ResumeBook/DeleteResume',SimpleSuccess);
+
+//[GET] (通用)获得私信模板
+M('/api/Common/Mail/GetTemplates',{
+  "code": "0", "msg": "ok", "count": 0,
+  "body": [
+    "您好，您的简历我们已收到，现给您发出面试邀请。面试时间：-月-日-时-分，面试地点：-",
+    "您好，我们对您的简历感兴趣，方便约时间聊聊吗？"
+  ]
+});
+
+//[POST] (通用)更新私信模板
+M('/api/Common/Mail/UpdateTemplates',SimpleSuccess);
+
+//[GET] (通用)获得招聘会列表
+M(/\/api\/Common\/CareerFair\/GetList\?PageIndex\=\w+\&PageSize\=\w+/,{
+  "code": "0",
+  "msg": "ok",
+  "body|5": [
+    {
+      "Id": "bf1609a347414461929c1e42ae542cb1", "Name": "广东汇才秋季大型综合招聘会",
+      "Content": "<div>\r\n\t<strong>联系方式</strong></div>\r\n<div>\r\n\t订展专线：86348888 / 18923988375（刘小姐, QQ：863193140 传真86322777）&nbsp;</div>\r\n<div>\r\n\t网　　址：www.zdzp.cn（职得招聘）&nbsp;</div>\r\n<div>\r\n\t会场地址：汕头市龙湖区金砂东路104号金龙大厦1-2楼广东汇才人力资源市场</div>\r\n<div>\r\n\t&nbsp;</div>\r\n<div>\r\n\t<strong>参会流程</strong></div>\r\n<div>\r\n\t企业参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。</div>\r\n<div>\r\n\t&nbsp;</div>\r\n<div>\r\n\t<strong>参会须知</strong></div>\r\n<div>\r\n\t参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。参会单位注意：参会单位工作人员上午9点签到入场，提前做好准备，服从大会统一安排，请勿随意搬移桌椅，会议期间妥善保管好随身物品。</div>\r\n<div>\r\n\t&nbsp;</div>\r\n<div>\r\n\t<strong>媒体支持</strong></div>\r\n<div>\r\n\t平面媒体：汕头电视台一套、汇才人力薪情快报、路边广告牌、展架及汕头电视台资讯频道不间断宣传等</div>\r\n<div>\r\n\t公车/驾车指引</div>\r\n<div>\r\n\t直达乘车路线&mdash;&mdash;10、24路公交车到外贸中专站下车或2、6、18、38、101路公交车到金海湾大酒店站。临近站点&mdash;&mdash;12、15、19、20、24、25、28、39、103路会展中心站下车向金海湾方向直走100米。</div>\r\n<div>\r\n\t&nbsp;</div>",
+      "Address": "广东汇才人力资源市场(汕头龙湖区金砂东路104号金龙大厦首层)",
+      // "Images": "/Mock/Images/Square/b1.jpg",
+      "Images": "@image('70x70')", "BoothImage": "@image('70x70')",
+      "ConductTime": "2017年10月14日9点", "IsEnd": false, "StallCount": 80, "CareerFairDetails": [], "JobSeekerCount": 0,
+      "TrafficGuide": "直达乘车路线——10、24路公交车到外贸中专站下车或2、6、18、38、101路公交车到金海湾大酒店站。临近站点——12、15、19、20、24、25、28、39、103路会展中心站下车向金海湾方向直走100米。",
+      "ContactWay": "订展专线：86348888 / 18923988375（刘小姐, QQ：863193140 传真86322777）\r\n网　　址：www.zdzp.cn（职得招聘）\r\n会场地址：汕头市龙湖区金砂东路104号金龙大厦1-2楼广东汇才人力资源市场",
+      "Notice": "参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。参会单位注意：参会单位工作人员上午9点签到入场，提前做好准备，服从大会统一安排，请勿随意搬移桌椅，会议期间妥善保管好随身物品。",
+      "Media": "平面媒体：汕头电视台一套、汇才人力薪情快报、路边广告牌、展架及汕头电视台资讯频道不间断宣传等",
+      "Flow": "企业参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。"
+    },
+    {
+      "Id": "bf1609a347414461929c1e42ae542cb2", "Name": "广东汇才秋季大型综合招聘会",
+      "Content": "<div>\r\n\t<strong>联系方式</strong></div>\r\n<div>\r\n\t订展专线：86348888 / 18923988375（刘小姐, QQ：863193140 传真86322777）&nbsp;</div>\r\n<div>\r\n\t网　　址：www.zdzp.cn（职得招聘）&nbsp;</div>\r\n<div>\r\n\t会场地址：汕头市龙湖区金砂东路104号金龙大厦1-2楼广东汇才人力资源市场</div>\r\n<div>\r\n\t&nbsp;</div>\r\n<div>\r\n\t<strong>参会流程</strong></div>\r\n<div>\r\n\t企业参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。</div>\r\n<div>\r\n\t&nbsp;</div>\r\n<div>\r\n\t<strong>参会须知</strong></div>\r\n<div>\r\n\t参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。参会单位注意：参会单位工作人员上午9点签到入场，提前做好准备，服从大会统一安排，请勿随意搬移桌椅，会议期间妥善保管好随身物品。</div>\r\n<div>\r\n\t&nbsp;</div>\r\n<div>\r\n\t<strong>媒体支持</strong></div>\r\n<div>\r\n\t平面媒体：汕头电视台一套、汇才人力薪情快报、路边广告牌、展架及汕头电视台资讯频道不间断宣传等</div>\r\n<div>\r\n\t公车/驾车指引</div>\r\n<div>\r\n\t直达乘车路线&mdash;&mdash;10、24路公交车到外贸中专站下车或2、6、18、38、101路公交车到金海湾大酒店站。临近站点&mdash;&mdash;12、15、19、20、24、25、28、39、103路会展中心站下车向金海湾方向直走100米。</div>\r\n<div>\r\n\t&nbsp;</div>",
+      "Address": "广东汇才人力资源市场(汕头龙湖区金砂东路104号金龙大厦首层)",
+      "Images": "@image('70x70')", "BoothImage": "@image('70x70')",
+      "ConductTime": "2017年10月14日9点", "IsEnd": true, "StallCount": 80, "CareerFairDetails": [], "JobSeekerCount": 0,
+      "TrafficGuide": "直达乘车路线——10、24路公交车到外贸中专站下车或2、6、18、38、101路公交车到金海湾大酒店站。临近站点——12、15、19、20、24、25、28、39、103路会展中心站下车向金海湾方向直走100米。",
+      "ContactWay": "订展专线：86348888 / 18923988375（刘小姐, QQ：863193140 传真86322777）\r\n网　　址：www.zdzp.cn（职得招聘）\r\n会场地址：汕头市龙湖区金砂东路104号金龙大厦1-2楼广东汇才人力资源市场",
+      "Notice": "参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。参会单位注意：参会单位工作人员上午9点签到入场，提前做好准备，服从大会统一安排，请勿随意搬移桌椅，会议期间妥善保管好随身物品。",
+      "Media": "平面媒体：汕头电视台一套、汇才人力薪情快报、路边广告牌、展架及汕头电视台资讯频道不间断宣传等",
+      "Flow": "企业参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。"
+    }
+  ]
+});
+
+//[GET] (通用)获得招聘会列表 - 参会人才
+M(/\/api\/Common\/CareerFair\/GetJobSeekerList\?careerFairId\=\w+/,{
+  "code": "0", "msg": "ok", "body": [], "count": 0
+});
+
+//[GET] (通用)获得招聘会列表 - 招聘会详情
+M(/\/api\/Common\/CareerFair\/GetDetail\?careerFairId\=\w+/,{
+  "code": "0", "msg": "ok", "count": 0,
+  "body": {
+    "Id": "bf1609a347414461929c1e42ae542cb1", "Name": "广东汇才秋季大型综合招聘会",
+    "Content": "<div>\r\n\t<strong>联系方式</strong></div>\r\n<div>\r\n\t订展专线：86348888 / 18923988375（刘小姐, QQ：863193140 传真86322777）&nbsp;</div>\r\n<div>\r\n\t网　　址：www.zdzp.cn（职得招聘）&nbsp;</div>\r\n<div>\r\n\t会场地址：汕头市龙湖区金砂东路104号金龙大厦1-2楼广东汇才人力资源市场</div>\r\n<div>\r\n\t&nbsp;</div>\r\n<div>\r\n\t<strong>参会流程</strong></div>\r\n<div>\r\n\t企业参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。</div>\r\n<div>\r\n\t&nbsp;</div>\r\n<div>\r\n\t<strong>参会须知</strong></div>\r\n<div>\r\n\t参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。参会单位注意：参会单位工作人员上午9点签到入场，提前做好准备，服从大会统一安排，请勿随意搬移桌椅，会议期间妥善保管好随身物品。</div>\r\n<div>\r\n\t&nbsp;</div>\r\n<div>\r\n\t<strong>媒体支持</strong></div>\r\n<div>\r\n\t平面媒体：汕头电视台一套、汇才人力薪情快报、路边广告牌、展架及汕头电视台资讯频道不间断宣传等</div>\r\n<div>\r\n\t公车/驾车指引</div>\r\n<div>\r\n\t直达乘车路线&mdash;&mdash;10、24路公交车到外贸中专站下车或2、6、18、38、101路公交车到金海湾大酒店站。临近站点&mdash;&mdash;12、15、19、20、24、25、28、39、103路会展中心站下车向金海湾方向直走100米。</div>\r\n<div>\r\n\t&nbsp;</div>",
+    "Address": "广东汇才人力资源市场(汕头龙湖区金砂东路104号金龙大厦首层)",
+    "Images": "@image('70x70')",  "BoothImage": "@image('70x70')",
+    "ConductTime": "2017年10月14日9点", "IsEnd": false, "StallCount": 80, "CareerFairDetails": [], "JobSeekerCount": 0,
+    "TrafficGuide": "直达乘车路线——10、24路公交车到外贸中专站下车或2、6、18、38、101路公交车到金海湾大酒店站。临近站点——12、15、19、20、24、25、28、39、103路会展中心站下车向金海湾方向直走100米。",
+    "ContactWay": "订展专线：86348888 / 18923988375（刘小姐, QQ：863193140 传真86322777）\r\n网　　址：www.zdzp.cn（职得招聘）\r\n会场地址：汕头市龙湖区金砂东路104号金龙大厦1-2楼广东汇才人力资源市场",
+    "Notice": "参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。参会单位注意：参会单位工作人员上午9点签到入场，提前做好准备，服从大会统一安排，请勿随意搬移桌椅，会议期间妥善保管好随身物品。",
+    "Media": "平面媒体：汕头电视台一套、汇才人力薪情快报、路边广告牌、展架及汕头电视台资讯频道不间断宣传等",
+    "Flow": "企业参会手续办理：参会单位须提供营业执照副本、介绍信或经办人身份证复印件、招聘资料，于大会前2天办理展位预定手续，以便统一制作宣传海报。"
+  }
+});
+
+//[GET] (通用)获得招聘会列表 - 是否有申请过
+M(/\/api\/Company\/CareerFair\/IsApply\?CareerFairId\=\w+/,{
+  "code": "0", "msg": "ok", "body": false, "count": 0
+});

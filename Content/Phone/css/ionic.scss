@@ -806,7 +806,7 @@ $item-theme-SmallImage-Size: 70px !default;
   .companyLogo{
     width:30px;height:30px;margin-right:-30px;overflow:hidden;
     &.circleLogo{ border-radius:50%;}
-    img{ width:100%;border:1px solid #eee;border-radius:50%;}
+    img{ width:30px;height:30px;border:1px solid #eee;border-radius:50%;}
   }
   
   .state{ margin:10px 0;text-align:center;font-size:14px;color:#aaa;}
@@ -4207,13 +4207,13 @@ $tempHeadHeight: 120px !default;
         box-sizing:border-box;padding:10px;overflow:hidden;
         .l, .r{ float:left;}
         .l{
-          width:45px;margin-right:-45px;
-          img{ display:block;width:45px;height:45px;}
+          width:72px;margin-right:-72px;
+          img{ display:block;width:72px;height:45px;}
         }
         .r{
           width:100%;
           .content{
-            margin-left:60px;
+            font-size:14px;margin-left:82px;
             a{
               color:$black-66;text-decoration:none;
               &:hover{ color:$slxgz2017_color;}

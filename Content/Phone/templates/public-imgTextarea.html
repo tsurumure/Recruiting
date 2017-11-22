@@ -9,14 +9,12 @@
   </ion-header-bar>
   
   <!-- Content -->
-  <ion-content ng-class="{true:'bg-white'}[imgTextsList.length<=0]" lazy-container>
-    
+  <ion-content ng-class="{true:'bg-white'}[!imgTextsList || imgTextsList.length<=0]" lazy-container>   
       
-    <div class="weiLife" style="margin-top:20px;" ng-hide="imgTextsList.length <= 0">
+    <div class="weiLife" style="margin-top:20px;" ng-hide="!imgTextsList || imgTextsList.length <= 0">
       <!--<label class="weiLife_date">{{item.ReleaseTime}}</label>-->
       <dl class="weiLife_section" ng-repeat="item in imgTextsList">
         <dt>
-          
           <a ng-href="{{item.Url || (app_config.links + '/#/' + entry + '/' + imgTextsList_detailUrl + '/detail/' + item.Id) }}">
             <img lazy-src="{{app_config.imgUrl}}{{item.Pic}}" err-src="/Content/Phone/images/default/w1.jpg">
             <label>{{item.Name}}</label>
