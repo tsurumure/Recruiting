@@ -12,30 +12,11 @@
   <!-- Content -->
   <ion-content overflow-scroll='true' class="bg-white" ng-class="{true:'has-footer'}[entry=='company'&&IsShowDetail&&(CardDetail.Resume.Phone!=''||CardDetail.Resume.Email!='')]" lazy-container>
     <div class="SquareJob">
-      <!-- <div class="ResumeDetailPreview CommonDetail">
-        <div class="centerHead">
-          <div class="head"><div class="head-a"><img ng-src="/Content/Phone/images/head/none.jpg" err-src="/Content/Phone/images/head/none.jpg"></div></div>
-          <h2>
-            {{CardDetail.Resume.Realname}}
-            <i class="ion ion-theme-boy colorful-font-5" ng-show="CardDetail.Resume.Gender==A01"></i>
-            <i class="ion ion-theme-girl colorful-font-7" ng-show="CardDetail.Resume.Gender==A02"></i>
-          </h2>
-          <div class="inform">
-            <div>
-              <span ng-bind="CardDetail.Resume.WorkingAgeCode | KeyToName:'WorkAge':ConstantXML"></span>
-              <i>|</i>
-              <span ng-bind="CardDetail.Resume.EducationCode | KeyToName:'Education':ConstantXML"></span>
-              <i>|</i>
-              <span ng-bind="CardDetail.Resume.Skill"></span>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
        <div class="CardDetail CommonDetail" ng-class="{true:'preview'}[IsShowDetail]">
 
         <div class="centerHead">
-          <div class="head-a"><img ng-src="{{CardDetail.Resume.HeadImage||'/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg"></div>
+          <div class="head-a"><img ng-src="{{CardDetail.Resume.HeadImage||'/Content/Phone/images/head/_none2.jpg'}}" err-src="/Content/Phone/images/head/_none2.jpg"></div>
           <h3>
             {{CardDetail.Resume.Realname}}
             <i class="ion ion-theme-boy colorful-font-5" ng-show="CardDetail.Resume.Gender=='A01'"></i>

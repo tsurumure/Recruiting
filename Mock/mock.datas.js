@@ -319,7 +319,6 @@ M(/\/api\/Common\/ResumeCard\/GetCard\?resumeCardId\=\w+/,{
       "Id": "6bb4c6fe803a4f54a438334cc65cf44d", "Type": "FulltimeResume",
       "Resume": SimpleResume
     }
-    
 });
 
 var CommomExistUser = { "code": "40502", "msg": "手机号码已被注册，请更换后重新尝试。", "body": {}, "count": 0 };
@@ -789,6 +788,8 @@ M(/\/api\/JobSeeker\/ResumeCard\/GetResumeCard\?type\=\w+/,{
     "Resume": SimpleResume
   }
 });
+// [POST] 推送名片到广场
+M('/api/JobSeeker/ResumeCard/ResumeCardPushToSquareMessage',SimpleSuccess);
 
 // [GET] (求职者)个人中心 - 收藏职位 - 列表
 M('/api/JobSeeker/Job/GetCollectJobList',SimpleJobList);
@@ -875,7 +876,9 @@ M('/api/Common/Mail/SendMail',SimpleSuccess);
 M('/api/Common/User/BindingPhone',SimpleSuccess);
 M('/api/Common/User/BindingEmail',SimpleSuccess);
 // [POST] 修改密码
-M('api/Common/User/ChangePwd',SimpleSuccess);
+M('/api/Common/User/ChangePwd',SimpleSuccess);
+// [POST] 留言反馈
+M('/api/Common/Feedback/Add',SimpleSuccess);
 
 // [GET] 判断是否有参加专题活动（顶部提示）
 M(/\/api\/Common\/Job\/GetJobSubhead\?jobId\=/,{

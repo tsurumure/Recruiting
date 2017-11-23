@@ -3361,7 +3361,10 @@ $borderSize_centerHead: 3px !default;
     border-radius:50%;overflow:hidden;margin:0 auto;
     background:$gray-ee;
   }
-  img{ display:block;width:$headSize;height:$headSize;margin:-$borderSize_centerHead;}
+  img{
+    display:block;width:$headSize;height:$headSize;
+    margin:-$borderSize_centerHead;background:$gray-ee;
+  }
   h2, h3, .inform{ margin:0 15px;text-align:center;}
   h2, h3{
     font-size: 22px;margin-bottom: 0;
