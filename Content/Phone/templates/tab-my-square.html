@@ -30,20 +30,20 @@
             <div class="s-mid">
               <a class="s-mid-content" href="{{app_config.links}}/#/tab/my/square/detail/{{item.Id}}" ng-bind-html='item.Content | EmotFilter | to_trusted'></a>
               
-              <a ng-if="item.ContentData!=''" href="#/tab/my/square/cardDetail/{{(item.ContentData | StringToJSON).Id}}" class="SquareCards_Wrap">
+              <a ng-if="item.ContentData && item.ContentData!=''" href="#/{{entry}}/my/square/cardDetail/{{(item.ContentData|StringToJSON).Id}}" class="SquareCards_Wrap">
                 <div class="SquareCards">
                   <div class="card-left">
                     <div class="title">
-                      <strong ng-bind="(item.ContentData | StringToJSON).Resume.Realname"></strong>
-                      <span>正在寻找{{ ((item.ContentData | StringToJSON).Type=='FulltimeResume') ? '全职':'兼职' }}工作</span>
+                      <strong ng-bind="(item.ContentData|StringToJSON).Resume.Realname"></strong>
+                      <span>正在寻找{{ ((item.ContentData|StringToJSON).Type=='FulltimeResume') ? '全职':'兼职' }}工作</span>
                     </div>
                     <div class="content">
                       <ul>
-                         <li><em>性别：</em><span ng-bind="(::item.ContentData|StringToJSON).Resume.Gender | KeyToName:'Gender':ConstantXML"></span></li>
-                        <li><em>年龄：</em><span ng-bind="((::item.ContentData|StringToJSON).Resume.Birthday | CallbackAge)+'岁'"></span></li>
-                        <li><em>学历：</em><span ng-bind="(::item.ContentData|StringToJSON).Resume.EducationCode | KeyToName:'Education':ConstantXML">本科</span></li>
-                        <li><em>身高：</em><span ng-bind="(::item.ContentData|StringToJSON).Resume.Stature+'cm'"></span></li>
-                        <li class="long"><em>意向：</em><span ng-bind="(::item.ContentData|StringToJSON).Resume.IntentionJobTypeNames"></span></li> 
+                         <li><em>性别：</em><span ng-bind="(item.ContentData|StringToJSON).Resume.Gender | KeyToName:'Gender':ConstantXML"></span></li>
+                        <li><em>年龄：</em><span ng-bind="((item.ContentData|StringToJSON).Resume.Birthday | CallbackAge)+'岁'"></span></li>
+                        <li><em>学历：</em><span ng-bind="(item.ContentData|StringToJSON).Resume.EducationCode | KeyToName:'Education':ConstantXML">本科</span></li>
+                        <li><em>身高：</em><span ng-bind="(item.ContentData|StringToJSON).Resume.Stature+'cm'"></span></li>
+                        <li class="long"><em>意向：</em><span ng-bind="(item.ContentData|StringToJSON).Resume.IntentionJobTypeNames"></span></li> 
                       </ul>
                     </div>
                   </div>

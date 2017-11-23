@@ -20,6 +20,8 @@
     <img src="/Content/Phone/images/default/wx_logo.png" style="display:block;width:0;height:0;margin:0;" title="微信显示小图">
 
     <div id="job" ng-if="jobDetailData">
+
+      <div class="item item-message warning" ng-if="isHasJobSubhead" ng-bind-html="isHasJobSubhead"></div>
       
       <div class="item" id="job-top" style="padding-bottom:10px;">
         <h1>

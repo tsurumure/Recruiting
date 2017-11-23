@@ -2233,26 +2233,30 @@ angular.module('starter.controllers', ['ngCookies'])
   // };
 
   //[GET] (学历教育)学校列表
-  (function(){
-    function httpCallBack(res){
-      $rootScope.eduSchoolList = res.body;
-    }
-    var httpFn = function(){
-      mEvent.http("GET", "/api/Common/Education/GetEducationSchool", false, httpCallBack);
-    }
-    httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
-  })();
+  if(isSchool){
+    (function(){
+      function httpCallBack(res){
+        $rootScope.eduSchoolList = res.body;
+      }
+      var httpFn = function(){
+        mEvent.http("GET", "/api/Common/Education/GetEducationSchool", false, httpCallBack);
+      }
+      httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
+    })();
+  }
 
   //[GET] (技能培训)技能列表
-  (function(){
-    function httpCallBack(res){
-      $rootScope.eduSkillList = res.body;
-    }
-    var httpFn = function(){
-      mEvent.http("GET", "/api/Common/Article/GetTrain", false, httpCallBack);
-    }
-    httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
-  })();
+  if(isSkill){
+    (function(){
+      function httpCallBack(res){
+        $rootScope.eduSkillList = res.body;
+      }
+      var httpFn = function(){
+        mEvent.http("GET", "/api/Common/Article/GetTrain", false, httpCallBack);
+      }
+      httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
+    })();
+  }
 
 })
 
@@ -2417,7 +2421,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
   //显示介绍
   $scope.showIntroduce = function(itemIntroduce){
-    $ionicModal.fromTemplateUrl("tab-index-eduTrain-schoolDetail-modalAdd.html?v="+Math.random(),{
+    $ionicModal.fromTemplateUrl("tab-index-eduTrain-schoolDetail-modalAdd.html",{
       scope:$scope,
     }).then(function(modal){
       $rootScope.modal = modal;
@@ -2428,7 +2432,7 @@ angular.module('starter.controllers', ['ngCookies'])
   
   //显示收费标准
   $scope.showCost = function(){
-    $ionicModal.fromTemplateUrl("tab-index-eduTrain-schoolDetail-cost-modalAdd.html?v="+Math.random(),{
+    $ionicModal.fromTemplateUrl("tab-index-eduTrain-schoolDetail-cost-modalAdd.html",{
       scope:$scope,
     }).then(function(modal){
       $rootScope.modal = modal;
@@ -2670,6 +2674,18 @@ angular.module('starter.controllers', ['ngCookies'])
   var defered = $q.defer();
   $rootScope.jobDetailData = undefined;//[];
 
+  // [GET] 判断是否有参加活动
+  (function(){
+    function httpCallBack(rs){
+      $scope.isHasJobSubhead = rs.body;
+    }
+    var httpFn = function(){
+      mEvent.http("GET", "/api/Common/Job/GetJobSubhead?jobId=" + $stateParams.Id, false, httpCallBack);
+    }
+    httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
+  })();
+  
+
   $scope.getJobDetail = function(){
     //[GET]职位详情
     (function(){
@@ -2751,11 +2767,11 @@ angular.module('starter.controllers', ['ngCookies'])
       var LoadJob_Broadcast = $rootScope.$on("LoadedJobDetail", function(ev, ds){
         if(!$rootScope.userImfor){
 
-          mEvent.CheckLoginRole();
-          $rootScope.$on('CheckLoginRole', function(evt, d){
-            if(d=='Personal'){ GetUserImfor.GetPersonal(true);}
-            if(d=='Company'){ GetUserImfor.GetCompany(true);}
-          });
+          // mEvent.CheckLoginRole();
+          // $rootScope.$on('CheckLoginRole', function(evt, d){
+          //   if(d=='Personal'){ GetUserImfor.GetPersonal(true);}
+          //   if(d=='Company'){ GetUserImfor.GetCompany(true);}
+          // });
 
           var GetusrBroadcast = $rootScope.$on("GetUserImfor",function(event, data){
             GetusrBroadcast();
@@ -2766,7 +2782,7 @@ angular.module('starter.controllers', ['ngCookies'])
         }
         LoadJob_Broadcast(); //注销广播(职位详情)
         
-        mEvent.CheckLoginRole();
+        // mEvent.CheckLoginRole();
         $rootScope.$on('CheckLoginRole', function(evt, d){
           if(d=='Personal' && $rootScope.jobDetailData){
             // 上架时
@@ -4994,19 +5010,15 @@ angular.module('starter.controllers', ['ngCookies'])
           if($rootScope.userImfor.IsHasResumeBaseInfo){
             // 获取默认简历
               function httpCallBack(rs){
-                // ---------------------------------------------------------
                 httpFn = undefined;
                 $scope.defaultResume = rs.body;
-                // ---------------------------------------------------------
               }
               var httpFn = function(){
-                mEvent.http("GET", "/api/JobSeeker/Resume/GetDefaultResume  ", true, httpCallBack, '');
+                mEvent.http("GET", "/api/JobSeeker/Resume/GetDefaultResume", true, httpCallBack, '');
               }
               httpFn();$scope.$on("reLoaded",function(event,data){ if(data){try{httpFn();}catch(e){ console.log("login error!"); }} });
           }
         });
-        
-
         
         // 获取我的简历设置
         (function(){
@@ -5427,10 +5439,14 @@ angular.module('starter.controllers', ['ngCookies'])
   // [POST] 发送私信
   $scope.SubmitComment = function(text, rUserId){
     if(text && text!=''){
+      var CurrentMailDetail = $rootScope.Message_MailGroupUsersDetail[0];
+      var ReceiveUserId = '';
+      (CurrentMailDetail.SendUser.Id==$rootScope.userImfor.Id) ? ReceiveUserId = CurrentMailDetail.ReceiveUser.Id : CurrentMailDetail.SendUser.Id;
+      
       $http({
         method:'Post', url:$rootScope.app_config.api + '/api/Common/Mail/SendMail',
         headers:{ "Authorization" : "BasicAuth " + $cookies.get("Ticket") },
-        data:{ Content:text, ReceiveUserId:$rootScope.Message_MailGroupUsersDetail[0].SendUser.Id }
+        data:{ Content:text, ReceiveUserId:ReceiveUserId }
       }).success(function(rs){
         if(rs.code==0){
           $scope.refreshMessage();
@@ -5561,10 +5577,14 @@ angular.module('starter.controllers', ['ngCookies'])
   // [POST] 发送私信
   $scope.SubmitComment = function(text, rUserId){
     if(text && text!=''){
+      var CurrentMailDetail = $rootScope.Message_MailGroupUsersDetail[0];
+      var ReceiveUserId = '';
+      (CurrentMailDetail.SendUser.Id==$rootScope.userImfor.Id) ? ReceiveUserId = CurrentMailDetail.ReceiveUser.Id : CurrentMailDetail.SendUser.Id;
+      
       $http({
         method:'Post', url:$rootScope.app_config.api + '/api/Common/Mail/SendMail',
         headers:{ "Authorization" : "BasicAuth " + $cookies.get("Ticket") },
-        data:{ Content:text, ReceiveUserId:$rootScope.Message_MailGroupUsersDetail[0].ReceiveUser.Id }
+        data:{ Content:text, ReceiveUserId:ReceiveUserId }
       }).success(function(rs){
         if(rs.code==0){
           $scope.refreshMessage();

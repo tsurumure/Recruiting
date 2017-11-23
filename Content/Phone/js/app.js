@@ -1020,7 +1020,7 @@ angular.module('starter', ['ionic', 'ngAnimate', 'template-bundle', 'starter.con
       url: '/my/jobrecord/detail/:Type/:Id', cache: false, params:{ entry:'tab' },
       views: {
         'tab-my': {
-          controller: 'JobDetailCtrl', templateUrl: 'tab-my-jobRecord-detail.html'
+          controller: 'JobDetailCtrl', templateUrl: 'tab-job-detail.html' //'tab-my-jobRecord-detail.html'
         }
       }
     })
@@ -1028,7 +1028,7 @@ angular.module('starter', ['ionic', 'ngAnimate', 'template-bundle', 'starter.con
       url: '/my/jobrecord/detailCompany/:Id', cache: false, params:{ entry:'tab' },
       views: {
         'tab-my': {
-          controller: 'JobCompanyDetailCtrl', templateUrl: 'tab-my-jobRecord-detail-company.html'
+          controller: 'JobCompanyDetailCtrl', templateUrl: 'tab-job-detail-company.html' //'tab-my-jobRecord-detail-company.html'
         }
       }
     })
