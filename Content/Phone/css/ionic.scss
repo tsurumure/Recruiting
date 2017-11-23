@@ -1656,9 +1656,10 @@ a.send_hidden,a.send_hidden:active{ background:#eee;color:#aaa;}
     dt{
       background:#fff;border-bottom:1px solid #e8e8e8;padding:.5em;
       a{
-        position:relative;display:block;
+        position:relative;display:block;background:$gray-ee;
         img{
-          display:block;width:100%;max-height:250px;
+          display:block;width:100%;min-height:80px;max-height:250px;
+          
         }
         label{
           font-size:14px;display:block;width:100%;

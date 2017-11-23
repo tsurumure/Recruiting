@@ -581,3 +581,15 @@ M(/\/api\/Common\/CareerFair\/GetDetail\?careerFairId\=\w+/,{
 M(/\/api\/Company\/CareerFair\/IsApply\?CareerFairId\=\w+/,{
   "code": "0", "msg": "ok", "body": false, "count": 0
 });
+
+//[GET] (通用)获得兼职频道列表
+M('/api/Common/Article/GetPartTimeJob',{
+  "code": "0", "msg": "ok",
+  "body|10": [
+    {
+      "Id": "2522e846897f42b98110899c0079a5fe", "Name": "澳门葡韵皇茶招兼职营业员", "Content": "",
+      "Pic": "@image(600x250)", "ReleaseTime": "2017-02-17 14:09:27",
+      "IsLink": false, "Url": "", "Describe": ""
+    }
+  ]
+})
