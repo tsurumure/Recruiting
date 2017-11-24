@@ -32,7 +32,6 @@ npm start
 ```
 
 ## 调试环境
-修改任何内容需要启动调试模式，使用前可先阅读gulpfile.js了解构建情况
 ```
 npm install
 npm run dev
