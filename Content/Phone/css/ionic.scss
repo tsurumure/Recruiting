@@ -3538,9 +3538,7 @@ $borderSize_centerHead: 3px !default;
 }
 
 .bottomCircle{
-  position:fixed;bottom:40px;width:40px;text-align:center;z-index:999;
-  // left:50%;margin-left:-20px;
-  right:20px;
+  position:fixed;right:20px;bottom:40px;width:40px;text-align:center;z-index:999;
   &.right{ left:auto;margin-left:0;right:20px;bottom:70px;}
   a{
     text-decoration:none;display:inline-block;border-radius:50%;
@@ -3557,6 +3555,19 @@ $borderSize_centerHead: 3px !default;
     font-size:16px;background:$black-44;
     &:active{ background:$positive;}
   }
+}
+
+.bottomTabs{
+  position:fixed;right:20px;bottom:15px;
+  font-size:12px;text-align:center;z-index:999;
+  .bottomTabsContent{ margin-bottom:5px;}
+  a{
+    display:block;padding:7px;text-decoration:none;
+    margin:-1px 0;border:1px solid #ddd;
+    background:#fff;color:$black-44;line-height:14px;
+    &.on{ color:#fff;background:$positive;border-color:$positive;}
+  }
+  .bottomTabsShow{ color:#fff;background:#1770e5;border-color:#1770e5;}
 }
 
 .section-style{
@@ -3655,13 +3666,7 @@ $borderSize_centerHead: 3px !default;
     i{ line-height:40px;margin-right:0 !important;}
   }
 }
-.item-hasword{
-  position:relative;
-  span{
-    display:block;position:absolute;right:0;top:0;
-    line-height:40px;margin-right:0 !important;
-  }
-}
+
 
 
 @media (min-width: 600px){
