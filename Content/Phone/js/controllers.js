@@ -5314,6 +5314,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
 })
 
+// 修改密码
 .controller('MyAccountPwdCtrl', function($scope, isLogin, $ionicPopup, GetUserImfor, $stateParams, $rootScope, mEvent, $http, $cookies){
 
   CommonFn($scope, $rootScope, $stateParams);
@@ -5340,7 +5341,7 @@ angular.module('starter.controllers', ['ngCookies'])
             $cookies.remove("s",{'path': '/'});
             $scope.errorMsg = undefined;
             $ionicPopup.alert({ title: '提示', template: '修改成功！请重新登录' });
-            window.location.href = $rootScope.app_config.links + "/#/tab/login";
+            window.location.href = $rootScope.app_config.links + "/#/" + $rootScope.entry + "/login";
           }
           if(res.code=="2"){
             $scope.errorMsg = "旧密码输入错误"

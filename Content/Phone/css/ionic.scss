@@ -3729,7 +3729,7 @@ $borderSize_centerHead: 3px !default;
   ul{
     overflow:hidden;
     li{
-      position:relative;overflow:hidden;
+      position:relative;overflow:hidden;background:$gray-ee;
       float:left;width:33.3333%;height:90px;margin-bottom:1px;
       a.img, img{ display:block;}
       a.img{ position:relative;width:99%;height:0;padding-bottom:99%;}

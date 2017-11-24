@@ -172,7 +172,7 @@ M(/\/api\/Common\/Enterprise\/GetEnterprise\?entId\=\w+/,{
     "Images": [ "Mock/Images/CompanyDetail/1.jpg","Mock/Images/CompanyDetail/2.jpg","@image('600x360')"],
     "Jobs|5": [{
         "Id": "098e9c2257ca43e1a9fff1779cf62062", "UserId": "ad1afaf8e17c49b0a531151fc4342edc",
-        "Name": "人力资源培训师", "Pay": "10000-12000", "JobPayUnit": "元/月", "IsPutaway": true,
+        "Name": "@JobNames()", "Pay": "@integer(1,5)000-@integer(5,10)000", "JobPayUnit": "元/月", "IsPutaway": true,
         "EnterpriseLogoSmall": "/Mock/Images/Head/company_1.png"
     }]
   }
