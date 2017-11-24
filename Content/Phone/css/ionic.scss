@@ -543,7 +543,7 @@ $item-theme-SmallImage-Size: 70px !default;
 
 .table{ display:table-cell;vertical-align:middle;}
 
-.textarea{ width:100%;height:80px;}
+.textarea{ width:100%;height:80px;margin-bottom:15px;}
 
 /* end Common */
 
@@ -3655,7 +3655,13 @@ $borderSize_centerHead: 3px !default;
     i{ line-height:40px;margin-right:0 !important;}
   }
 }
-
+.item-hasword{
+  position:relative;
+  span{
+    display:block;position:absolute;right:0;top:0;
+    line-height:40px;margin-right:0 !important;
+  }
+}
 
 
 @media (min-width: 600px){

@@ -51,15 +51,15 @@
         <div class="list list-inset mt10">
           <div class="item item-input">
             <span class="input-label">联系人<b>*</b></span>
-            <input type="text" placeholder="请输入联系人姓名" ng-model="UserBaseInfor.ContactManName" required>
+            <div><input type="text" placeholder="请输入联系人姓名" ng-model="UserBaseInfor.ContactManName" required></div>
           </div>
           <div class="item item-input">
             <span class="input-label">联系电话<b>*</b></span>
-            <input type="text" placeholder="请输入联系电话" ng-model="UserBaseInfor.ContactManPhone" required>
+            <div><input type="text" placeholder="请输入联系电话" ng-model="UserBaseInfor.ContactManPhone" required></div>
           </div>
           <div class="item item-input">
             <span class="input-label">联系QQ</span>
-            <input type="text" placeholder="请输入联系QQ" ng-model="UserBaseInfor.QQ">
+            <div><input type="text" placeholder="请输入联系QQ" ng-model="UserBaseInfor.QQ"></div>
           </div>
 
           <address-location title="公司地址" bind-address="UserBaseInfor.Address" bind-location="UserBaseInfor.MapLocation"></address-location>
@@ -67,9 +67,11 @@
         </div>
 
         <div class="list list-inset mt10">
-          <div class="item item-input">
+          <div class="item">
             <span class="input-label">企业介绍<b>*</b></span>
-            <textarea placeholder="请输入企业介绍" ng-model="UserBaseInfor.Intro" required></textarea>
+            <div class="content">
+              <textarea placeholder="请输入企业介绍" class="textarea" ng-model="UserBaseInfor.Intro" required></textarea>
+            </div>
           </div>
         </div>
 

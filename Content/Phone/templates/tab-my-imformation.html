@@ -22,7 +22,7 @@
           
           <div class="item item-input">
             <span class="input-label">真实姓名<b>*</b></span>
-            <input type="text" placeholder="请输入真实姓名" name="Name" ng-model="UserBaseInfor.Name" ng-pattern="/^[\u4e00-\u9fa5]{2,4}$/" required>
+            <div><input type="text" placeholder="请输入真实姓名" name="Name" ng-model="UserBaseInfor.Name" ng-pattern="/^[\u4e00-\u9fa5]{2,4}$/" required></div>
           </div>
           <div class="item item-error" ng-show="myForm.Name.$dirty && myForm.Name.$invalid">
             <span ng-show="myForm.Name.$error.required">姓名不能为空</span>
@@ -36,7 +36,7 @@
 
           <div class="item item-input">
             <span class="input-label">身　　高</span>
-            <input type="text" placeholder="请输入身高" ng-model="UserBaseInfor.Stature" required>cm
+            <div class="item-hasword"><input type="text" placeholder="请输入身高" ng-model="UserBaseInfor.Stature" required><span>cm</span></div>
           </div>
 
           <div class="item item-input">
@@ -73,11 +73,11 @@
           </div>
           <div class="item item-input">
             <span class="input-label">毕业学校<b>*</b></span>
-            <input type="text" placeholder="请输入毕业学校" ng-model="UserBaseInfor.GraduateSchool" required>
+            <div><input type="text" placeholder="请输入毕业学校" ng-model="UserBaseInfor.GraduateSchool" required></div>
           </div>
           <div class="item item-input">
             <span class="input-label">主修专业<b>*</b></span>
-            <input type="text" placeholder="请输入主修专业" ng-model="UserBaseInfor.MajorIn" required>
+            <div><input type="text" placeholder="请输入主修专业" ng-model="UserBaseInfor.MajorIn" required></div>
           </div>
           <div class="item item-input">
             <span class="input-label">学　　历<b>*</b></span>
