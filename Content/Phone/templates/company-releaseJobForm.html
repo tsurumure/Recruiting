@@ -19,7 +19,7 @@
         <div class="list list-inset">
           <div class="item item-input">
             <span class="input-label">职位名称<b>*</b></span>
-            <input type="text" placeholder="请输入职位名称" ng-model="datas.Name" required>
+            <div><input type="text" placeholder="请输入职位名称" ng-model="datas.Name" required></div>
           </div>
           <div class="item item-input">
             <span class="input-label">所属区域<b>*</b></span>
@@ -42,7 +42,7 @@
           </div>
           <div class="item item-input">
             <span class="input-label">招聘人数<b>*</b></span>
-            <input type="text" placeholder="请输入招聘人数" ng-model="datas.RecruitingCount" required>
+            <div><input type="text" placeholder="请输入招聘人数" ng-model="datas.RecruitingCount" required></div>
           </div>
           <div class="item item-input">
             <span class="input-label">计薪方式<b>*</b></span>
@@ -51,9 +51,11 @@
 
           <div class="item item-input">
             <span class="input-label">职位薪资<b>*</b></span>
-            <input type="number" placeholder="薪资" max="{{datas.PayMax}}" ng-model="datas.PayMin" name="payMin" required>
-            <div style="margin-right:12%;margin-left:-20px;">-</div>
-            <input type="number" placeholder="薪资" min="{{datas.PayMin}}" ng-model="datas.PayMax" name="payMax" required>
+            <div class="input-minmax">
+              <input type="number" placeholder="0" max="{{datas.PayMax}}" ng-model="datas.PayMin" name="payMin" required>
+              <span>-</span>
+              <input type="number" placeholder="10000" min="{{datas.PayMin}}" ng-model="datas.PayMax" name="payMax" required>
+            </div>
           </div>
 
           <div class="item item-input">
@@ -74,11 +76,11 @@
         <div class="list list-inset mt10">
           <div class="item item-input">
             <span class="input-label">联系人</span>
-            <input type="text" placeholder="请输入联系人姓名" ng-model="datas.ContactManName">
+            <div><input type="text" placeholder="请输入联系人姓名" ng-model="datas.ContactManName"></div>
           </div>
           <div class="item item-input">
             <span class="input-label">联系电话</span>
-            <input type="text" placeholder="请输入联系电话" ng-model="datas.ContactManPhone">
+            <div><input type="text" placeholder="请输入联系电话" ng-model="datas.ContactManPhone"></div>
           </div>
 
           <address-location title="工作地址" bind-address="datas.WorkAddress" bind-location="datas.MapLocation"></address-location>

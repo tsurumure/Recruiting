@@ -18,7 +18,7 @@
         <div class="section-item hasHead" ng-repeat="item in CollectResumeList | limitTo:RJ_onepage:RJ_current*RJ_onepage">
           <div class="left-head">
             <a href="javascript:;" class="circleLogo">
-              <img lazy-src="/Content/Phone/images/head/none.jpg" err-src="/Content/Phone/images/head/none.jpg" class="my-galleryImg"/>
+              <img lazy-src="{{item.Resume.HeadImage||'/Content/Phone/images/head/none.jpg'}}" err-src="/Content/Phone/images/head/none.jpg" class="my-galleryImg"/>
             </a>
           </div>
           <div class="left">

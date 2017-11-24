@@ -1528,8 +1528,8 @@ angular.module('starter.controllers', ['ngCookies'])
 
     // [POST] 修改职位
     $scope.submitForm = function(isValid){
-      if(!isValid) { $scope.submitError = true;}else{
-        $scope.submitError = false;
+      if(!isValid) { $scope.isErrorForSubmit = true;}else{
+        $scope.isErrorForSubmit = false;
         // console.log($scope.datas);
         // [GET] 职位详情
         (function(){
@@ -1604,8 +1604,10 @@ angular.module('starter.controllers', ['ngCookies'])
       (function(){
         function httpCallBack(rs){
           // console.log(rs);
-          $rootScope.userImfor.IsApplyNotReadCount--;
-          $rootScope.userImfor.IsApplyReadCount++;
+          if($rootScope.userImfor){
+            $rootScope.userImfor.IsApplyNotReadCount--;
+            $rootScope.userImfor.IsApplyReadCount++;
+          }
         }
         var httpFn = function(){
           mEvent.http("POST", "/api/Company/JobApply/ReadJobApply", true, httpCallBack, { JobApplyId:thisId });

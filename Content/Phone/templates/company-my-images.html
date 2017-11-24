@@ -31,7 +31,7 @@
       <div ng-show="imagesList.length>0">
         <div class="imagesListGroup">
           <ul>
-            <li ng-repeat="item in imagesList" class="deleteGroupItem">
+            <li ng-repeat="item in imagesList track by $index" class="deleteGroupItem">
               <a href="javascript:;" ng-click="SetFirst($index)" class="first" ng-class="{true:'on'}[$index==0]"><i class="ion-ios-home"></i></a>
               <a href="javascript:;" ng-click="DeleteImage($index)" class="del">x</a>
               <a href="javascript:;" ng-click="ShowBigImg()" class="img"><img ng-src="{{item}}"></a>

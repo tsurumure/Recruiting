@@ -1553,8 +1553,10 @@ angular.module('starter.services', ['ngCookies'])
     replace: false,
     template: '<div class="item item-input">'+
                   '<span class="input-label">{{title}}</span>'+
-                  '<input type="text" placeholder="请输入{{title}}" ng-model="bindAddress">'+
-                  '<a href="javascript:;" ng-click="SelectMapLocation()" class="iconLink"><i class="ion-ditu"></i></a>'+
+                  '<div class="item-address">'+
+                    '<input type="text" placeholder="请输入{{title}}" ng-model="bindAddress">'+
+                    '<a href="javascript:;" ng-click="SelectMapLocation()" class="iconLink"><i class="ion-ditu"></i></a>'+
+                  '</div>'+
               '</div>'+
               '<div class="item item-input" style="padding-top:0;">'+
                   '<span class="input-label">坐标</span>'+

@@ -20,11 +20,6 @@ var SimpleJobList = {
     }
   ]
 }
-var SimpleSystemMessage = {
-  "Id": "bd7f7b26609e48829b322052d9c7eda7", "Name": "[@CompanyNames]包装工", "Type": "Interview",
-  "Content": "@ctitle(10,15)", "AddTime": "2016-09-07 13:53:52", "IsRead": true, "IdentCode": "52dfab4480e14b118d25622fd528f97f"
-}
-
 var SimpleJob = {
   "Id": "098e9c2257ca43e1a9fff1779cf62062",
   "Name": "@JobNames()", "Pay": "@integer(1,5)000-@integer(5,10)000", "JobPayUnit": "元/月",
@@ -39,6 +34,32 @@ var SimpleJob = {
   "Department": "啧啧啧", "PayWay": "A01", "Describe": "好像呼吸iii洗在哦在哦izoo嫁鸡随鸡看看",
   "ApplyCount": 2, "ResumeCount": 2, "Accommodation": "", "WorkAddress": "汕头市龙湖区金霞街道金砂路104号金龙大厦12层",
   "IsHot": false, "IsSelf": false, "ContactManName": "泽民", "ContactManPhone": "15017247642", "IsPutaway": true,
+}
+var EditJob = {
+  "JobId":"39fcc95e9f0b4ba1823ab385224bb22x",
+  "Id": "c94a2a2a88af4f3fbc4f3b8167c43389", "EnterpriseId": "fbf638f4704f482bbb3eacd20e059687",
+  "EnterpriseName": "@CompanyNames()", "EnterpriseLogoSmall": "@image(40x40)",
+  "Name": "@JobNames()", "Nature": "A02", "JobTypeId": "00000000000000000000000000000012",
+  "JobTypeName": "销售业务跟单", "Department": "技术部", "RecruitingCount": 2, "PayWay": "A01",
+  "WorkAreaId": "00000000000000000000000000440507", "WorkAreaName": "龙湖区", "WorkAreaCascadeName": "广东省 汕头市 龙湖区",
+  "Pay": "@integer(1,5)000-@integer(5,10)000","PayMin": 3000, "PayMax": 5000, "JobPayUnit": "元/月", "Welfare": "A02,A05", "WelfareValue": "班车,实习",
+  "MapLocation": "116.730262,23.363683", "ReleaseTime": "2017-11-14 14:11:29", "IsPutaway": true, "ApplyCount": 0
+}
+
+var SimpleResumeList = {
+  "code": "0", "msg": "ok",
+  "body|10": [
+    {
+      "Id": "1b5e088fbd5046c8aeb4d9876723e41c", "Title": "@cname()的简历", "Gender": "A01",
+      "Realname": "@cname()", "GenderCode": "A01", "GraduateSchool": "1231", "Birthday": "1970-01-21 00:00:00",
+      "MajorIn": "12312312312", "HeadImage": "@image(30x30)",
+      "IntentionAreaIds": "00000000000000000000000000440500", "IntentionAreaNames": "汕头市",
+      "IntentionJobTypeId": "00000000000000000000000000000015", "IntentionJobType": "@JobNames",
+      "IntentionJobTypeIds": "00000000000000000000000000000015", "IntentionJobTypeNames": "@JobNames",
+      "WorkingAgeCode": "A01", "IntentionPayCode": "A01", "EducationCode": "A01", "IsDefault": true,
+      "UserId": "9590d84a86914ecc88e27cb579b77c4e", "Labels": "@ArrayToString('" + S.Labels + "',3)"
+    }
+  ]
 }
 var SimpleResume = {
   "Id": "9ea4f20ca8f6460c856cee0fe1dc5bd9", "Title": "@cname()的简历", "Realname": "@cname()", "GenderCode": "A01", "NationCode": "A01", "MaritalStatusCode": "A02",
@@ -55,6 +76,10 @@ var SimpleResume = {
   "PersonalProfile": "本人有高度的事业心与责任心，良好的职业道德，原则性强，工作认真，积极主动，能吃苦耐劳，在工作和生活中能够不断吸取新的知识充实自己，并能从实际出发全面考虑问题，有信心向新工作挑战，和同事关系融洽！我愿到贵公司工作。我希望能与其它员工一起为贵公司奉献自己的一份力量，同时也体现自己的人生价值。",
   "Proportion": 1.0, "Certificate": "高级工程师认证", "Skill": "编程", "IsDefault": true, "Integral": 1, "Phone": "", "Email": "", "ReleaseTime": "2017-07-29 14:04:13",
   "UserId": "0ae601616b7d4a90b6d6d087aa6af228", "Labels": "A06,A05,A08"
+}
+var SimpleSystemMessage = {
+  "Id": "bd7f7b26609e48829b322052d9c7eda7", "Name": "[@CompanyNames]包装工", "Type": "Interview",
+  "Content": "@ctitle(10,15)", "AddTime": "2016-09-07 13:53:52", "IsRead": true, "IdentCode": "52dfab4480e14b118d25622fd528f97f"
 }
 
 Mock.Random.extend({
@@ -123,14 +148,7 @@ M(/\/api\/Common\/Job\/GetHomeJobList\?AreaId\=\w+\&PageIndex\=\w+\&PageSize\=\w
         "Id": "098e9c2257ca43e1a9fff1779cf62062", "EnterpriseId": "6abcb5e1ad5a4999b93928561c355b14",
         "Name": "@JobNames()", "EnterpriseName": "@CompanyNames()",
         "EnterpriseLogoSmall": "@image(30x30)", "IsPutaway": true,
-        "Pay": "@integer(1,5)000-@integer(5,10)000", "JobPayUnit": "元/月", "WelfareValue": "@ArrayToString('" + S.WelfareValue + "',4)",
-        // "Nature": "A01", "JobTypeId": "00000000000000000000000000000121", "JobTypeName": "IT行业",
-        // "Department": "技术部", "RecruitingCount": 10, "PayWay": "A01", 
-        // "WorkAreaId": "00000000000000000000000000440507",
-        // "WorkAreaName": "龙湖区", "WorkAreaCascadeName": "广东省 汕头市 龙湖区",
-        // "Welfare": "A09,A04,A05", 
-        // "MapLocation": "116.72710393761011,23.372009521654274",
-        // "ReleaseTime": "2017-10-26 17:35:43",  "ApplyCount": 2
+        "Pay": "@integer(1,5)000-@integer(5,10)000", "JobPayUnit": "元/月", "WelfareValue": "@ArrayToString('" + S.WelfareValue + "',4)"
       }
     ]
 });
@@ -212,11 +230,11 @@ M(/\/api\/Common\/Job\/GetJobMapList\?lng\=\w+\.\w+\&lat\=\w+\.\w+/,{
     "code": "0", "msg": "ok",
     "body|10": [
       {
-        "Id": "253eea8298f344c7a3097bd4cdeb1d50", "Name": "保安队长", "Pay": "3000",
-        "EnterpriseName": "汕头国泰装饰材料城", "EnterpriseLogoSmall": "/Mock/Images/Head/company_1.png",
+        "Id": "253eea8298f344c7a3097bd4cdeb1d50", "Name": "@JobNames", "Pay": "@integer(1,5)000-@integer(5,10)000",
+        "EnterpriseName": "@CompanyNames", "EnterpriseLogoSmall": "@image(40x40)",
         "ShareLogo": "/Mock/Images/Head/company_1.png", "Welfare": "住,险", "WelfareValue": "住宿,保险",
         "MapLng": "116.722067", "MapLat": "23.386145", "JobPayUnit": "元/月",
-        "Distance": 716
+        "Distance": "@integer(1,500)"
       }
     ]
 });
@@ -394,7 +412,7 @@ M('/api/Company/Enterprise/IsInitBaseInfo',{
     "code": "0", "msg": "ok", "body": true, "count": 0
 });
 
-// [GET] (企业)获取基本资料
+// [GET] (企业)基本资料 - 获取
 M('/api/Company/Enterprise/GetEnterpriseBaseInfo', {
     "code": "0", "msg": "ok", "count": 0,
     "body": {
@@ -407,21 +425,24 @@ M('/api/Company/Enterprise/GetEnterpriseBaseInfo', {
       "BusinessLicensePic": "/Mock/Images/Head/company_1.png"
     }
 });
-// [GET] (求职者)获取基本资料
+// [GET] (企业)基本资料 - 更新
+M('/api/Company/Enterprise/UpdateInfo',SimpleSuccess);
+
+// [GET] (求职者)基本资料 - 获取
 M('/api/JobSeeker/Resume/GetBaseInfo',{
-    "code": "0", "msg": "ok", "count": 0,
-    "body": {
-      "Name": "张三", "GenderCode": "A01", "NationCode": "A01", "MaritalStatusCode": "A01",
-      "Birthday": "2017-10-18 15:28:22", "Stature": 160, "Phone": "13612309640", "Email": "405348097@qq.com",
-      "QQ": "405348097", "Address": "汕头市龙湖区金龙大厦B座1楼", "ComputerLevelCode": "A04", "EnglishLevelCode": "A04",
-      "LiveAreaId": "00000000000000000000000000140425", "LiveAreaName": "平顺县",
-      "LiveAreaCascadeName": "山西省 长治市 平顺县", "NativePlaceAreaId": "00000000000000000000000000120100",
-      "NativePlaceAreaName": "天津市", "NativePlaceAreaCascadeName": "天津 天津市",
-      "EducationCode": "A05", "WorkingAgeCode": "A01", "GraduateSchool": "汕头大学",
-      "MajorIn": "软件开发", "Labels": "A01,A02,A03"
-    }
-  });
-// [GET] (求职者)更新基本资料
+  "code": "0", "msg": "ok", "count": 0,
+  "body": {
+    "Name": "张三", "GenderCode": "A01", "NationCode": "A01", "MaritalStatusCode": "A01",
+    "Birthday": "2017-10-18 15:28:22", "Stature": 160, "Phone": "13612309640", "Email": "405348097@qq.com",
+    "QQ": "405348097", "Address": "汕头市龙湖区金龙大厦B座1楼", "ComputerLevelCode": "A04", "EnglishLevelCode": "A04",
+    "LiveAreaId": "00000000000000000000000000140425", "LiveAreaName": "平顺县",
+    "LiveAreaCascadeName": "山西省 长治市 平顺县", "NativePlaceAreaId": "00000000000000000000000000120100",
+    "NativePlaceAreaName": "天津市", "NativePlaceAreaCascadeName": "天津 天津市",
+    "EducationCode": "A05", "WorkingAgeCode": "A01", "GraduateSchool": "汕头大学",
+    "MajorIn": "软件开发", "Labels": "A01,A02,A03"
+  }
+});
+// [GET] (求职者)基本资料 - 更新
 M(/\/api\/JobSeeker\/Resume\/UpdateBaseInfo/,SimpleSuccess);
 
 // [GET] (求职者)简历保密设置
@@ -506,27 +527,17 @@ M(/\/api\/Common\/Single\/GetSingle\?code\=\w+/,{
 M(/\/api\/Common\/Data\/GetAreaAbbr\w+/,mockArea);
 
 // [GET] (企业)首页简历列表
-M(/\/api\/Common\/Resume\/GetHomeResumeList\?AreaId\=\w+\&PageIndex\=\w+\&PageSize\=\w+/,{
-  "code": "0", "msg": "ok",
-  "body|10": [
-    {
-      "Id": "1b5e088fbd5046c8aeb4d9876723e41c", "Title": "@cname()的简历", "Gender": "A01",
-      "Realname": "@cname()", "GenderCode": "A01", "GraduateSchool": "1231", "Birthday": "1970-01-21 00:00:00",
-      "MajorIn": "12312312312", "HeadImage": "@image(30x30)",
-      "IntentionAreaIds": "00000000000000000000000000440500", "IntentionAreaNames": "汕头市",
-      "IntentionJobTypeId": "00000000000000000000000000000015", "IntentionJobType": "@JobNames",
-      "IntentionJobTypeIds": "00000000000000000000000000000015", "IntentionJobTypeNames": "@JobNames",
-      "WorkingAgeCode": "A01", "IntentionPayCode": "A01", "EducationCode": "A01", "IsDefault": true,
-      "UserId": "9590d84a86914ecc88e27cb579b77c4e", "Labels": "@ArrayToString('" + S.Labels + "',4)"
-    }
-  ]
-});
+M(/\/api\/Common\/Resume\/GetHomeResumeList\?AreaId\=\w+\&PageIndex\=\w+\&PageSize\=\w+/,SimpleResumeList);
 
 // [GET] (企业)简历详情
 M(/\/api\/Company\/Resume\/GetResumeDetail\?ResumeId\=\w+/,{
   "code": "0", "msg": "ok", "count": 0,
   "body": SimpleResume
 });
+
+// [POST] (企业)邀请面试
+M('/api/Company/Resume/Invite',SimpleSuccess);
+
 
 // [GET] (企业)简历详情 - 扣除次数，开放显示简历联系方式的权限（需要再刷新GetResumeDetail接口才会显示）
 M(/\/api\/Company\/Resume\/GetResumeContactWay\?resumeId\=\w+/,{
@@ -616,14 +627,26 @@ M(/\/api\/Company\/CareerFair\/IsApply\?CareerFairId\=\w+/,{
 // [GET] (通用)获得兼职频道 - 列表
 M('/api/Common/Article/GetPartTimeJob',{
   "code": "0", "msg": "ok",
-  "body|10": [
+  "body|5": [
     {
       "Id": "2522e846897f42b98110899c0079a5fe", "Name": "@CompanyNames() 招聘 @JobNames()", "Content": "",
       "Pic": "@image(600x250)", "ReleaseTime": "2017-02-17 14:09:27",
       "IsLink": false, "Url": "", "Describe": ""
     }
   ]
-})
+});
+
+// [GET] (通用)企业热点
+M('/api/Common/Article/GetEnterpriseHot',{
+  "code": "0", "msg": "ok",
+  "body|5": [
+    {
+      "Id": "2522e846897f42b98110899c0079a5f2", "Name": "@JobNames()专场招聘会", "Content": "",
+      "Pic": "@image(600x250)", "ReleaseTime": "2017-02-17 14:09:27",
+      "IsLink": false, "Url": "", "Describe": ""
+    }
+  ]
+});
 
 // [GET] (通用)获得兼职频道 - 详情
 M(/\/api\/Common\/Article\/GetDetail\?artId\=\w+/,{
@@ -885,3 +908,71 @@ M(/\/api\/Common\/Job\/GetJobSubhead\?jobId\=/,{
   "code": "0", "msg": "成功", "count": 0, "body":""
   // "body": "<a href=\"javascript:;\">此岗位参加了《送来‘薪’工作专场活动》</a>"
 });
+
+// /api/Company/Resume/SearchPublicResume?Key=%E6%99%AE%E5%B7%A5&IntentionJobTypes=&IntentionAreas=&Pays=&Gender=&LastLoginDay=&PageIndex=0&PageSize=10
+// [GET] (企业)搜索简历
+M(/\/api\/Company\/Resume\/SearchPublicResume[\w\W]*/,SimpleResumeList);
+
+// [GET] (企业)个人中心 - 收到简历 - 新
+M('/api/Company/JobApply/GetNotReadSimpleJobApplyList',{
+  "code": "0", "msg": "ok",
+  "body|5": [
+    {
+      "Id": "ba25e27af95b450cb88b61e60219beb7", "ApplyTime": "2017-10-11 15:29:37",
+      "IsDispose": false, "DisposeTime": "1970-01-01 08:00:00", "IsPass": false,
+      "DisposeContent": "", "Job": SimpleJob, "Resume": SimpleResume, "JobseekerName": "郑文豪",
+      "ResumeIntegral": 2, "IsResumeSelectAuth": true, "JobApplyDisposeStatus": 0, "IsRead": false
+    }
+  ]
+});
+
+// [GET] (企业)个人中心 - 收到简历 - 已读简历
+M(/\/api\/Company\/JobApply\/GetSimpleJobApplyList\?PageIndex\=\w+\&PageSize\=\w+/,{
+  "code": "0", "msg": "ok",
+  "body|5": [
+    {
+      "Id": "ba25e27af95b450cb88b61e60219beb7", "ApplyTime": "2017-10-11 15:29:37",
+      "IsDispose": true, "DisposeTime": "1970-01-01 08:00:00", "IsPass": true,
+      "DisposeContent": "", "Job": SimpleJob, "Resume": SimpleResume, "JobseekerName": "郑文豪",
+      "ResumeIntegral": 2, "IsResumeSelectAuth": true, "JobApplyDisposeStatus": 0, "IsRead": true
+    }
+  ]
+});
+
+// [GET] (企业)个人中心 - 收到简历 - 满意/不满意
+M('/api/Company/JobApply/Pass',SimpleSuccess);
+M('/api/Company/JobApply/Reject',SimpleSuccess);
+
+// [GET] (企业)个人中心 - 收到简历 - 添加已阅
+M('/api/Company/JobApply/ReadJobApply',SimpleSuccess);
+
+// [GET] (企业)个人中心 - 简历库（收藏的简历）
+M('/api/Company/ResumeBook/GetResumeList',{
+  "code": "0", "msg": "ok",
+  "body|15": [
+    {
+      "Id": "0c5fff63bb3d4dc292d3b3ecc5dbce4b", "Resume": SimpleResume, "AddTime": "2017-09-06 10:17:07", "Remark": "",
+      "User": {
+        "Id": "0ae601616b7d4a90b6d6d087aa6af228", "Rold": "JobSeeker", "NickName": "@cname()", "HeadPic": "@image(40x40)",
+        "Phone": "136@integer(0,100000000)", "RegisterTime": "2016-03-15 16:47:14", "Proportion": 0.0, "IsHasResume": true, "RealName": "@cname()"
+      }
+    }
+  ]
+});
+
+// [GET] (企业)个人中心 - 企业图集 - 列表
+M('/api/Company/Enterprise/GetImage',{ "code": "0", "msg": "ok", "count": 0, "body|5": [ "@image(200x200)" ] });
+// [GET] (企业)个人中心 - 企业图集 - 更新
+M('/api/Company/Enterprise/ChangeImage',SimpleSuccess);
+
+// [GET] (企业)个人中心 - 已发布职位 - 列表
+M('/api/Company/Job/GetReleaseJobList',{ "code": "0", "msg": "ok", "body|15": [ EditJob ] });
+// [GET] (企业)个人中心 - 已发布职位 - 刷新/上架/下架
+M('/api/Company/Job/RepublishJob',SimpleSuccess);
+M('/api/Company/Job/SuspendJob',SimpleSuccess);
+M('/api/Company/Job/PutawayJob',SimpleSuccess);
+
+// [GET] (企业)个人中心 - 已发布职位 - 修改职位 - 查
+M(/\/api\/Company\/Job\/GetJobDetail\?jobId\=\w+/, { "code": "0", "msg": "ok", "body": EditJob });
+// [GET] (企业)个人中心 - 已发布职位 - 修改职位 - 改
+M('/api/Company/Job/UpdateJob',SimpleSuccess);

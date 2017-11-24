@@ -8,12 +8,14 @@
     
     <div class="item item-input">
       <span class="input-label">公司地址</span>
-      <input type="text" placeholder="输入公司地址" ng-model="datas.tempAddress">
-      <a href="javascript:;" ng-click="ResetAddressPoint()" class="iconLink"><i class="ion-ditu"></i></a>
+      <div class="item-address">
+        <input type="text" placeholder="输入公司地址" ng-model="datas.tempAddress">
+        <a href="javascript:;" ng-click="ResetAddressPoint()" class="iconLink"><i class="ion-ditu"></i></a>
+      </div>
     </div>
     <div class="item item-input">
       <span class="input-label">坐标定位</span>
-      <input type="text" ng-disabled="true" ng-value="datas.tempLocation">
+      <div><input type="text" ng-disabled="true" ng-value="datas.tempLocation"></div>
     </div>
 
     <div id="ModalMap" style="width:100%;height:100%;"></div>
