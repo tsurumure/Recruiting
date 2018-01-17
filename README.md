@@ -24,19 +24,19 @@
 
 运行前请确保已经安装了[NodeJS](https://nodejs.org)
 
-## 快速开始
+### 快速开始
 运行前请确保不占用本地端口(8080)
 ```
 npm install --production
 npm start
 ```
 
-## 调试环境
+### 调试环境
 ```
 npm install
 npm run dev
 ```
 
-## 欢迎与我交流
+### 欢迎与我交流
 本项目仅用于学习交流，拒绝商用，侵权必究  
 QQ: 405348097
